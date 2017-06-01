@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_button"
+    android:layout_width="@dimen/x592"
+    android:layout_height="@dimen/y88"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/transparent"
+    android:orientation="horizontal">
+
+    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:id="@+id/tv_left"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/dialog_item_left_selector"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="left"
+        android:textColor="@color/colorGray333"
+        android:textSize="13sp"/>
+
+    <View
+        android:layout_width="@dimen/x2"
+        android:layout_height="match_parent"
+        android:background="@color/split"/>
+
+    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:id="@+id/tv_right"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/dialog_item_right_selector"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="right"
+        android:textColor="@color/colorGray333"
+        android:textSize="13sp"/>
+</LinearLayout>

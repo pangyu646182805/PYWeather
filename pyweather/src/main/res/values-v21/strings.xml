@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="listview_footer_base_data_text">%1$s条数据记录</string>
+    <string name="memory_size">可用内存：%s</string>
+    <string name="wave_create_time">时间：%s</string>
+    <string name="wave_size">大小：%s</string>
+    <string name="wave_duration">时长：%s</string>
+</resources>

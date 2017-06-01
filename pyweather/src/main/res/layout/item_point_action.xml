@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/return_ripple"
+    android:layout_gravity="center">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/ic_more_vert_white_24dp"/>
+
+    <View
+        android:id="@+id/view_point_red"
+        android:layout_width="@dimen/x10"
+        android:layout_height="@dimen/y10"
+        android:layout_alignRight="@+id/iv"
+        android:layout_alignTop="@+id/iv"
+        android:background="@drawable/point_red"
+        android:visibility="invisible"/>
+</RelativeLayout>

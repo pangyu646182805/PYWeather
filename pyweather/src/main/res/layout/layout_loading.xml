@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <FrameLayout
+        android:id="@+id/fl_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="加载失败，点击重试"
+                android:textColor="@color/colorGray333"
+                android:textSize="14sp"/>
+
+            <com.neuroandroid.pyweather.widget.StateButton
+                android:id="@+id/btn_reload"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="@dimen/x140"
+                android:layout_height="@dimen/y64"
+                android:layout_marginTop="@dimen/y16"
+                android:padding="0dp"
+                android:text="重新加载"
+                android:textSize="14sp"
+                app:buttonRadius="@dimen/x4"
+                app:normalBackgroundColor="@color/colorPrimary"
+                app:normalStrokeWidth="@dimen/x1"
+                app:normalTextColor="@color/backgroundColor"
+                app:pressedBackgroundColor="@color/colorPrimaryDark"
+                app:pressedStrokeWidth="@dimen/x1"
+                app:pressedTextColor="@color/white"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.neuroandroid.pyweather.widget.ProgressWheel
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="@dimen/x64"
+                android:layout_height="@dimen/y64"
+                app:matProg_barColor="@color/colorPrimary"
+                app:matProg_progressIndeterminate="true"
+                app:matProg_rimColor="#3000"/>
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_loading_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y16"
+                android:text="正在加载..."
+                android:textColor="@color/colorGray666"
+                android:textSize="14sp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!--<android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/pb_loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"/>-->
+</FrameLayout>

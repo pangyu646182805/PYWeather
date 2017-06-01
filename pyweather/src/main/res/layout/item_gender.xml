@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:id="@+id/tv_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ccc"
+        android:paddingBottom="@dimen/y16"
+        android:paddingLeft="@dimen/x32"
+        android:paddingTop="@dimen/y16"
+        android:text="男"/>
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#a000"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/x32">
+
+        <com.neuroandroid.pyweather.widget.ProgressWheel
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="@dimen/x64"
+            android:layout_height="@dimen/y64"
+            app:matProg_barColor="@color/colorPrimary"
+            app:matProg_progressIndeterminate="true"
+            app:matProg_rimColor="#3000"/>
+
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
+            android:id="@+id/tv_loading_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y24"
+            android:text="正在加载..."
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</LinearLayout>

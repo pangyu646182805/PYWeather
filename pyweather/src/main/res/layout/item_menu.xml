@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_menu_item"
+    android:layout_width="@dimen/x260"
+    android:layout_height="@dimen/y80"
+    android:background="@drawable/menu_item_selector"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
+
+        <View
+            android:layout_width="@dimen/x16"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"/>
+
+        <ImageView
+            android:id="@+id/iv_menu_icon"
+            android:layout_width="@dimen/x32"
+            android:layout_height="@dimen/y32"
+            android:layout_marginLeft="@dimen/x32"
+            app:srcCompat="@drawable/ic_saoyisao"/>
+    </FrameLayout>
+
+    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:id="@+id/tv_menu_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/x16"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="添加联系人"
+        android:textSize="13dp"/>
+</LinearLayout>

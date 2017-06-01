@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorGray999">#999999</color>
+    <color name="colorGray666">#666666</color>
+    <color name="colorGray333">#333333</color>
+
+    <color name="split">#eeeeee</color>
+    <color name="backgroundColor">#f8f8f8</color>
+    <color name="backgroundPanel">#fefefe</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="colorMonitorDi">#a0db2e</color>
+    <color name="colorMonitorZhong">#ffdb9e</color>
+    <color name="colorMonitorGao">#ff7679</color>
+    <color name="colorMonitorWei">#ff0000</color>
+
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="red">#ff0000</color><!--红色 -->
+    <color name="del_red">#de7777</color>
+
+    <color name="gray">#808080</color><!--灰色 -->
+    <color name="grayccc">#cccccc</color><!--灰色 -->
+    <color name="style_red">#ff4c41</color>
+    <color name="btn_enable">#FFCBCBCB</color>
+    <color name="colorTabItem">#b2b2b2</color>
+    <color name="blue">#499BF7</color>
+    <color name="white_title">#F9F9F9</color>
+    <color name="rating_bar_color">#f8d739</color>
+
+    <!--pickerView相关-->
+    <color name="bgColor_overlay">#60000000</color>
+    <color name="pickerview_timebtn_nor">#057dff</color>
+    <color name="pickerview_timebtn_pre">#c2daf5</color>
+    <color name="pickerview_bg_topbar">#f5f5f5</color>
+    <color name="pickerview_topbar_title">#000000</color>
+    <color name="pickerview_wheelview_textcolor_out">#a8a8a8</color>
+    <color name="pickerview_wheelview_textcolor_center">#2a2a2a</color>
+    <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
+</resources>

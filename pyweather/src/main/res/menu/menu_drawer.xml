@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_city_manage"
+        android:icon="@mipmap/ic_menu_city_manage"
+        android:title="城市管理"/>
+
+    <item android:title="其他">
+        <menu>
+            <item
+                android:id="@+id/nav_skin"
+                android:icon="@mipmap/ic_menu_skin"
+                android:title="主题皮肤"/>
+            <item
+                android:id="@+id/nav_check_update"
+                android:icon="@mipmap/ic_menu_check_update"
+                android:title="检查更新"/>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@mipmap/ic_menu_settings"
+                android:title="帮助"/>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@mipmap/ic_menu_about"
+                android:title="关于"/>
+        </menu>
+    </item>
+    <!--<item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@mipmap/ic_settings_24dp"
+                android:title="设置"/>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@mipmap/ic_info_24dp"
+                android:title="关于"/>
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@mipmap/ic_help_24dp"
+                android:title="@string/help"/>
+        </menu>
+    </item>-->
+
+</menu>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        android:background="#3f00"
+    android:orientation="vertical">
+
+    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y16"
+        android:layout_marginBottom="@dimen/y16"
+        android:text="test"/>
+</LinearLayout>

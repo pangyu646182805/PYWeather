@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_title"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x592"
+    android:layout_height="@dimen/y96"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="title"
+        android:textColor="@color/colorGray333"
+        android:textSize="13sp"/>
+</LinearLayout>

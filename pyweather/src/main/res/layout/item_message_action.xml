@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/return_ripple">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/icon_my_return"/>
+
+        <View
+            android:id="@+id/view_point_red"
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/y10"
+            android:layout_gravity="right"
+            android:background="@drawable/point_red"
+            android:visibility="invisible"/>
+    </FrameLayout>
+
+
+    <!--<TextView
+        android:id="@+id/tv_red_point"
+        android:layout_width="@dimen/x24"
+        android:layout_height="@dimen/x24"
+        android:background="@drawable/point_red"
+        android:layout_marginBottom="-8dp"
+        android:layout_toRightOf="@+id/iv"
+        android:layout_above="@+id/iv"
+        android:layout_marginLeft="-8dp"
+        android:visibility="visible"
+        android:gravity="center"
+        android:textSize="8sp"
+        android:lines="1"
+        android:text="8"
+        android:maxEms="1"
+        android:textColor="@color/white"/>-->
+</RelativeLayout>
