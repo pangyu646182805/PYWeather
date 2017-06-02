@@ -65,6 +65,10 @@ public class PYCityStore extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * @param cityId 城市ID
+     * @return 删除的记录数量
+     */
     public synchronized int deleteByCityId(String cityId) {
         SQLiteDatabase db = getWritableDatabase();
         int delete = db.delete(TABLE_NAME, "city_id=?", new String[]{cityId});
@@ -72,6 +76,10 @@ public class PYCityStore extends SQLiteOpenHelper {
         return delete;
     }
 
+    /**
+     * @param cityId 城市ID
+     * @return 返回找到符合记录的数量
+     */
     public synchronized int find(String cityId) {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null, "city_id=?", new String[] {cityId},
@@ -82,6 +90,9 @@ public class PYCityStore extends SQLiteOpenHelper {
         return count;
     }
 
+    /**
+     * 更新数据库
+     */
     public synchronized int update(String cityId, String cityName, int weatherCode, int max, int min, String weatherDesc) {
         SQLiteDatabase db = getWritableDatabase();
         int update = db.update(TABLE_NAME, getContentValues(cityId, cityName, weatherCode, max, min, weatherDesc),
@@ -90,6 +101,9 @@ public class PYCityStore extends SQLiteOpenHelper {
         return update;
     }
 
+    /**
+     * 获取数据库里面TABLE_NAME表的所有数据
+     */
     public ArrayList<CityBean.CityListBean> getAllCities() {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null, null, null,

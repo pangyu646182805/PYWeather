@@ -72,10 +72,13 @@ public class CityManageFragment extends BaseFragment implements MainActivity.Mai
         mAllCities = PYCityStore.getInstance(mContext).getAllCities();
         if (mCityListAdapter == null) {
             mCityListAdapter = new CityListAdapter(mContext, mAllCities);
+            // 布局管理器
             mRvCityList.setLayoutManager(new LinearLayoutManager(mContext));
+            // RecyclerView分割线
             mRvCityList.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
                     .sizeResId(R.dimen.y2).colorResId(R.color.split).build());
             mRvCityList.setAdapter(mCityListAdapter);
+            // 长按删除
             mCityListAdapter.setItemLongClickListener((view, position, cityListBean) ->
                     new TitleDialog(mContext).setCustomTitle("是否删除该城市")
                             .setConfirmClickListener((dialog, v) -> {
@@ -88,6 +91,10 @@ public class CityManageFragment extends BaseFragment implements MainActivity.Mai
         checkIsEmpty();
     }
 
+    /**
+     * 检查适配器的数量是否为空
+     * 如为空则显示 empty view
+     */
     private void checkIsEmpty() {
         if (mCityListAdapter == null || mCityListAdapter.getItemCount() == 0) {
             mLlEmpty.setVisibility(View.VISIBLE);
@@ -113,11 +120,18 @@ public class CityManageFragment extends BaseFragment implements MainActivity.Mai
         }
     }
 
+    /**
+     * @return true : 表示已经消费返回事件
+     */
     @Override
     public boolean handleBackPress() {
         return false;
     }
 
+    /**
+     * 异步任务
+     * 保存或者更新城市列表信息
+     */
     class SaveAsyncTask extends AsyncTask<CityManageEvent, Void, Boolean> {
         @Override
         protected Boolean doInBackground(CityManageEvent... cityManageEvents) {
@@ -137,10 +151,15 @@ public class CityManageFragment extends BaseFragment implements MainActivity.Mai
         protected void onPostExecute(Boolean flag) {
             super.onPostExecute(flag);
             if (flag) ShowUtils.showToast("该城市已经添加过");
+            // 后台任务执行完成时候重新刷新一下界面
             initData();
         }
     }
 
+    /**
+     * 异步任务
+     * 删除数据库中的某一条记录
+     */
     class DeleteAsyncTask extends AsyncTask<CityBean.CityListBean, Void, Boolean> {
         @Override
         protected Boolean doInBackground(CityBean.CityListBean... cityListBeen) {
@@ -154,6 +173,7 @@ public class CityManageFragment extends BaseFragment implements MainActivity.Mai
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
             if (aBoolean) ShowUtils.showToast("该城市已经删除");
+            // 后台任务执行完成时候重新刷新一下界面
             initData();
         }
     }

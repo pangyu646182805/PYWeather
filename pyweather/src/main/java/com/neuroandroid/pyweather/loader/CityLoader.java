@@ -14,6 +14,9 @@ import java.util.ArrayList;
  */
 
 public class CityLoader {
+    /**
+     * 根据本地asset文件夹里面的city.json文件获取全国省市信息
+     */
     public static CityBean getAllCities(Context context) {
         InputStream is = null;
         try {

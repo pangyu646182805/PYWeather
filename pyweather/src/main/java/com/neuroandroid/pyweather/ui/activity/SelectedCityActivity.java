@@ -18,7 +18,6 @@ import com.neuroandroid.pyweather.bean.CityBean;
 import com.neuroandroid.pyweather.event.CityManageEvent;
 import com.neuroandroid.pyweather.loader.CityLoader;
 import com.neuroandroid.pyweather.loader.WrappedAsyncTaskLoader;
-import com.neuroandroid.pyweather.utils.L;
 import com.neuroandroid.pyweather.utils.UIUtils;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -77,7 +76,6 @@ public class SelectedCityActivity extends BaseActivity implements LoaderManager.
         mCityBean = data;
         mSelectCityAdapter.replaceAll(data.getProvinceList());
         mSelectCityAdapter.setItemClickListener((view, position, city) -> {
-            long start = System.currentTimeMillis();
             switch (mSelectCityAdapter.getCurrentLevel()) {
                 case SelectCityAdapter.PROVINCE_LEVEL:
                     selectProvince(city);
@@ -98,7 +96,6 @@ public class SelectedCityActivity extends BaseActivity implements LoaderManager.
                     finish();
                     break;
             }
-            L.e("time : " + (System.currentTimeMillis() - start));
         });
     }
 
@@ -168,6 +165,11 @@ public class SelectedCityActivity extends BaseActivity implements LoaderManager.
         }
     }
 
+    /**
+     * 返回事件
+     * 如果当前视图是根视图(省份视图)则允许返回
+     * 否则更新状态
+     */
     @Override
     public void onBackPressed() {
         if (mSelectCityAdapter.getCurrentLevel() == SelectCityAdapter.AREA_LEVEL) {
@@ -196,6 +198,9 @@ public class SelectedCityActivity extends BaseActivity implements LoaderManager.
         return province;
     }
 
+    /**
+     * ToolBar返回箭头点击事件
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
