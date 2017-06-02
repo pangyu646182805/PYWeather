@@ -5,11 +5,5 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.neuroandroid.pyweather.widget.NoPaddingTextView
-        android:id="@+id/tv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="100sp"
-        android:gravity="center"
-        android:text="weather"/>
+    <include layout="@layout/layout_title_bar"/>
 </LinearLayout>

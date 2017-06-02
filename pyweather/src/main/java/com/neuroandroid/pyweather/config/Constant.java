@@ -9,7 +9,7 @@ public class Constant {
      * URL前缀
      */
     // public static final String BASE_URL = "http://192.168.97.159:80/clinicCloudDemo/v1/";
-    public static final String BASE_URL = "http://106.75.15.138:8080/v4/";
+    public static final String BASE_URL = "https://free-api.heweather.com/v5/";
 
     /**
      * SP配置TAG
@@ -27,6 +27,8 @@ public class Constant {
     public static final String USER = "USER";
 
     public static final int USER_TYPE = 0;
+
+    public static final String APP_KEY = "4f7b1188c1674728ac1a5ad81def0388";
 
     /**
      * 返回的响应码

@@ -11,6 +11,7 @@ import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.base.BaseActivity;
 import com.neuroandroid.pyweather.ui.fragment.CityManageFragment;
 import com.neuroandroid.pyweather.ui.fragment.WeatherFragment;
+import com.neuroandroid.pyweather.utils.FragmentUtils;
 import com.neuroandroid.pyweather.utils.ShowUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 
@@ -102,10 +103,12 @@ public class MainActivity extends BaseActivity {
     private void setChooser(int key) {
         switch (key) {
             case FRAGMENT_WEATHER:
-                setCurrentFragment(WeatherFragment.newInstance(), false);
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                setCurrentFragment(WeatherFragment.newInstance());
                 break;
             case FRAGMENT_CITY_MANAGE:
-                setCurrentFragment(CityManageFragment.newInstance(), true);
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                setCurrentFragment(CityManageFragment.newInstance());
                 break;
         }
     }
@@ -113,9 +116,9 @@ public class MainActivity extends BaseActivity {
     /**
      * 设置当前Fragment
      */
-    private void setCurrentFragment(@SuppressWarnings("NullableProblems") Fragment fragment, boolean isAddStack) {
-        // FragmentUtils.replaceFragment(getSupportFragmentManager(), fragment, R.id.fl_drawer_container, isAddStack);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_drawer_container, fragment, null).commit();
+    private void setCurrentFragment(@SuppressWarnings("NullableProblems") Fragment fragment) {
+        FragmentUtils.replaceFragment(getSupportFragmentManager(), fragment, R.id.fl_drawer_container, false);
+        // getSupportFragmentManager().beginTransaction().replace(R.id.fl_drawer_container, fragment, null).commit();
         mCurrentFragment = (MainActivityFragmentCallbacks) fragment;
     }
 

@@ -5,6 +5,7 @@ package com.neuroandroid.pyweather.event;
  */
 
 public class BaseEvent {
+    public static final int EVENT_CITY_MANAGE = 200;
     private int eventFlag;
 
     public int getEventFlag() {

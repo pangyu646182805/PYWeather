@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">PY天气</string>
+    <string name="city_manager">城市管理</string>
+    <string name="add_city">添加</string>
+    <string name="select_province">选择省份</string>
+    <string name="select_city">选择城市</string>
+    <string name="str_empty">您还没有添加城市(˵¯͒⌢͗¯͒˵)</string>
 
     <string name="pickerview_cancel">取消</string>
     <string name="pickerview_submit">确定</string>

@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import com.neuroandroid.pyweather.listener.OnItemChildClickListener;
 import com.neuroandroid.pyweather.listener.OnItemClickListener;
+import com.neuroandroid.pyweather.listener.OnItemLongClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,11 @@ public abstract class BaseRvAdapter<T, VH extends RecyclerView.ViewHolder> exten
     protected Context mContext;
     protected OnItemClickListener<T> mItemClickListener;
     protected OnItemChildClickListener<T> mItemChildClickListener;
+    protected OnItemLongClickListener<T> mItemLongClickListener;
+
+    public void setItemLongClickListener(OnItemLongClickListener<T> itemLongClickListener) {
+        mItemLongClickListener = itemLongClickListener;
+    }
 
     public void setItemClickListener(OnItemClickListener<T> itemClickListener) {
         mItemClickListener = itemClickListener;
@@ -48,6 +54,12 @@ public abstract class BaseRvAdapter<T, VH extends RecyclerView.ViewHolder> exten
             if (mItemClickListener != null) {
                 mItemClickListener.onItemClick(v, position, mDataList.get(position));
             }
+        });
+        holder.itemView.setOnLongClickListener(view -> {
+            if (mItemLongClickListener != null) {
+                mItemLongClickListener.onItemLongClick(holder.itemView, position, mDataList.get(position));
+            }
+            return true;
         });
         onBindItemViewHolder((VH) holder, position);
     }

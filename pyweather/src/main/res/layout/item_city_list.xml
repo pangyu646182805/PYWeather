@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/backgroundPanel"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/y24"
+    android:paddingTop="@dimen/y24">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x32">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_circle"
+            android:layout_width="@dimen/x88"
+            android:layout_height="@dimen/y88"
+            android:src="@color/colorPrimary"/>
+
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
+            android:id="@+id/tv_first_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            tools:text="杭"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/x32"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/x32"
+        android:orientation="vertical">
+
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/colorGray333"
+            android:textSize="14sp"
+            tools:text="杭州"/>
+
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
+            android:id="@+id/tv_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/colorGray666"
+            android:layout_marginTop="@dimen/y8"
+            android:textSize="12sp"
+            android:text="N/A"/>
+    </LinearLayout>
+
+    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:id="@+id/tv_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/x32"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        tools:text="28°"/>
+</LinearLayout>
