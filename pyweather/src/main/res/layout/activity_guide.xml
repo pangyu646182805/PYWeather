@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rl_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignWithParentIfMissing="true">
+    </android.support.v4.view.ViewPager>
+
+    <com.itsronald.widget.ViewPagerIndicator
+        android:id="@+id/view_pager_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/y32"
+        android:gravity="center_vertical"
+        app:dotRadius="@dimen/x4"
+        app:selectedDotColor="@color/white"
+        app:unselectedDotColor="#9fff"
+        app:viewPagerId="@id/vp_guide"/>
+
+    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:id="@+id/btn_into"
+        android:layout_width="@dimen/x212"
+        android:layout_height="@dimen/y64"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:background="@drawable/shape_guide"
+        android:gravity="center"
+        android:text="立即体验"
+        android:layout_marginBottom="@dimen/y64"
+        android:textColor="@color/white"/>
+</RelativeLayout>

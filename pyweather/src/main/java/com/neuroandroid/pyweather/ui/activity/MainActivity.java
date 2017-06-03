@@ -9,9 +9,11 @@ import android.support.v4.widget.DrawerLayout;
 
 import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.base.BaseActivity;
+import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.ui.fragment.CityManageFragment;
 import com.neuroandroid.pyweather.ui.fragment.WeatherFragment;
 import com.neuroandroid.pyweather.utils.FragmentUtils;
+import com.neuroandroid.pyweather.utils.SPUtils;
 import com.neuroandroid.pyweather.utils.ShowUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 
@@ -46,7 +48,12 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        boolean appGuide = SPUtils.getBoolean(this, Constant.APP_GUIDE, false);
+        if (!appGuide) {
+            // 如果没有显示过引导页面则显示
+            mIntent.setClass(this, GuideActivity.class);
+            UIUtils.toLayout(mIntent);
+        }
     }
 
     @Override

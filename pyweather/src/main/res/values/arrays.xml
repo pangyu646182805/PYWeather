@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="landing_bg">
+        <item>@color/light_cyan</item>
+        <item>@color/light_orange</item>
+        <item>@color/light_purple</item>
+        <item>@color/light_green</item>
+
+    </array>
+
+    <array name="icons">
+        <item>@drawable/img_guide_one</item>
+        <item>@drawable/img_guide_two</item>
+        <item>@drawable/img_guide_three</item>
+        <item>@drawable/img_guide_four</item>
+    </array>
+
+    <string-array name="titles" >
+        <item>@string/guide_welcome</item>
+        <item>@string/guide_simple</item>
+        <item>@string/guide_light</item>
+        <item>@string/guide_hope</item>
+    </string-array>
+
+    <string-array name="hints" >
+        <item>@string/app_name</item>
+        <item>@string/customization</item>
+        <item>@string/elegance</item>
+        <item>@string/hope</item>
+    </string-array>
+</resources>

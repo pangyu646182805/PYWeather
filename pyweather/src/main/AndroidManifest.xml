@@ -26,6 +26,12 @@
         </activity>
 
         <activity
+            android:name="com.neuroandroid.pyweather.ui.activity.GuideActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
             android:name="com.neuroandroid.pyweather.ui.activity.SelectedCityActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">

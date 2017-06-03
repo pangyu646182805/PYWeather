@@ -30,6 +30,8 @@ public class Constant {
 
     public static final String APP_KEY = "4f7b1188c1674728ac1a5ad81def0388";
 
+    public static final String APP_GUIDE = "app_guide";
+
     /**
      * 返回的响应码
      */

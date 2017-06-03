@@ -8,6 +8,11 @@
     <color name="colorGray666">#666666</color>
     <color name="colorGray333">#333333</color>
 
+    <color name="light_green">#4cae50</color>
+    <color name="light_purple">#8c61b3</color>
+    <color name="light_orange">#ffb500</color>
+    <color name="light_cyan">#00BCD4</color>
+
     <color name="split">#eeeeee</color>
     <color name="backgroundColor">#f8f8f8</color>
     <color name="backgroundPanel">#fefefe</color>

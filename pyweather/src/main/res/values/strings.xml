@@ -6,6 +6,15 @@
     <string name="select_city">选择城市</string>
     <string name="str_empty">您还没有添加城市(˵¯͒⌢͗¯͒˵)</string>
 
+    <string name="guide_welcome">欢迎使用</string>
+    <string name="guide_simple">简洁不失个性</string>
+    <string name="guide_light">轻巧不失优雅</string>
+    <string name="guide_hope">愿每一天都是晴天</string>
+
+    <string name="customization">Customization</string>
+    <string name="elegance">Elegance</string>
+    <string name="hope">Every day is sunny</string>
+
     <string name="pickerview_cancel">取消</string>
     <string name="pickerview_submit">确定</string>
     <string name="pickerview_year">年</string>
