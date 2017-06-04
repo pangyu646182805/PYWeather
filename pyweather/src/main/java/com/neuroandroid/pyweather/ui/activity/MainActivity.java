@@ -22,6 +22,7 @@ import didikee.com.permissionshelper.PermissionsHelper;
 import didikee.com.permissionshelper.permission.DangerousPermissions;
 
 public class MainActivity extends BaseActivity {
+    private static final int REQUEST_CODE_INTO_GUIDE = 2;
     private static final int FRAGMENT_WEATHER = 0;
     private static final int FRAGMENT_CITY_MANAGE = 1;
 
@@ -48,18 +49,20 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        boolean appGuide = SPUtils.getBoolean(this, Constant.APP_GUIDE, false);
-        if (!appGuide) {
-            // 如果没有显示过引导页面则显示
-            mIntent.setClass(this, GuideActivity.class);
-            UIUtils.toLayout(mIntent);
-        }
+
     }
 
     @Override
     protected void initData() {
         mPermissionsHelper = new PermissionsHelper(this, PERMISSIONS);
-        checkPermission();
+        boolean appGuide = SPUtils.getBoolean(this, Constant.APP_GUIDE, false);
+        if (!appGuide) {
+            // 如果没有显示过引导页面则显示
+            mIntent.setClass(this, GuideActivity.class);
+            startActivityForResult(mIntent, REQUEST_CODE_INTO_GUIDE);
+        } else {
+            checkPermission();
+        }
     }
 
     @Override
@@ -173,5 +176,8 @@ public class MainActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mPermissionsHelper.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_INTO_GUIDE) {
+            checkPermission();
+        }
     }
 }
