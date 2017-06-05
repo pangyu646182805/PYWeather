@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/y640">
+    android:layout_height="@dimen/y620">
 
     <com.neuroandroid.pyweather.widget.NoPaddingTextView
         android:id="@+id/tv_weather_desc"
@@ -42,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_current_temp"
         android:gravity="bottom"
+        android:paddingBottom="@dimen/y48"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 

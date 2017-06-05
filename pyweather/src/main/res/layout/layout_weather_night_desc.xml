@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_night1"
+            android:background="@mipmap/iconfont_baitianqing"
+            android:layout_width="@dimen/x42"
+            android:layout_height="@dimen/x42"/>
+
+        <TextView
+            android:id="@+id/tv_night_desc1"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="多云"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_dir1"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text=""
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/tv_sc1"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="微风"
+            android:textSize="10sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_night2"
+            android:layout_width="@dimen/x42"
+            android:layout_height="@dimen/x42"
+            android:background="@mipmap/iconfont_baitianqing"/>
+
+        <TextView
+            android:id="@+id/tv_night_desc2"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="多云"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_dir2"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text=""
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/tv_sc2"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="微风"
+            android:textSize="10sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_night3"
+            android:layout_width="@dimen/x42"
+            android:layout_height="@dimen/x42"
+            android:background="@mipmap/iconfont_baitianqing"            />
+
+        <TextView
+            android:id="@+id/tv_night_desc3"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="多云"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_dir3"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text=""
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/tv_sc3"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="微风"
+            android:textSize="10sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_night4"
+            android:layout_width="@dimen/x42"
+            android:layout_height="@dimen/x42"
+            android:background="@mipmap/iconfont_baitianqing"            />
+
+        <TextView
+            android:id="@+id/tv_night_desc4"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="多云"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_dir4"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text=""
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/tv_sc4"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="微风"
+            android:textSize="10sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_night5"
+            android:layout_width="@dimen/x42"
+            android:layout_height="@dimen/x42"
+            android:background="@mipmap/iconfont_baitianqing"            />
+
+        <TextView
+            android:id="@+id/tv_night_desc5"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="多云"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_dir5"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text=""
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/tv_sc5"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="微风"
+            android:textSize="10sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_night6"
+            android:layout_width="@dimen/x42"
+            android:layout_height="@dimen/x42"
+            android:background="@mipmap/iconfont_baitianqing"            />
+
+        <TextView
+            android:id="@+id/tv_night_desc6"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="多云"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_dir6"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text=""
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/tv_sc6"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="微风"
+            android:textSize="10sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_night7"
+            android:layout_width="@dimen/x42"
+            android:layout_height="@dimen/x42"
+            android:background="@mipmap/iconfont_baitianqing"            />
+
+        <TextView
+            android:id="@+id/tv_night_desc7"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="多云"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_dir7"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text=""
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/tv_sc7"
+            style="@style/TextViewWeatherWhite"
+            android:layout_marginTop="2dp"
+            android:text="微风"
+            android:textSize="10sp"/>
+    </LinearLayout>
+</LinearLayout>

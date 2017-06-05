@@ -64,7 +64,11 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
     protected void onFragmentVisibleChange(boolean isVisible) {
         super.onFragmentVisibleChange(isVisible);
         if (isVisible) {  // 不可见 -> 可见
-            // mRefreshLayout.startRefresh();
+            if (mWeatherAdapter.getDataList().isEmpty()) {
+                mRefreshLayout.startRefresh();
+            }
+        } else {
+            mRefreshLayout.finishRefreshing();
         }
     }
 
