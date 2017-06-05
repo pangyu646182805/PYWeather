@@ -32,6 +32,8 @@ public class Constant {
 
     public static final String APP_GUIDE = "app_guide";
 
+    public static final String CITY = "city";
+
     /**
      * 返回的响应码
      */
@@ -46,4 +48,31 @@ public class Constant {
     public static final int RESPONSE_CODE_IMAGE_UPLOAD_FAILED = -3005;
     public static final int RESPONSE_CODE_USER_HAS_REGISTER = -1004;
     public static final int RESPONSE_CODE_PASSWORD_ERROR = -1001;
+
+    /**
+     * 接口正常
+     */
+    public static final String STATUS_OK = "ok";
+    /**
+     * 错误的用户 key
+     */
+    public static final String STATUS_INVALID_KEY = "invalid key";
+    /**
+     * 	未知城市
+     */
+    public static final String STATUS_UNKNOWN_CITY = "unknown city";
+    /**
+     * 超过访问次数
+     */
+    public static final String STATUS_NO_MORE_REQUESTS = "no more requests";
+    /**
+     * 服务无响应或超时
+     */
+    public static final String STATUS_ANR = "anr";
+    /**
+     * 没有访问权限
+     */
+    public static final String STATUS_PERMISSION_DENIED = "permission denied";
+
+    public static final String TEMP = "°";
 }

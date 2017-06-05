@@ -13,4 +13,12 @@ public class BaseModel {
     public BaseModel(String baseUrl) {
         mService = RetrofitUtils.getInstance(baseUrl, false, true).create(ApiService.class);
     }
+
+    public BaseModel(String baseUrl, boolean needCache) {
+        mService = RetrofitUtils.getInstance(baseUrl, needCache, true).create(ApiService.class);
+    }
+
+    public BaseModel(String baseUrl, boolean needCache, boolean needLog) {
+        mService = RetrofitUtils.getInstance(baseUrl, needCache, needLog).create(ApiService.class);
+    }
 }

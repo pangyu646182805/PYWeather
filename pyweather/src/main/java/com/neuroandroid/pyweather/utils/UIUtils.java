@@ -3,8 +3,11 @@ package com.neuroandroid.pyweather.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -95,5 +98,26 @@ public class UIUtils {
 
     public static void setImage(ImageView iv, int resId) {
         iv.setImageResource(resId);
+    }
+
+    /**
+     * 获取文本边框
+     *
+     * @param paint
+     * @param text
+     * @param rect
+     */
+    public static void getTextBounds(Paint paint, String text, Rect rect) {
+        paint.getTextBounds(text, 0, text.length(), rect);
+    }
+
+    public static float getRawSize(Context context, int unit, float size) {
+        Resources resources;
+        if (context == null) {
+            resources = Resources.getSystem();
+        } else {
+            resources = context.getResources();
+        }
+        return TypedValue.applyDimension(unit, size, resources.getDisplayMetrics());
     }
 }

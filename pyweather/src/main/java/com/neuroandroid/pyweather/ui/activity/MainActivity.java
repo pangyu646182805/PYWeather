@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.FrameLayout;
 
 import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.base.BaseActivity;
@@ -16,6 +17,7 @@ import com.neuroandroid.pyweather.utils.FragmentUtils;
 import com.neuroandroid.pyweather.utils.SPUtils;
 import com.neuroandroid.pyweather.utils.ShowUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
+import com.neuroandroid.pyweather.widget.weather.DynamicWeatherView;
 
 import butterknife.BindView;
 import didikee.com.permissionshelper.PermissionsHelper;
@@ -38,6 +40,8 @@ public class MainActivity extends BaseActivity {
     DrawerLayout mDrawerLayout;
     @BindView(R.id.nav_layout)
     NavigationView mNavLayout;
+    private FrameLayout mFlBackground;
+    private DynamicWeatherView mDynamicWeatherView;
 
     private PermissionsHelper mPermissionsHelper;
     private MainActivityFragmentCallbacks mCurrentFragment;
@@ -49,7 +53,12 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        /*mFlBackground = (FrameLayout) findViewById(R.id.fl_background);
+        mDynamicWeatherView = new DynamicWeatherView(this);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        mDynamicWeatherView.setLayoutParams(params);
+        mFlBackground.addView(mDynamicWeatherView);
+        mDynamicWeatherView.setDrawerType(BaseDrawer.Type.CLOUDY_D);*/
     }
 
     @Override

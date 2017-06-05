@@ -1,6 +1,5 @@
 package com.neuroandroid.pyweather.widget;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
@@ -8,13 +7,15 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.lcodecore.tkrefreshlayout.IHeaderView;
 import com.lcodecore.tkrefreshlayout.OnAnimEndListener;
 import com.neuroandroid.pyweather.R;
-import com.neuroandroid.pyweather.utils.L;
 import com.neuroandroid.pyweather.utils.UIUtils;
 
 /**
@@ -25,6 +26,7 @@ public class WeatherRefreshHeader extends FrameLayout implements IHeaderView {
     private Context mContext;
     private ImageView mIvSun;
     private int mSunWidthAndHeight;
+    private RotateAnimation mRotateAnimation;
 
     public WeatherRefreshHeader(@NonNull Context context) {
         this(context, null);
@@ -46,10 +48,18 @@ public class WeatherRefreshHeader extends FrameLayout implements IHeaderView {
         LayoutParams params = new LayoutParams(mSunWidthAndHeight, mSunWidthAndHeight);
         params.gravity = Gravity.CENTER;
         mIvSun.setLayoutParams(params);
-        mIvSun.setBackgroundResource(R.mipmap.ic_sun);
+        mIvSun.setBackgroundResource(R.mipmap.iconfont_baitianqing);
         mIvSun.setScaleX(0f);
         mIvSun.setScaleY(0f);
         addView(mIvSun);
+
+        mRotateAnimation = new RotateAnimation(mIvSun.getRotation(), mIvSun.getRotation() + 360f, Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        mRotateAnimation.setInterpolator(new LinearInterpolator());
+        mRotateAnimation.setRepeatCount(Animation.INFINITE);
+        mRotateAnimation.setRepeatMode(Animation.INFINITE);
+        mRotateAnimation.setFillAfter(true);
+        mRotateAnimation.setDuration(2000);
     }
 
     @Override
@@ -59,46 +69,41 @@ public class WeatherRefreshHeader extends FrameLayout implements IHeaderView {
 
     @Override
     public void onPullingDown(float fraction, float maxHeadHeight, float headHeight) {
-        L.e("onPullingDown : fraction : " + fraction);
-        // ViewCompat.animate(mIvSun).scaleX()
+        // L.e("onPullingDown : fraction : " + headHeight);
         if (fraction <= 1f) {
             mIvSun.setScaleX(fraction);
             mIvSun.setScaleY(fraction);
+            mIvSun.setRotation(fraction * 180);
         }
-        mIvSun.setRotation(fraction * headHeight / maxHeadHeight * 180);
     }
 
     @Override
     public void onPullReleasing(float fraction, float maxHeadHeight, float headHeight) {
-        L.e("onPullReleasing : fraction : " + fraction);
+        // L.e("onPullReleasing : fraction : " + fraction);
         if (fraction <= 1f) {
             mIvSun.setScaleX(fraction);
             mIvSun.setScaleY(fraction);
-            mIvSun.setRotation(fraction * headHeight / maxHeadHeight * 180);
+            mIvSun.setRotation(fraction * 180);
         }
     }
 
     @Override
     public void startAnim(float maxHeadHeight, float headHeight) {
-        L.e("onPullReleasing : maxHeadHeight : " + maxHeadHeight + " headHeight : " + headHeight);
-        ValueAnimator animator = ValueAnimator.ofFloat(mIvSun.getRotation(), 720f);
-        animator.addUpdateListener(animation -> {
-            float rotation = (float) animation.getAnimatedValue();
-            mIvSun.setRotation(rotation);
-        });
-        animator.setDuration(2000);
-        animator.start();
+        // L.e("onPullReleasing : maxHeadHeight : " + maxHeadHeight + " headHeight : " + headHeight);
+
+        mIvSun.startAnimation(mRotateAnimation);
     }
 
     @Override
     public void onFinish(OnAnimEndListener animEndListener) {
-        L.e("onFinish");
+        // L.e("onFinish");
         animEndListener.onAnimEnd();
     }
 
     @Override
     public void reset() {
-        L.e("reset");
+        // L.e("reset");
         mIvSun.setRotation(0f);
+        mIvSun.clearAnimation();
     }
 }

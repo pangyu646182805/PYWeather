@@ -1,20 +1,19 @@
 package com.neuroandroid.pyweather.ui.fragment;
 
-import android.database.Cursor;
-import android.provider.MediaStore;
+import android.support.v4.view.ViewPager;
+import android.view.View;
 
-import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
-import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.itsronald.widget.ViewPagerIndicator;
 import com.neuroandroid.pyweather.R;
+import com.neuroandroid.pyweather.adapter.WeatherPagerAdapter;
 import com.neuroandroid.pyweather.base.BaseFragment;
-import com.neuroandroid.pyweather.config.Constant;
-import com.neuroandroid.pyweather.model.response.HeFenWeather;
-import com.neuroandroid.pyweather.mvp.contract.IWeatherContract;
-import com.neuroandroid.pyweather.mvp.presenter.WeatherPresenter;
+import com.neuroandroid.pyweather.bean.CityBean;
+import com.neuroandroid.pyweather.provider.PYCityStore;
 import com.neuroandroid.pyweather.ui.activity.MainActivity;
-import com.neuroandroid.pyweather.utils.L;
 import com.neuroandroid.pyweather.utils.UIUtils;
-import com.neuroandroid.pyweather.widget.WeatherRefreshHeader;
+import com.neuroandroid.pyweather.widget.TitleBar;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -22,17 +21,16 @@ import butterknife.BindView;
  * Created by NeuroAndroid on 2017/6/1.
  */
 
-public class WeatherFragment extends BaseFragment<IWeatherContract.Presenter> implements MainActivity.MainActivityFragmentCallbacks, IWeatherContract.View {
-    @BindView(R.id.refresh_layout)
-    TwinklingRefreshLayout mRefreshLayout;
+public class WeatherFragment extends BaseFragment implements MainActivity.MainActivityFragmentCallbacks {
+    @BindView(R.id.view_pager_indicator)
+    ViewPagerIndicator mPagerIndicator;
+    @BindView(R.id.vp_content)
+    ViewPager mVpContent;
+
+    private ArrayList<CityBean.CityListBean> mAllCities;
 
     public static WeatherFragment newInstance() {
         return new WeatherFragment();
-    }
-
-    @Override
-    protected void initPresenter() {
-        mPresenter = new WeatherPresenter(Constant.BASE_URL, this);
     }
 
     @Override
@@ -43,40 +41,28 @@ public class WeatherFragment extends BaseFragment<IWeatherContract.Presenter> im
     @Override
     protected void initView() {
         initTitleBar(UIUtils.getString(R.string.app_name));
-
-        WeatherRefreshHeader refreshHeader = new WeatherRefreshHeader(mContext);
-        mRefreshLayout.setHeaderView(refreshHeader);
+        initLeftAction(new TitleBar.ImageAction(R.drawable.ic_menu_white) {
+            @Override
+            public void performAction(View view) {
+                getMainActivity().openDrawer();
+            }
+        });
     }
 
     @Override
     protected void initData() {
         // mPresenter.getWeatherInfo("杭州", Constant.APP_KEY);
-
-        Cursor songs = mContext.getContentResolver().query(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null,
-                MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
-
-        while(songs.moveToNext()){
-            //音乐名字
-            String name = songs.getString(songs.getColumnIndex(MediaStore.Audio.Media.TITLE));
-            //演唱者
-            String artist = songs.getString(songs.getColumnIndex(MediaStore.Audio.Media.ARTIST));
-            //时间
-            long time = songs.getLong(songs.getColumnIndex(MediaStore.Audio.Media.DURATION));
-            //路径
-            String file = songs.getString(songs.getColumnIndex(MediaStore.Audio.Media.DATA));
-
-            L.e(name + " : " + artist);
-        }
-        songs.close();
+        mAllCities = PYCityStore.getInstance(mContext).getAllCities();
+        if (!mAllCities.isEmpty()) getTitleBar().setTitle(mAllCities.get(0).getCityZh());
+        setUpViewPager();
     }
 
     @Override
     protected void initListener() {
-        mRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+        mVpContent.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
-            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
-                UIUtils.getHandler().postDelayed(() -> refreshLayout.finishRefreshing(), 2000);
+            public void onPageSelected(int position) {
+                getTitleBar().setTitle(mAllCities.get(position).getCityZh());
             }
         });
     }
@@ -86,8 +72,12 @@ public class WeatherFragment extends BaseFragment<IWeatherContract.Presenter> im
         return false;
     }
 
-    @Override
-    public void showWeatherInfo(HeFenWeather weatherInfo) {
-        getTitleBar().setTitle(mGson.toJson(weatherInfo));
+    /**
+     * ViewPager相关设置
+     */
+    private void setUpViewPager() {
+        WeatherPagerAdapter weatherPagerAdapter = new WeatherPagerAdapter(mContext, getChildFragmentManager(), mAllCities);
+        mVpContent.setAdapter(weatherPagerAdapter);
+        mVpContent.setOffscreenPageLimit(weatherPagerAdapter.getCount() - 1);
     }
 }

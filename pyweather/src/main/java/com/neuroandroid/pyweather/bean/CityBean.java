@@ -1,5 +1,6 @@
 package com.neuroandroid.pyweather.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +27,7 @@ public class CityBean {
         this.dataList = dataList;
     }
 
-    public static class CityListBean {
+    public static class CityListBean implements Serializable {
         /**
          * id : CN101010100
          * cityEn : beijing

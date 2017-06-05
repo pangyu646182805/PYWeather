@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#600f"
+    android:background="#FF3C3F41"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_title_bar"/>
-
-    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
-        android:id="@+id/refresh_layout"
+    <com.neuroandroid.pyweather.widget.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_weather"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+    <com.itsronald.widget.ViewPagerIndicator
+        android:id="@+id/view_pager_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:gravity="center_vertical"
+        app:dotPadding="@dimen/x4"
+        app:dotRadius="@dimen/x3"
+        app:selectedDotColor="@color/white"
+        app:unselectedDotColor="#9fff"
+        app:viewPagerId="@+id/vp_content"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

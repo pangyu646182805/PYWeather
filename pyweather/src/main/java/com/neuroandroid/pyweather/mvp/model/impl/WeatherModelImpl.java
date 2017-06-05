@@ -11,8 +11,8 @@ import retrofit2.Call;
  */
 
 public class WeatherModelImpl extends BaseModel implements IWeatherModel {
-    public WeatherModelImpl(String baseUrl) {
-        super(baseUrl);
+    public WeatherModelImpl(String baseUrl, boolean needCache) {
+        super(baseUrl, needCache);
     }
 
     @Override

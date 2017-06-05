@@ -1,15 +1,12 @@
 package com.neuroandroid.pyweather.model.response;
 
-import com.google.gson.annotations.SerializedName;
-import com.neuroandroid.pyweather.base.BaseHeFen;
-
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/4.
  */
 
-public class HeFenWeather extends BaseHeFen {
+public class HeFenWeather {
     private List<HeWeather5Bean> HeWeather5;
 
     public List<HeWeather5Bean> getHeWeather5() {
@@ -22,19 +19,18 @@ public class HeFenWeather extends BaseHeFen {
 
     public static class HeWeather5Bean {
         /**
-         * aqi : {"city":{"aqi":"84","co":"1","no2":"77","o3":"19","pm10":"118","pm25":"58","qlty":"良","so2":"7"}}
-         * basic : {"city":"北京","cnty":"中国","id":"CN101010100","lat":"39.90498734","lon":"116.40528870","update":{"loc":"2017-06-04 08:52","utc":"2017-06-04 00:52"}}
-         * daily_forecast : [{"astro":{"mr":"14:37","ms":"02:02","sr":"04:48","ss":"19:37"},"cond":{"code_d":"101","code_n":"101","txt_d":"多云","txt_n":"多云"},"date":"2017-06-04","hum":"40","pcpn":"0.0","pop":"0","pres":"1010","tmp":{"max":"31","min":"19"},"uv":"9","vis":"20","wind":{"deg":"184","dir":"西南风","sc":"3-4","spd":"13"}},{"astro":{"mr":"15:35","ms":"02:31","sr":"04:48","ss":"19:38"},"cond":{"code_d":"104","code_n":"305","txt_d":"阴","txt_n":"小雨"},"date":"2017-06-05","hum":"43","pcpn":"0.0","pop":"3","pres":"1011","tmp":{"max":"27","min":"15"},"uv":"7","vis":"20","wind":{"deg":"141","dir":"南风","sc":"3-4","spd":"11"}},{"astro":{"mr":"16:31","ms":"03:01","sr":"04:47","ss":"19:39"},"cond":{"code_d":"305","code_n":"101","txt_d":"小雨","txt_n":"多云"},"date":"2017-06-06","hum":"76","pcpn":"1.6","pop":"81","pres":"1010","tmp":{"max":"21","min":"14"},"uv":"5","vis":"18","wind":{"deg":"160","dir":"东南风","sc":"微风","spd":"5"}},{"astro":{"mr":"17:28","ms":"03:33","sr":"04:47","ss":"19:39"},"cond":{"code_d":"101","code_n":"101","txt_d":"多云","txt_n":"多云"},"date":"2017-06-07","hum":"59","pcpn":"0.6","pop":"70","pres":"1005","tmp":{"max":"30","min":"18"},"uv":"8","vis":"19","wind":{"deg":"273","dir":"南风","sc":"微风","spd":"6"}},{"astro":{"mr":"18:23","ms":"04:07","sr":"04:47","ss":"19:40"},"cond":{"code_d":"100","code_n":"101","txt_d":"晴","txt_n":"多云"},"date":"2017-06-08","hum":"42","pcpn":"0.0","pop":"1","pres":"1003","tmp":{"max":"33","min":"21"},"uv":"8","vis":"20","wind":{"deg":"297","dir":"南风","sc":"微风","spd":"3"}},{"astro":{"mr":"19:17","ms":"04:44","sr":"04:47","ss":"19:40"},"cond":{"code_d":"104","code_n":"104","txt_d":"阴","txt_n":"阴"},"date":"2017-06-09","hum":"48","pcpn":"0.0","pop":"4","pres":"1001","tmp":{"max":"33","min":"21"},"uv":"6","vis":"20","wind":{"deg":"183","dir":"西南风","sc":"3-4","spd":"16"}},{"astro":{"mr":"20:09","ms":"05:25","sr":"04:47","ss":"19:41"},"cond":{"code_d":"104","code_n":"104","txt_d":"阴","txt_n":"阴"},"date":"2017-06-10","hum":"46","pcpn":"0.0","pop":"5","pres":"1002","tmp":{"max":"31","min":"19"},"uv":"6","vis":"18","wind":{"deg":"82","dir":"北风","sc":"3-4","spd":"15"}}]
-         * hourly_forecast : [{"cond":{"code":"100","txt":"晴"},"date":"2017-06-04 10:00","hum":"33","pop":"0","pres":"1011","tmp":"25","wind":{"deg":"150","dir":"东南风","sc":"微风","spd":"9"}},{"cond":{"code":"100","txt":"晴"},"date":"2017-06-04 13:00","hum":"24","pop":"0","pres":"1009","tmp":"29","wind":{"deg":"191","dir":"西南风","sc":"微风","spd":"16"}},{"cond":{"code":"100","txt":"晴"},"date":"2017-06-04 16:00","hum":"22","pop":"0","pres":"1007","tmp":"29","wind":{"deg":"198","dir":"西南风","sc":"3-4","spd":"19"}},{"cond":{"code":"100","txt":"晴"},"date":"2017-06-04 19:00","hum":"28","pop":"0","pres":"1008","tmp":"26","wind":{"deg":"203","dir":"西南风","sc":"微风","spd":"16"}},{"cond":{"code":"103","txt":"晴间多云"},"date":"2017-06-04 22:00","hum":"33","pop":"0","pres":"1010","tmp":"23","wind":{"deg":"215","dir":"西南风","sc":"微风","spd":"11"}}]
-         * now : {"cond":{"code":"101","txt":"多云"},"fl":"21","hum":"40","pcpn":"0","pres":"1011","tmp":"23","vis":"7","wind":{"deg":"293","dir":"西南风","sc":"微风","spd":"7"}}
+         * aqi : {"city":{"aqi":"113","co":"1","no2":"56","o3":"162","pm10":"115","pm25":"85","qlty":"轻度污染","so2":"26"}}
+         * basic : {"city":"北京","cnty":"中国","id":"CN101010100","lat":"39.90498734","lon":"116.40528870","update":{"loc":"2017-06-05 12:52","utc":"2017-06-05 04:52"}}
+         * daily_forecast : [{"astro":{"mr":"15:35","ms":"02:31","sr":"04:48","ss":"19:38"},"cond":{"code_d":"101","code_n":"305","txt_d":"多云","txt_n":"小雨"},"date":"2017-06-05","hum":"39","pcpn":"0.1","pop":"1","pres":"1012","tmp":{"max":"29","min":"15"},"uv":"7","vis":"19","wind":{"deg":"152","dir":"南风","sc":"3-4","spd":"15"}},{"astro":{"mr":"16:31","ms":"03:01","sr":"04:47","ss":"19:39"},"cond":{"code_d":"305","code_n":"100","txt_d":"小雨","txt_n":"晴"},"date":"2017-06-06","hum":"76","pcpn":"3.2","pop":"99","pres":"1010","tmp":{"max":"20","min":"14"},"uv":"4","vis":"17","wind":{"deg":"132","dir":"南风","sc":"微风","spd":"6"}},{"astro":{"mr":"17:28","ms":"03:33","sr":"04:47","ss":"19:39"},"cond":{"code_d":"100","code_n":"100","txt_d":"晴","txt_n":"晴"},"date":"2017-06-07","hum":"56","pcpn":"0.0","pop":"4","pres":"1006","tmp":{"max":"31","min":"18"},"uv":"8","vis":"19","wind":{"deg":"279","dir":"南风","sc":"微风","spd":"4"}},{"astro":{"mr":"18:23","ms":"04:07","sr":"04:47","ss":"19:40"},"cond":{"code_d":"101","code_n":"100","txt_d":"多云","txt_n":"晴"},"date":"2017-06-08","hum":"38","pcpn":"0.0","pop":"8","pres":"1004","tmp":{"max":"33","min":"21"},"uv":"8","vis":"20","wind":{"deg":"282","dir":"南风","sc":"微风","spd":"5"}},{"astro":{"mr":"19:17","ms":"04:44","sr":"04:47","ss":"19:40"},"cond":{"code_d":"101","code_n":"101","txt_d":"多云","txt_n":"多云"},"date":"2017-06-09","hum":"40","pcpn":"0.0","pop":"0","pres":"1002","tmp":{"max":"34","min":"21"},"uv":"8","vis":"20","wind":{"deg":"170","dir":"南风","sc":"微风","spd":"8"}},{"astro":{"mr":"20:09","ms":"05:25","sr":"04:47","ss":"19:41"},"cond":{"code_d":"104","code_n":"300","txt_d":"阴","txt_n":"阵雨"},"date":"2017-06-10","hum":"45","pcpn":"0.1","pop":"35","pres":"1003","tmp":{"max":"30","min":"19"},"uv":"6","vis":"19","wind":{"deg":"93","dir":"南风","sc":"微风","spd":"3"}},{"astro":{"mr":"20:57","ms":"06:10","sr":"04:47","ss":"19:41"},"cond":{"code_d":"104","code_n":"100","txt_d":"阴","txt_n":"晴"},"date":"2017-06-11","hum":"47","pcpn":"2.7","pop":"65","pres":"1004","tmp":{"max":"27","min":"17"},"uv":"6","vis":"18","wind":{"deg":"153","dir":"南风","sc":"微风","spd":"4"}}]
+         * hourly_forecast : [{"cond":{"code":"103","txt":"晴间多云"},"date":"2017-06-05 13:00","hum":"39","pop":"0","pres":"1010","tmp":"24","wind":{"deg":"208","dir":"西南风","sc":"3-4","spd":"19"}},{"cond":{"code":"100","txt":"晴"},"date":"2017-06-05 16:00","hum":"42","pop":"0","pres":"1010","tmp":"23","wind":{"deg":"206","dir":"西南风","sc":"3-4","spd":"22"}},{"cond":{"code":"100","txt":"晴"},"date":"2017-06-05 19:00","hum":"52","pop":"0","pres":"1011","tmp":"21","wind":{"deg":"217","dir":"西南风","sc":"3-4","spd":"19"}},{"cond":{"code":"100","txt":"晴"},"date":"2017-06-05 22:00","hum":"51","pop":"0","pres":"1010","tmp":"17","wind":{"deg":"222","dir":"西南风","sc":"3-4","spd":"17"}}]
+         * now : {"cond":{"code":"101","txt":"多云"},"fl":"28","hum":"31","pcpn":"0","pres":"1012","tmp":"29","vis":"5","wind":{"deg":"220","dir":"东南风","sc":"3-4","spd":"10"}}
          * status : ok
-         * suggestion : {"comf":{"brf":"较舒适","txt":"白天天气晴好，您在这种天气条件下，会感觉早晚凉爽、舒适，午后偏热。"},"cw":{"brf":"较适宜","txt":"较适宜洗车，未来一天无雨，风力较小，擦洗一新的汽车至少能保持一天。"},"drsg":{"brf":"热","txt":"天气热，建议着短裙、短裤、短薄外套、T恤等夏季服装。"},"flu":{"brf":"少发","txt":"各项气象条件适宜，发生感冒机率较低。但请避免长期处于空调房间中，以防感冒。"},"sport":{"brf":"较适宜","txt":"天气较好，但因风力稍强，户外可选择对风力要求不高的运动，推荐您进行室内运动。"},"trav":{"brf":"适宜","txt":"天气较好，温度稍高，幸好风稍大，会缓解稍热的天气。适宜旅游，可不要错过机会呦！"},"uv":{"brf":"中等","txt":"属中等强度紫外线辐射天气，外出时建议涂擦SPF高于15、PA+的防晒护肤品，戴帽子、太阳镜。"}}
+         * suggestion : {"comf":{"brf":"较舒适","txt":"白天天气晴好，您在这种天气条件下，会感觉早晚凉爽、舒适，午后偏热。"},"cw":{"brf":"不宜","txt":"不宜洗车，未来24小时内有雨，如果在此期间洗车，雨水和路上的泥水可能会再次弄脏您的爱车。"},"drsg":{"brf":"热","txt":"天气热，建议着短裙、短裤、短薄外套、T恤等夏季服装。"},"flu":{"brf":"少发","txt":"各项气象条件适宜，无明显降温过程，发生感冒机率较低。"},"sport":{"brf":"较适宜","txt":"天气较好，但因风力稍强，户外可选择对风力要求不高的运动，推荐您进行室内运动。"},"trav":{"brf":"适宜","txt":"天气较好，温度适宜，但风稍微有点大。这样的天气适宜旅游，您可以尽情地享受大自然的无限风光。"},"uv":{"brf":"弱","txt":"紫外线强度较弱，建议出门前涂擦SPF在12-15之间、PA+的防晒护肤品。"}}
          */
         private AqiBean aqi;
         private BasicBean basic;
         private NowBean now;
-        @SerializedName("status")
-        private String statusX;
+        private String status;
         private SuggestionBean suggestion;
         private List<DailyForecastBean> daily_forecast;
         private List<HourlyForecastBean> hourly_forecast;
@@ -63,12 +59,12 @@ public class HeFenWeather extends BaseHeFen {
             this.now = now;
         }
 
-        public String getStatusX() {
-            return statusX;
+        public String getStatus() {
+            return status;
         }
 
-        public void setStatusX(String statusX) {
-            this.statusX = statusX;
+        public void setStatus(String status) {
+            this.status = status;
         }
 
         public SuggestionBean getSuggestion() {
@@ -97,7 +93,7 @@ public class HeFenWeather extends BaseHeFen {
 
         public static class AqiBean {
             /**
-             * city : {"aqi":"84","co":"1","no2":"77","o3":"19","pm10":"118","pm25":"58","qlty":"良","so2":"7"}
+             * city : {"aqi":"113","co":"1","no2":"56","o3":"162","pm10":"115","pm25":"85","qlty":"轻度污染","so2":"26"}
              */
 
             private CityBean city;
@@ -112,15 +108,16 @@ public class HeFenWeather extends BaseHeFen {
 
             public static class CityBean {
                 /**
-                 * aqi : 84
+                 * aqi : 113
                  * co : 1
-                 * no2 : 77
-                 * o3 : 19
-                 * pm10 : 118
-                 * pm25 : 58
-                 * qlty : 良
-                 * so2 : 7
+                 * no2 : 56
+                 * o3 : 162
+                 * pm10 : 115
+                 * pm25 : 85
+                 * qlty : 轻度污染
+                 * so2 : 26
                  */
+
                 private String aqi;
                 private String co;
                 private String no2;
@@ -203,8 +200,9 @@ public class HeFenWeather extends BaseHeFen {
              * id : CN101010100
              * lat : 39.90498734
              * lon : 116.40528870
-             * update : {"loc":"2017-06-04 08:52","utc":"2017-06-04 00:52"}
+             * update : {"loc":"2017-06-05 12:52","utc":"2017-06-05 04:52"}
              */
+
             private String city;
             private String cnty;
             private String id;
@@ -262,9 +260,10 @@ public class HeFenWeather extends BaseHeFen {
 
             public static class UpdateBean {
                 /**
-                 * loc : 2017-06-04 08:52
-                 * utc : 2017-06-04 00:52
+                 * loc : 2017-06-05 12:52
+                 * utc : 2017-06-05 04:52
                  */
+
                 private String loc;
                 private String utc;
 
@@ -289,14 +288,15 @@ public class HeFenWeather extends BaseHeFen {
         public static class NowBean {
             /**
              * cond : {"code":"101","txt":"多云"}
-             * fl : 21
-             * hum : 40
+             * fl : 28
+             * hum : 31
              * pcpn : 0
-             * pres : 1011
-             * tmp : 23
-             * vis : 7
-             * wind : {"deg":"293","dir":"西南风","sc":"微风","spd":"7"}
+             * pres : 1012
+             * tmp : 29
+             * vis : 5
+             * wind : {"deg":"220","dir":"东南风","sc":"3-4","spd":"10"}
              */
+
             private CondBean cond;
             private String fl;
             private String hum;
@@ -375,6 +375,7 @@ public class HeFenWeather extends BaseHeFen {
                  * code : 101
                  * txt : 多云
                  */
+
                 private String code;
                 private String txt;
 
@@ -397,11 +398,12 @@ public class HeFenWeather extends BaseHeFen {
 
             public static class WindBean {
                 /**
-                 * deg : 293
-                 * dir : 西南风
-                 * sc : 微风
-                 * spd : 7
+                 * deg : 220
+                 * dir : 东南风
+                 * sc : 3-4
+                 * spd : 10
                  */
+
                 private String deg;
                 private String dir;
                 private String sc;
@@ -444,13 +446,14 @@ public class HeFenWeather extends BaseHeFen {
         public static class SuggestionBean {
             /**
              * comf : {"brf":"较舒适","txt":"白天天气晴好，您在这种天气条件下，会感觉早晚凉爽、舒适，午后偏热。"}
-             * cw : {"brf":"较适宜","txt":"较适宜洗车，未来一天无雨，风力较小，擦洗一新的汽车至少能保持一天。"}
+             * cw : {"brf":"不宜","txt":"不宜洗车，未来24小时内有雨，如果在此期间洗车，雨水和路上的泥水可能会再次弄脏您的爱车。"}
              * drsg : {"brf":"热","txt":"天气热，建议着短裙、短裤、短薄外套、T恤等夏季服装。"}
-             * flu : {"brf":"少发","txt":"各项气象条件适宜，发生感冒机率较低。但请避免长期处于空调房间中，以防感冒。"}
+             * flu : {"brf":"少发","txt":"各项气象条件适宜，无明显降温过程，发生感冒机率较低。"}
              * sport : {"brf":"较适宜","txt":"天气较好，但因风力稍强，户外可选择对风力要求不高的运动，推荐您进行室内运动。"}
-             * trav : {"brf":"适宜","txt":"天气较好，温度稍高，幸好风稍大，会缓解稍热的天气。适宜旅游，可不要错过机会呦！"}
-             * uv : {"brf":"中等","txt":"属中等强度紫外线辐射天气，外出时建议涂擦SPF高于15、PA+的防晒护肤品，戴帽子、太阳镜。"}
+             * trav : {"brf":"适宜","txt":"天气较好，温度适宜，但风稍微有点大。这样的天气适宜旅游，您可以尽情地享受大自然的无限风光。"}
+             * uv : {"brf":"弱","txt":"紫外线强度较弱，建议出门前涂擦SPF在12-15之间、PA+的防晒护肤品。"}
              */
+
             private ComfBean comf;
             private CwBean cw;
             private DrsgBean drsg;
@@ -520,6 +523,7 @@ public class HeFenWeather extends BaseHeFen {
                  * brf : 较舒适
                  * txt : 白天天气晴好，您在这种天气条件下，会感觉早晚凉爽、舒适，午后偏热。
                  */
+
                 private String brf;
                 private String txt;
 
@@ -542,9 +546,10 @@ public class HeFenWeather extends BaseHeFen {
 
             public static class CwBean {
                 /**
-                 * brf : 较适宜
-                 * txt : 较适宜洗车，未来一天无雨，风力较小，擦洗一新的汽车至少能保持一天。
+                 * brf : 不宜
+                 * txt : 不宜洗车，未来24小时内有雨，如果在此期间洗车，雨水和路上的泥水可能会再次弄脏您的爱车。
                  */
+
                 private String brf;
                 private String txt;
 
@@ -570,6 +575,7 @@ public class HeFenWeather extends BaseHeFen {
                  * brf : 热
                  * txt : 天气热，建议着短裙、短裤、短薄外套、T恤等夏季服装。
                  */
+
                 private String brf;
                 private String txt;
 
@@ -593,8 +599,9 @@ public class HeFenWeather extends BaseHeFen {
             public static class FluBean {
                 /**
                  * brf : 少发
-                 * txt : 各项气象条件适宜，发生感冒机率较低。但请避免长期处于空调房间中，以防感冒。
+                 * txt : 各项气象条件适宜，无明显降温过程，发生感冒机率较低。
                  */
+
                 private String brf;
                 private String txt;
 
@@ -620,6 +627,7 @@ public class HeFenWeather extends BaseHeFen {
                  * brf : 较适宜
                  * txt : 天气较好，但因风力稍强，户外可选择对风力要求不高的运动，推荐您进行室内运动。
                  */
+
                 private String brf;
                 private String txt;
 
@@ -643,7 +651,7 @@ public class HeFenWeather extends BaseHeFen {
             public static class TravBean {
                 /**
                  * brf : 适宜
-                 * txt : 天气较好，温度稍高，幸好风稍大，会缓解稍热的天气。适宜旅游，可不要错过机会呦！
+                 * txt : 天气较好，温度适宜，但风稍微有点大。这样的天气适宜旅游，您可以尽情地享受大自然的无限风光。
                  */
 
                 private String brf;
@@ -668,9 +676,10 @@ public class HeFenWeather extends BaseHeFen {
 
             public static class UvBean {
                 /**
-                 * brf : 中等
-                 * txt : 属中等强度紫外线辐射天气，外出时建议涂擦SPF高于15、PA+的防晒护肤品，戴帽子、太阳镜。
+                 * brf : 弱
+                 * txt : 紫外线强度较弱，建议出门前涂擦SPF在12-15之间、PA+的防晒护肤品。
                  */
+
                 private String brf;
                 private String txt;
 
@@ -694,18 +703,19 @@ public class HeFenWeather extends BaseHeFen {
 
         public static class DailyForecastBean {
             /**
-             * astro : {"mr":"14:37","ms":"02:02","sr":"04:48","ss":"19:37"}
-             * cond : {"code_d":"101","code_n":"101","txt_d":"多云","txt_n":"多云"}
-             * date : 2017-06-04
-             * hum : 40
-             * pcpn : 0.0
-             * pop : 0
-             * pres : 1010
-             * tmp : {"max":"31","min":"19"}
-             * uv : 9
-             * vis : 20
-             * wind : {"deg":"184","dir":"西南风","sc":"3-4","spd":"13"}
+             * astro : {"mr":"15:35","ms":"02:31","sr":"04:48","ss":"19:38"}
+             * cond : {"code_d":"101","code_n":"305","txt_d":"多云","txt_n":"小雨"}
+             * date : 2017-06-05
+             * hum : 39
+             * pcpn : 0.1
+             * pop : 1
+             * pres : 1012
+             * tmp : {"max":"29","min":"15"}
+             * uv : 7
+             * vis : 19
+             * wind : {"deg":"152","dir":"南风","sc":"3-4","spd":"15"}
              */
+
             private AstroBean astro;
             private CondBeanX cond;
             private String date;
@@ -808,11 +818,12 @@ public class HeFenWeather extends BaseHeFen {
 
             public static class AstroBean {
                 /**
-                 * mr : 14:37
-                 * ms : 02:02
+                 * mr : 15:35
+                 * ms : 02:31
                  * sr : 04:48
-                 * ss : 19:37
+                 * ss : 19:38
                  */
+
                 private String mr;
                 private String ms;
                 private String sr;
@@ -854,10 +865,11 @@ public class HeFenWeather extends BaseHeFen {
             public static class CondBeanX {
                 /**
                  * code_d : 101
-                 * code_n : 101
+                 * code_n : 305
                  * txt_d : 多云
-                 * txt_n : 多云
+                 * txt_n : 小雨
                  */
+
                 private String code_d;
                 private String code_n;
                 private String txt_d;
@@ -898,9 +910,10 @@ public class HeFenWeather extends BaseHeFen {
 
             public static class TmpBean {
                 /**
-                 * max : 31
-                 * min : 19
+                 * max : 29
+                 * min : 15
                  */
+
                 private String max;
                 private String min;
 
@@ -923,11 +936,12 @@ public class HeFenWeather extends BaseHeFen {
 
             public static class WindBeanX {
                 /**
-                 * deg : 184
-                 * dir : 西南风
+                 * deg : 152
+                 * dir : 南风
                  * sc : 3-4
-                 * spd : 13
+                 * spd : 15
                  */
+
                 private String deg;
                 private String dir;
                 private String sc;
@@ -969,14 +983,15 @@ public class HeFenWeather extends BaseHeFen {
 
         public static class HourlyForecastBean {
             /**
-             * cond : {"code":"100","txt":"晴"}
-             * date : 2017-06-04 10:00
-             * hum : 33
+             * cond : {"code":"103","txt":"晴间多云"}
+             * date : 2017-06-05 13:00
+             * hum : 39
              * pop : 0
-             * pres : 1011
-             * tmp : 25
-             * wind : {"deg":"150","dir":"东南风","sc":"微风","spd":"9"}
+             * pres : 1010
+             * tmp : 24
+             * wind : {"deg":"208","dir":"西南风","sc":"3-4","spd":"19"}
              */
+
             private CondBeanXX cond;
             private String date;
             private String hum;
@@ -1043,9 +1058,10 @@ public class HeFenWeather extends BaseHeFen {
 
             public static class CondBeanXX {
                 /**
-                 * code : 100
-                 * txt : 晴
+                 * code : 103
+                 * txt : 晴间多云
                  */
+
                 private String code;
                 private String txt;
 
@@ -1068,11 +1084,12 @@ public class HeFenWeather extends BaseHeFen {
 
             public static class WindBeanXX {
                 /**
-                 * deg : 150
-                 * dir : 东南风
-                 * sc : 微风
-                 * spd : 9
+                 * deg : 208
+                 * dir : 西南风
+                 * sc : 3-4
+                 * spd : 19
                  */
+
                 private String deg;
                 private String dir;
                 private String sc;

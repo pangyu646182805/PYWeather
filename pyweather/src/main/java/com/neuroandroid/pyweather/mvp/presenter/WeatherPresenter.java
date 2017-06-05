@@ -20,7 +20,7 @@ public class WeatherPresenter extends BasePresenter<HeFenWeather> implements IWe
     public WeatherPresenter(String baseUrl, IWeatherContract.View view) {
         super(baseUrl);
         this.mView = view;
-        mWeatherModel = new WeatherModelImpl(baseUrl);
+        mWeatherModel = new WeatherModelImpl(baseUrl, true);
         mView.setPresenter(this);
     }
 
