@@ -1,7 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y24"
+        android:padding="@dimen/x16"
+        android:text="@string/air_quality"
+        android:textColor="@color/white_a"
+        android:textSize="12sp"/>
+
+    <com.neuroandroid.pyweather.widget.AirQualityView
+        android:id="@+id/air_quality_view"
+        android:layout_width="@dimen/x360"
+        android:layout_height="@dimen/y360"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y24"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y24"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextViewWeatherWhite"
+                android:text="PM2.5"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_pm25"
+                style="@style/TextViewWeatherWhite"
+                android:layout_marginTop="3dp"
+                android:text="0"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#4fff"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextViewWeatherWhite"
+                android:text="PM10"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_pm10"
+                style="@style/TextViewWeatherWhite"
+                android:layout_marginTop="3dp"
+                android:text="0"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#4fff"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextViewWeatherWhite"
+                android:text="SO2"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_so2"
+                style="@style/TextViewWeatherWhite"
+                android:layout_marginTop="3dp"
+                android:text="0"
+                android:textSize="14sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="#4fff"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextViewWeatherWhite"
+                android:text="CO"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_co"
+                style="@style/TextViewWeatherWhite"
+                android:layout_marginTop="3dp"
+                android:text="0"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#4fff"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextViewWeatherWhite"
+                android:text="NO2"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_no2"
+                style="@style/TextViewWeatherWhite"
+                android:layout_marginTop="3dp"
+                android:text="0"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#4fff"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextViewWeatherWhite"
+                android:text="O3"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_o3"
+                style="@style/TextViewWeatherWhite"
+                android:layout_marginTop="3dp"
+                android:text="0"
+                android:textSize="14sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="#4fff"/>
 </LinearLayout>

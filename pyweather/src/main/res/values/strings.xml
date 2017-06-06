@@ -4,6 +4,7 @@
     <string name="add_city">添加</string>
     <string name="select_province">选择省份</string>
     <string name="select_city">选择城市</string>
+    <string name="air_quality">空气质量</string>
     <string name="str_empty">您还没有添加城市(˵¯͒⌢͗¯͒˵)</string>
 
     <string name="guide_welcome">欢迎使用</string>

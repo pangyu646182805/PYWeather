@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.adapter.base.BaseRvAdapter;
 import com.neuroandroid.pyweather.model.response.HeFenWeather;
+import com.neuroandroid.pyweather.widget.AirQualityView;
 import com.neuroandroid.pyweather.widget.NoPaddingTextView;
 import com.neuroandroid.pyweather.widget.WeatherLineChartView;
 
@@ -21,11 +22,10 @@ import butterknife.ButterKnife;
  */
 
 public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, WeatherAdapter.Holder> {
-    private static final int ITEM_HEADER = 0;
-    private static final int ITEM_LINE_CHART = 1;  // 折线图
-    private static final int ITEM_AIR_QUALITY = 2;  // 空气质量
-    private static final int ITEM_SUN = 3;  // 日出日落
-    private static final int ITEM_SUGGESTION = 4;  // 生活指数
+    private static final int ITEM_HEADER_AND_LINE_CHART = 0;
+    private static final int ITEM_AIR_QUALITY = 1;  // 空气质量
+    private static final int ITEM_SUN = 2;  // 日出日落
+    private static final int ITEM_SUGGESTION = 3;  // 生活指数
 
     public WeatherAdapter(Context context, List<HeFenWeather.HeWeather5Bean> dataList) {
         super(context, dataList);
@@ -36,12 +36,8 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
         Holder holder = null;
         View view;
         switch (viewType) {
-            case ITEM_HEADER:
+            case ITEM_HEADER_AND_LINE_CHART:
                 view = LayoutInflater.from(mContext).inflate(R.layout.item_weather_header, parent, false);
-                holder = new Holder(view, viewType);
-                break;
-            case ITEM_LINE_CHART:
-                view = LayoutInflater.from(mContext).inflate(R.layout.item_line_chart, parent, false);
                 holder = new Holder(view, viewType);
                 break;
             case ITEM_AIR_QUALITY:
@@ -63,13 +59,11 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
     @Override
     public void onBindItemViewHolder(Holder holder, int position) {
         switch (getItemViewType(position)) {
-            case ITEM_HEADER:
+            case ITEM_HEADER_AND_LINE_CHART:
                 holder.setHeaderData();
                 break;
-            case ITEM_LINE_CHART:
-                holder.setLineChartData();
-                break;
             case ITEM_AIR_QUALITY:
+                holder.setAirQualityData();
                 break;
             case ITEM_SUN:
                 break;
@@ -81,16 +75,14 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
     @Override
     public int getItemCount() {
         if (mDataList == null || mDataList.isEmpty()) return 0;
-        return 5;
+        return 4;
     }
 
     @Override
     public int getItemViewType(int position) {
         switch (position) {
-            case ITEM_HEADER:
-                return ITEM_HEADER;
-            case ITEM_LINE_CHART:
-                return ITEM_LINE_CHART;
+            case ITEM_HEADER_AND_LINE_CHART:
+                return ITEM_HEADER_AND_LINE_CHART;
             case ITEM_AIR_QUALITY:
                 return ITEM_AIR_QUALITY;
             case ITEM_SUGGESTION:
@@ -104,6 +96,7 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
     public class Holder extends RecyclerView.ViewHolder {
         private HeFenWeather.HeWeather5Bean mWeatherBean;
 
+        // 头布局
         private NoPaddingTextView mTvCurrentTemp;
         private NoPaddingTextView mTvWeatherDesc;
         private NoPaddingTextView mTvRefreshTime;
@@ -111,14 +104,16 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
         private NoPaddingTextView mTvWind;
         private NoPaddingTextView mTvWindDesc;
         private NoPaddingTextView mTvTemp;
-
         private WeatherLineChartView mWeatherLineChartView;
+
+        // 空气质量指数
+        private AirQualityView mAirQualityView;
 
         public Holder(View itemView, int viewType) {
             super(itemView);
             mWeatherBean = mDataList.get(0);
             switch (viewType) {
-                case ITEM_HEADER:
+                case ITEM_HEADER_AND_LINE_CHART:
                     mTvCurrentTemp = ButterKnife.findById(itemView, R.id.tv_current_temp);
                     mTvWeatherDesc = ButterKnife.findById(itemView, R.id.tv_weather_desc);
                     mTvRefreshTime = ButterKnife.findById(itemView, R.id.tv_refresh_time);
@@ -126,9 +121,11 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
                     mTvWind = ButterKnife.findById(itemView, R.id.tv_wind);
                     mTvWindDesc = ButterKnife.findById(itemView, R.id.tv_wind_desc);
                     mTvTemp = ButterKnife.findById(itemView, R.id.tv_temp);
-                    break;
-                case ITEM_LINE_CHART:
                     mWeatherLineChartView = ButterKnife.findById(itemView, R.id.weather_line_chart);
+                    break;
+                case ITEM_AIR_QUALITY:
+                    mAirQualityView = ButterKnife.findById(itemView, R.id.air_quality_view);
+                    break;
             }
         }
 
@@ -142,10 +139,12 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
             mTvWindDesc.setText(now.getWind().getDir());
             mTvWind.setText(now.getWind().getSc() + "级");
             mTvTemp.setText(now.getFl() + "°");
+            mWeatherLineChartView.setDailyForecastDataList(mWeatherBean.getDaily_forecast());
         }
 
-        public void setLineChartData() {
-            mWeatherLineChartView.setDailyForecastDataList(mWeatherBean.getDaily_forecast());
+        public void setAirQualityData() {
+            HeFenWeather.HeWeather5Bean.AqiBean aqiBean = mWeatherBean.getAqi();
+            mAirQualityView.setAqiBean(aqiBean);
         }
     }
 }

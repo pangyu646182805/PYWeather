@@ -3,165 +3,188 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/y620">
+    android:layout_height="match_parent">
 
-    <com.neuroandroid.pyweather.widget.NoPaddingTextView
-        android:id="@+id/tv_weather_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/y24"
-        android:textColor="@color/white_a"
-        android:textSize="13sp"
-        tools:text="中雨"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_above="@+id/ll_line_chart"
+        android:layout_height="match_parent">
 
-    <com.neuroandroid.pyweather.widget.NoPaddingTextView
-        android:id="@+id/tv_current_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_weather_desc"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/y32"
-        android:textColor="@color/white"
-        android:textSize="80sp"
-        tools:text="19°"/>
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
+            android:id="@+id/tv_weather_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y24"
+            android:textColor="@color/white_a"
+            android:textSize="13sp"
+            tools:text="中雨"/>
 
-    <com.neuroandroid.pyweather.widget.NoPaddingTextView
-        android:id="@+id/tv_refresh_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:paddingRight="@dimen/x32"
-        android:layout_marginTop="@dimen/y24"
-        android:textColor="@color/white_a"
-        android:textSize="13sp"
-        tools:text="14:29刷新"/>
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
+            android:id="@+id/tv_current_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_weather_desc"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y32"
+            android:textColor="@color/white"
+            android:textSize="80sp"
+            tools:text="19°"/>
+
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
+            android:id="@+id/tv_refresh_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/y24"
+            android:paddingRight="@dimen/x32"
+            android:textColor="@color/white_a"
+            android:textSize="13sp"
+            tools:text="14:29刷新"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tv_current_temp"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/y48">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iv_wet"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/ic_weather_wet"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/iv_wet"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="空气湿度"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"/>
+
+                    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                        android:id="@+id/tv_wet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        tools:text="hum"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iv_wind"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/ic_weather_wind"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/iv_wind"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                        android:id="@+id/tv_wind_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="西北风"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"/>
+
+                    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                        android:id="@+id/tv_wind"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        tools:text="wind"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iv_temp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/ic_weather_temperature"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/iv_temp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="体感温度"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"/>
+
+                    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                        android:id="@+id/tv_temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="tmp"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/ll_line_chart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_current_temp"
-        android:gravity="bottom"
-        android:paddingBottom="@dimen/y48"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
+        <include layout="@layout/layout_weather_day_desc"/>
 
-            <ImageView
-                android:id="@+id/iv_wet"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_centerVertical="true"
-                android:background="@mipmap/ic_weather_wet"/>
+        <com.neuroandroid.pyweather.widget.WeatherLineChartView
+            android:id="@+id/weather_line_chart"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y320"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@+id/iv_wet"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <com.neuroandroid.pyweather.widget.NoPaddingTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="空气湿度"
-                    android:textColor="@color/white"
-                    android:textSize="14dp"/>
-
-                <com.neuroandroid.pyweather.widget.NoPaddingTextView
-                    android:id="@+id/tv_wet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    tools:text="hum"/>
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/iv_wind"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_centerVertical="true"
-                android:background="@mipmap/ic_weather_wind"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@+id/iv_wind"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <com.neuroandroid.pyweather.widget.NoPaddingTextView
-                    android:id="@+id/tv_wind_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="西北风"
-                    android:textColor="@color/white"
-                    android:textSize="14dp"/>
-
-                <com.neuroandroid.pyweather.widget.NoPaddingTextView
-                    android:id="@+id/tv_wind"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    tools:text="wind"/>
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/iv_temp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_centerVertical="true"
-                android:background="@mipmap/ic_weather_temperature"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@+id/iv_temp"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <com.neuroandroid.pyweather.widget.NoPaddingTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="体感温度"
-                    android:textColor="@color/white"
-                    android:textSize="14dp"/>
-
-                <com.neuroandroid.pyweather.widget.NoPaddingTextView
-                    android:id="@+id/tv_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="tmp"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-        </RelativeLayout>
+        <include layout="@layout/layout_weather_night_desc"/>
     </LinearLayout>
 </RelativeLayout>

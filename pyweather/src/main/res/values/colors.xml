@@ -25,6 +25,7 @@
 
     <color name="white">#fff</color>
     <color name="white_a">#afff</color>
+    <color name="white_3">#3fff</color>
     <color name="black">#000</color>
     <color name="red">#ff0000</color><!--红色 -->
     <color name="del_red">#de7777</color>
@@ -37,6 +38,13 @@
     <color name="blue">#499BF7</color>
     <color name="white_title">#F9F9F9</color>
     <color name="rating_bar_color">#f8d739</color>
+
+    <color name="air_quality_level_1">#00e301</color>
+    <color name="air_quality_level_2">#fdfd01</color>
+    <color name="air_quality_level_3">#fd7e01</color>
+    <color name="air_quality_level_4">#f70001</color>
+    <color name="air_quality_level_5">#98004c</color>
+    <color name="air_quality_level_6">#7d0023</color>
 
     <!--pickerView相关-->
     <color name="bgColor_overlay">#60000000</color>
