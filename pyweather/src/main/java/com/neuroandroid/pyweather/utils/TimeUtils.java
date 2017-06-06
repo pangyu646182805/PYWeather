@@ -1086,8 +1086,8 @@ public class TimeUtils {
         return CHINESE_ZODIAC[year % 12];
     }
 
-    private static final String[] ZODIAC       = {"水瓶座", "双鱼座", "白羊座", "金牛座", "双子座", "巨蟹座", "狮子座", "处女座", "天秤座", "天蝎座", "射手座", "魔羯座"};
-    private static final int[]    ZODIAC_FLAGS = {20, 19, 21, 21, 21, 22, 23, 23, 23, 24, 23, 22};
+    private static final String[] ZODIAC = {"水瓶座", "双鱼座", "白羊座", "金牛座", "双子座", "巨蟹座", "狮子座", "处女座", "天秤座", "天蝎座", "射手座", "魔羯座"};
+    private static final int[] ZODIAC_FLAGS = {20, 19, 21, 21, 21, 22, 23, 23, 23, 24, 23, 22};
 
     /**
      * 获取星座
@@ -1147,5 +1147,76 @@ public class TimeUtils {
         return ZODIAC[day >= ZODIAC_FLAGS[month - 1]
                 ? month - 1
                 : (month + 10) % 12];
+    }
+
+    /*********************************************************/
+    /************************ADD******************************/
+    /*********************************************************/
+    public static String getWeekText(String time) {
+        int week = dayForWeek(time);
+        String str = "周一";
+        switch (week) {
+            case 1:
+                str = "周一";
+                break;
+            case 2:
+                str = "周二";
+                break;
+            case 3:
+                str = "周三";
+                break;
+            case 4:
+                str = "周四";
+                break;
+            case 5:
+                str = "周五";
+                break;
+            case 6:
+                str = "周六";
+                break;
+            case 7:
+                str = "周日";
+                break;
+        }
+        return str;
+    }
+
+    /**
+     * 判断当前日期是星期几
+     *
+     * @param time 要判断的时间
+     * @return dayForWeek 判断结果
+     * @Exception 发生异常
+     */
+    public static int dayForWeek(String time) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(format.parse(time));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int dayForWeek = 0;
+        if (c.get(Calendar.DAY_OF_WEEK) == 1) {
+            dayForWeek = 7;
+        } else {
+            dayForWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
+        }
+        return dayForWeek;
+    }
+
+    public static String getDateText(String date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(format.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int m = c.get(Calendar.MONTH) + 1;
+        int d = c.get(Calendar.DAY_OF_MONTH);
+        String month = m > 9 ? m + "" : "0" + m;
+        String day = d > 9 ? d + "" : "0" + d;
+        return month + "/" + day;
     }
 }

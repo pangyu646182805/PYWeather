@@ -10,6 +10,7 @@ public class Constant {
      */
     // public static final String BASE_URL = "http://192.168.97.159:80/clinicCloudDemo/v1/";
     public static final String BASE_URL = "https://free-api.heweather.com/v5/";
+    public static final String BASE_WEATHER_IMG_URL = "https://cdn.heweather.com/cond_icon/";
 
     /**
      * SP配置TAG

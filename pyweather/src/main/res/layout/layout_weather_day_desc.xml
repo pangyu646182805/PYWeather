@@ -12,20 +12,20 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day1"
             style="@style/TextViewWeatherWhite"
             android:text="今天"
             android:textSize="12sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_date1"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
             android:text="11-14"
             android:textSize="10sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day_desc1"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
@@ -39,7 +39,7 @@
             android:layout_width="@dimen/x42"
             android:layout_height="@dimen/x42"
             android:layout_marginTop="2dp"
-            android:background="@mipmap/iconfont_baitianqing"/>
+            android:src="@mipmap/iconfont_baitianqing"/>
     </LinearLayout>
 
     <LinearLayout
@@ -49,20 +49,20 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day2"
             style="@style/TextViewWeatherWhite"
             android:text="明天"
             android:textSize="12sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_date2"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
             android:text="11-14"
             android:textSize="10sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day_desc2"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
@@ -76,7 +76,7 @@
             android:layout_width="@dimen/x42"
             android:layout_height="@dimen/x42"
             android:layout_marginTop="2dp"
-            android:background="@mipmap/iconfont_baitianqing"/>
+            android:src="@mipmap/iconfont_baitianqing"/>
     </LinearLayout>
 
     <LinearLayout
@@ -86,20 +86,20 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day3"
             style="@style/TextViewWeatherWhite"
             android:text="周一"
             android:textSize="12sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_date3"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
             android:text="11-14"
             android:textSize="10sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day_desc3"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
@@ -113,7 +113,7 @@
             android:layout_width="@dimen/x42"
             android:layout_height="@dimen/x42"
             android:layout_marginTop="2dp"
-            android:background="@mipmap/iconfont_baitianqing"/>
+            android:src="@mipmap/iconfont_baitianqing"/>
     </LinearLayout>
 
     <LinearLayout
@@ -123,20 +123,20 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day4"
             style="@style/TextViewWeatherWhite"
             android:text="周一"
             android:textSize="12sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_date4"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
             android:text="11-14"
             android:textSize="10sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day_desc4"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
@@ -150,7 +150,7 @@
             android:layout_width="@dimen/x42"
             android:layout_height="@dimen/x42"
             android:layout_marginTop="2dp"
-            android:background="@mipmap/iconfont_baitianqing"/>
+            android:src="@mipmap/iconfont_baitianqing"/>
     </LinearLayout>
 
     <LinearLayout
@@ -160,20 +160,20 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day5"
             style="@style/TextViewWeatherWhite"
             android:text="周一"
             android:textSize="12sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_date5"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
             android:text="11-14"
             android:textSize="10sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day_desc5"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
@@ -187,7 +187,7 @@
             android:layout_width="@dimen/x42"
             android:layout_height="@dimen/x42"
             android:layout_marginTop="2dp"
-            android:background="@mipmap/iconfont_baitianqing"/>
+            android:src="@mipmap/iconfont_baitianqing"/>
     </LinearLayout>
 
     <LinearLayout
@@ -197,20 +197,20 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day6"
             style="@style/TextViewWeatherWhite"
             android:text="周一"
             android:textSize="12sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_date6"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
             android:text="11-14"
             android:textSize="10sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day_desc6"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
@@ -224,7 +224,7 @@
             android:layout_width="@dimen/x42"
             android:layout_height="@dimen/x42"
             android:layout_marginTop="2dp"
-            android:background="@mipmap/iconfont_baitianqing"/>
+            android:src="@mipmap/iconfont_baitianqing"/>
     </LinearLayout>
 
     <LinearLayout
@@ -234,20 +234,20 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day7"
             style="@style/TextViewWeatherWhite"
             android:text="周一"
             android:textSize="12sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_date7"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
             android:text="11-14"
             android:textSize="10sp"/>
 
-        <TextView
+        <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_day_desc7"
             style="@style/TextViewWeatherWhite"
             android:layout_marginTop="2dp"
@@ -261,6 +261,6 @@
             android:layout_width="@dimen/x42"
             android:layout_height="@dimen/x42"
             android:layout_marginTop="2dp"
-            android:background="@mipmap/iconfont_baitianqing"/>
+            android:src="@mipmap/iconfont_baitianqing"/>
     </LinearLayout>
 </LinearLayout>

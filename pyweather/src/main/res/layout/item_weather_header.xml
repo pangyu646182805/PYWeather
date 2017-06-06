@@ -176,6 +176,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y16"
         android:orientation="vertical">
 
         <include layout="@layout/layout_weather_day_desc"/>
