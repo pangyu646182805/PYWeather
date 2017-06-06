@@ -453,7 +453,6 @@ public class HeFenWeather {
              * trav : {"brf":"适宜","txt":"天气较好，温度适宜，但风稍微有点大。这样的天气适宜旅游，您可以尽情地享受大自然的无限风光。"}
              * uv : {"brf":"弱","txt":"紫外线强度较弱，建议出门前涂擦SPF在12-15之间、PA+的防晒护肤品。"}
              */
-
             private ComfBean comf;
             private CwBean cw;
             private DrsgBean drsg;

@@ -5,6 +5,8 @@
     <string name="select_province">选择省份</string>
     <string name="select_city">选择城市</string>
     <string name="air_quality">空气质量</string>
+    <string name="life_index">生活指数</string>
+    <string name="sunrise_and_sunset">日出和日落</string>
     <string name="str_empty">您还没有添加城市(˵¯͒⌢͗¯͒˵)</string>
 
     <string name="guide_welcome">欢迎使用</string>

@@ -1,7 +1,354 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
+    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y24"
+        android:padding="@dimen/x16"
+        android:text="@string/life_index"
+        android:textColor="@color/white_a"
+        android:textSize="12sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/y16"
+        android:paddingTop="@dimen/y16">
+
+        <ImageView
+            android:layout_width="@dimen/x72"
+            android:layout_height="@dimen/y72"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x32"
+            android:background="@mipmap/zs_ic_shushi"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x24"
+            android:layout_marginRight="@dimen/x32"
+            android:orientation="vertical">
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_comfort_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="舒适度指数 --"
+                android:textColor="@color/white"
+                android:textSize="13sp"/>
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_comfort_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y16"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/y8"
+                android:maxLines="2"
+                tools:text="白天天气多云，同时会感到有些热，不很舒适。"
+                android:textColor="@color/white_a"
+                android:textSize="11sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y24"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/y16"
+        android:paddingTop="@dimen/y16">
+
+        <ImageView
+            android:layout_width="@dimen/x72"
+            android:layout_height="@dimen/y72"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x32"
+            android:background="@mipmap/zs_ic_xiche"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x24"
+            android:layout_marginRight="@dimen/x32"
+            android:orientation="vertical">
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_car_wash_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="洗车指数 --"
+                android:textColor="@color/white"
+                android:textSize="13sp"/>
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_car_wash_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y16"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/y8"
+                android:maxLines="2"
+                tools:text="较适宜洗车，未来一天无雨，风力较小，擦洗一新的汽车至少能保持一天。"
+                android:textColor="@color/white_a"
+                android:textSize="11sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y24"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/y16"
+        android:paddingTop="@dimen/y16">
+
+        <ImageView
+            android:layout_width="@dimen/x72"
+            android:layout_height="@dimen/y72"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x32"
+            android:background="@mipmap/zs_ic_chuanyi"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x24"
+            android:layout_marginRight="@dimen/x32"
+            android:orientation="vertical">
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_dressing_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="穿衣指数 --"
+                android:textColor="@color/white"
+                android:textSize="13sp"/>
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_dressing_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y16"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/y8"
+                android:maxLines="2"
+                tools:text="天气炎热，建议着短衫、短裙、短裤、薄型T恤衫等清凉夏季服装。"
+                android:textColor="@color/white_a"
+                android:textSize="11sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y24"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/y16"
+        android:paddingTop="@dimen/y16">
+
+        <ImageView
+            android:layout_width="@dimen/x72"
+            android:layout_height="@dimen/y72"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x32"
+            android:background="@mipmap/zs_ic_ganmao"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x24"
+            android:layout_marginRight="@dimen/x32"
+            android:orientation="vertical">
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_cold_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="感冒指数 --"
+                android:textColor="@color/white"
+                android:textSize="13sp"/>
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_cold_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y16"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/y8"
+                android:maxLines="2"
+                tools:text="各项气象条件适宜，发生感冒机率较低。但请避免长期处于空调房间中，以防感冒。"
+                android:textColor="@color/white_a"
+                android:textSize="11sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y24"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/y16"
+        android:paddingTop="@dimen/y16">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/x72"
+            android:layout_height="@dimen/y72"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x32"
+            android:background="@mipmap/zs_ic_chenlian"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x24"
+            android:layout_marginRight="@dimen/x32"
+            android:orientation="vertical">
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_sport_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="运动指数 --"
+                android:textColor="@color/white"
+                android:textSize="13sp"/>
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_sport_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y16"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/y8"
+                android:maxLines="2"
+                tools:text="天气较好，户外运动请注意防晒。推荐您进行室内运动。"
+                android:textColor="@color/white_a"
+                android:textSize="11sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y24"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/y16"
+        android:paddingTop="@dimen/y16">
+
+        <ImageView
+            android:layout_width="@dimen/x72"
+            android:layout_height="@dimen/y72"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x32"
+            android:background="@mipmap/zs_ic_lvyou"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x24"
+            android:layout_marginRight="@dimen/x32"
+            android:orientation="vertical">
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_tour_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="旅游指数 --"
+                android:textColor="@color/white"
+                android:textSize="13sp"/>
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_tour_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y16"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/y8"
+                android:maxLines="2"
+                tools:text="天气较好，温度较高，天气较热，但有微风相伴，还是比较适宜旅游的，不过外出时要注意防暑防晒哦！"
+                android:textColor="@color/white_a"
+                android:textSize="11sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y24"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/y16"
+        android:paddingTop="@dimen/y16">
+
+        <ImageView
+            android:layout_width="@dimen/x72"
+            android:layout_height="@dimen/y72"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x32"
+            android:background="@mipmap/zs_ic_ziwaixian"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x24"
+            android:layout_marginRight="@dimen/x32"
+            android:orientation="vertical">
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_uv_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="紫外线指数 --"
+                android:textColor="@color/white"
+                android:textSize="13sp"/>
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_uv_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y16"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/y8"
+                android:maxLines="2"
+                tools:text="属中等强度紫外线辐射天气，外出时建议涂擦SPF高于15、PA+的防晒护肤品，戴帽子、太阳镜。"
+                android:textColor="@color/white_a"
+                android:textSize="11sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/y24"
+        android:background="#4fff"/>
+
+    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y92"
+        android:gravity="center"
+        android:text="数据来源 和风天气"
+        android:textColor="@color/white_a"
+        android:textSize="12sp"/>
 </LinearLayout>

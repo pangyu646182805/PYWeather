@@ -175,6 +175,24 @@ public class MainActivity extends BaseActivity {
         return mCurrentFragment != null && mCurrentFragment.handleBackPress();
     }
 
+    /*@Override
+    protected void onResume() {
+        super.onResume();
+        mDynamicWeatherView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mDynamicWeatherView.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mDynamicWeatherView.onDestroy();
+    }*/
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

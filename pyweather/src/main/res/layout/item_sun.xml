@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
+    <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y24"
+        android:padding="@dimen/x16"
+        android:text="@string/sunrise_and_sunset"
+        android:textColor="@color/white_a"
+        android:textSize="12sp"/>
+
+    <com.neuroandroid.pyweather.widget.SunriseAndSunsetView
+        android:id="@+id/sunrise_and_sunset_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y360"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/y8"
+        android:background="#4fff"/>
 </LinearLayout>

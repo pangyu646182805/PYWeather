@@ -11,6 +11,7 @@ import com.neuroandroid.pyweather.adapter.base.BaseRvAdapter;
 import com.neuroandroid.pyweather.model.response.HeFenWeather;
 import com.neuroandroid.pyweather.widget.AirQualityView;
 import com.neuroandroid.pyweather.widget.NoPaddingTextView;
+import com.neuroandroid.pyweather.widget.SunriseAndSunsetView;
 import com.neuroandroid.pyweather.widget.WeatherLineChartView;
 
 import java.util.List;
@@ -66,8 +67,10 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
                 holder.setAirQualityData();
                 break;
             case ITEM_SUN:
+                holder.setSunriseAndSunsetData();
                 break;
             case ITEM_SUGGESTION:
+                holder.setLifeIndexData();
                 break;
         }
     }
@@ -108,6 +111,24 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
 
         // 空气质量指数
         private AirQualityView mAirQualityView;
+        private NoPaddingTextView mTvPm25;
+        private NoPaddingTextView mTvPm10;
+        private NoPaddingTextView mTvSo2;
+        private NoPaddingTextView mTvCo;
+        private NoPaddingTextView mTvNo2;
+        private NoPaddingTextView mTvO3;
+
+        // 日出日落
+        private SunriseAndSunsetView mSunriseAndSunsetView;
+
+        // 生活指数
+        private NoPaddingTextView mTvComfortDesc, mTvComfortTxt;
+        private NoPaddingTextView mTvCarWashDesc, mTvCarWashTxt;
+        private NoPaddingTextView mTvDressingDesc, mTvDressingTxt;
+        private NoPaddingTextView mTvColdDesc, mTvColdTxt;
+        private NoPaddingTextView mTvSportDesc, mTvSportTxt;
+        private NoPaddingTextView mTvTourDesc, mTvTourTxt;
+        private NoPaddingTextView mTvUvDesc, mTvUvTxt;
 
         public Holder(View itemView, int viewType) {
             super(itemView);
@@ -125,6 +146,31 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
                     break;
                 case ITEM_AIR_QUALITY:
                     mAirQualityView = ButterKnife.findById(itemView, R.id.air_quality_view);
+                    mTvPm25 = ButterKnife.findById(itemView, R.id.tv_pm25);
+                    mTvPm10 = ButterKnife.findById(itemView, R.id.tv_pm10);
+                    mTvSo2 = ButterKnife.findById(itemView, R.id.tv_so2);
+                    mTvCo = ButterKnife.findById(itemView, R.id.tv_co);
+                    mTvNo2 = ButterKnife.findById(itemView, R.id.tv_no2);
+                    mTvO3 = ButterKnife.findById(itemView, R.id.tv_o3);
+                    break;
+                case ITEM_SUN:
+                    mSunriseAndSunsetView = ButterKnife.findById(itemView, R.id.sunrise_and_sunset_view);
+                    break;
+                case ITEM_SUGGESTION:
+                    mTvComfortDesc = ButterKnife.findById(itemView, R.id.tv_comfort_desc);
+                    mTvComfortTxt = ButterKnife.findById(itemView, R.id.tv_comfort_txt);
+                    mTvCarWashDesc = ButterKnife.findById(itemView, R.id.tv_car_wash_desc);
+                    mTvCarWashTxt = ButterKnife.findById(itemView, R.id.tv_car_wash_txt);
+                    mTvDressingDesc = ButterKnife.findById(itemView, R.id.tv_dressing_desc);
+                    mTvDressingTxt = ButterKnife.findById(itemView, R.id.tv_dressing_txt);
+                    mTvColdDesc = ButterKnife.findById(itemView, R.id.tv_cold_desc);
+                    mTvColdTxt = ButterKnife.findById(itemView, R.id.tv_cold_txt);
+                    mTvSportDesc = ButterKnife.findById(itemView, R.id.tv_sport_desc);
+                    mTvSportTxt = ButterKnife.findById(itemView, R.id.tv_sport_txt);
+                    mTvTourDesc = ButterKnife.findById(itemView, R.id.tv_tour_desc);
+                    mTvTourTxt = ButterKnife.findById(itemView, R.id.tv_tour_txt);
+                    mTvUvDesc = ButterKnife.findById(itemView, R.id.tv_uv_desc);
+                    mTvUvTxt = ButterKnife.findById(itemView, R.id.tv_uv_txt);
                     break;
             }
         }
@@ -145,6 +191,41 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
         public void setAirQualityData() {
             HeFenWeather.HeWeather5Bean.AqiBean aqiBean = mWeatherBean.getAqi();
             mAirQualityView.setAqiBean(aqiBean);
+            HeFenWeather.HeWeather5Bean.AqiBean.CityBean city = aqiBean.getCity();
+            mTvPm25.setText(city.getPm25());
+            mTvPm10.setText(city.getPm10());
+            mTvSo2.setText(city.getSo2());
+            mTvNo2.setText(city.getNo2());
+            mTvCo.setText(city.getCo());
+            mTvO3.setText(city.getO3());
+        }
+
+        public void setSunriseAndSunsetData() {
+            mSunriseAndSunsetView.setAstroBean(mWeatherBean.getDaily_forecast().get(0).getAstro());
+        }
+
+        public void setLifeIndexData() {
+            HeFenWeather.HeWeather5Bean.SuggestionBean suggestion = mWeatherBean.getSuggestion();
+            mTvComfortDesc.setText("舒适度指数 " + suggestion.getComf().getBrf());
+            mTvComfortTxt.setText(suggestion.getComf().getTxt());
+
+            mTvCarWashDesc.setText("洗车指数 " + suggestion.getCw().getBrf());
+            mTvCarWashTxt.setText(suggestion.getCw().getTxt());
+
+            mTvDressingDesc.setText("穿衣指数 " + suggestion.getDrsg().getBrf());
+            mTvDressingTxt.setText(suggestion.getDrsg().getTxt());
+
+            mTvColdDesc.setText("感冒指数 " + suggestion.getFlu().getBrf());
+            mTvColdTxt.setText(suggestion.getFlu().getTxt());
+
+            mTvSportDesc.setText("运动指数 " + suggestion.getSport().getBrf());
+            mTvSportTxt.setText(suggestion.getSport().getTxt());
+
+            mTvTourDesc.setText("旅游指数 " + suggestion.getTrav().getBrf());
+            mTvTourTxt.setText(suggestion.getTrav().getTxt());
+
+            mTvUvDesc.setText("紫外线指数 " + suggestion.getUv().getBrf());
+            mTvUvTxt.setText(suggestion.getUv().getTxt());
         }
     }
 }
