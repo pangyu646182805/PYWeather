@@ -6,7 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.neuroandroid.pyweather.R;
@@ -33,6 +35,12 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
     private static final int ITEM_AIR_QUALITY = 1;  // 空气质量
     private static final int ITEM_SUN = 2;  // 日出日落
     private static final int ITEM_SUGGESTION = 3;  // 生活指数
+
+    private int mRlHeaderHeight;
+
+    public int getRlHeaderHeight() {
+        return mRlHeaderHeight;
+    }
 
     public WeatherAdapter(Context context, List<HeFenWeather.HeWeather5Bean> dataList) {
         super(context, dataList);
@@ -61,6 +69,10 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
                 break;
         }
         return holder;
+    }
+
+    public void refreshItem(int position) {
+        notifyItemChanged(position);
     }
 
     @Override
@@ -106,6 +118,7 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
         private HeFenWeather.HeWeather5Bean mWeatherBean;
 
         // 头布局
+        private RelativeLayout mRlHeader;
         private NoPaddingTextView mTvCurrentTemp;
         private NoPaddingTextView mTvWeatherDesc;
         private NoPaddingTextView mTvRefreshTime;
@@ -147,6 +160,15 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
             mWeatherBean = mDataList.get(0);
             switch (viewType) {
                 case ITEM_HEADER_AND_LINE_CHART:
+                    mRlHeader = ButterKnife.findById(itemView, R.id.rl_header);
+                    mRlHeader.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            mRlHeader.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                            mRlHeaderHeight = mRlHeader.getHeight();
+                        }
+                    });
+
                     mTvCurrentTemp = ButterKnife.findById(itemView, R.id.tv_current_temp);
                     mTvWeatherDesc = ButterKnife.findById(itemView, R.id.tv_weather_desc);
                     mTvRefreshTime = ButterKnife.findById(itemView, R.id.tv_refresh_time);

@@ -216,6 +216,18 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
         }
     }
 
+    public void setReloadBtnText(String reloadText) {
+        if (mLoadingLayout != null) {
+            mLoadingLayout.setReloadBtnText(reloadText);
+        }
+    }
+
+    public void setStatusTextColor(int color) {
+        if (mLoadingLayout != null) {
+            mLoadingLayout.setStatusTextColor(color);
+        }
+    }
+
     protected void initTitleBar(CharSequence title) {
         initTitleBar(title, true);
     }
@@ -309,7 +321,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
         if (getMainActivity() != null) {
             if (getMainActivity().mImmersive) {
                 statusBar.getLayoutParams().height = SystemUtils.getStatusHeight(mActivity);
-                statusBar.setBackgroundColor(UIUtils.getColor(R.color.colorPrimary));
+                statusBar.setBackgroundColor(UIUtils.getColor(R.color.transparent));
             }
         }
     }

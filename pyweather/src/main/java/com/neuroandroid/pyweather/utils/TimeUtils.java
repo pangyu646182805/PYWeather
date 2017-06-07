@@ -1219,4 +1219,15 @@ public class TimeUtils {
         String day = d > 9 ? d + "" : "0" + d;
         return month + "/" + day;
     }
+
+    public static boolean judgeDayOrNight() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        if (hour >= 6 && hour <= 18) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

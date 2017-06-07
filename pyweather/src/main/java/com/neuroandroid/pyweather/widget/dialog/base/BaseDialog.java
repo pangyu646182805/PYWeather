@@ -135,6 +135,17 @@ public abstract class BaseDialog<T extends BaseDialog<T>> extends Dialog {
         return (T) this;
     }
 
+    public T setCancelClickListener(OnDialogClickListener<T> onDialogClickListener) {
+        if (mTvLeft != null) {
+            mTvLeft.setOnClickListener(view -> {
+                if (onDialogClickListener != null) {
+                    onDialogClickListener.onClick((T) this, view);
+                }
+            });
+        }
+        return (T) this;
+    }
+
     /**
      * 隐藏标题栏
      */

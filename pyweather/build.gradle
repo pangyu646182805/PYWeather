@@ -64,4 +64,5 @@ dependencies {
     compile 'com.android.support:design:26.0.0-alpha1'
     compile 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.4'
     compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
+    compile project(':photogallery')
 }

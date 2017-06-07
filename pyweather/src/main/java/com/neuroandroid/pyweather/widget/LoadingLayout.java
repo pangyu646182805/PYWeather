@@ -36,6 +36,8 @@ public class LoadingLayout extends FrameLayout {
     RelativeLayout mRlLoading;
     @BindView(R.id.tv_status)
     NoPaddingTextView mTvStatus;
+    @BindView(R.id.btn_reload)
+    StateButton mBtnReload;
     private Context mContext;
 
     public LoadingLayout(@NonNull Context context) {
@@ -88,6 +90,14 @@ public class LoadingLayout extends FrameLayout {
             mTvStatus.setText(statusStr);
         }
         switchView();
+    }
+
+    public void setReloadBtnText(String reloadText) {
+        mBtnReload.setText(reloadText);
+    }
+
+    public void setStatusTextColor(int color) {
+        mTvStatus.setTextColor(color);
     }
 
     /**

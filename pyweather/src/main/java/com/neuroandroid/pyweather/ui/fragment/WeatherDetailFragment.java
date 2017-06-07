@@ -10,9 +10,12 @@ import com.neuroandroid.pyweather.adapter.WeatherAdapter;
 import com.neuroandroid.pyweather.base.BaseFragment;
 import com.neuroandroid.pyweather.bean.CityBean;
 import com.neuroandroid.pyweather.config.Constant;
+import com.neuroandroid.pyweather.listener.OnLineTypeChangeListener;
 import com.neuroandroid.pyweather.model.response.HeFenWeather;
 import com.neuroandroid.pyweather.mvp.contract.IWeatherContract;
 import com.neuroandroid.pyweather.mvp.presenter.WeatherPresenter;
+import com.neuroandroid.pyweather.provider.PYCityStore;
+import com.neuroandroid.pyweather.utils.L;
 import com.neuroandroid.pyweather.utils.ShowUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 import com.neuroandroid.pyweather.widget.WeatherRefreshHeader;
@@ -25,7 +28,7 @@ import butterknife.BindView;
  * Created by NeuroAndroid on 2017/6/5.
  */
 
-public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Presenter> implements IWeatherContract.View {
+public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Presenter> implements IWeatherContract.View, OnLineTypeChangeListener {
     @BindView(R.id.rv_weather)
     RecyclerView mRvWeather;
     @BindView(R.id.refresh_layout)
@@ -33,6 +36,12 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
     private CityBean.CityListBean mCurrentCity;
     private WeatherFragment mWeatherFragment;
     private WeatherAdapter mWeatherAdapter;
+    private int mScrolledY;
+    private HeFenWeather.HeWeather5Bean mWeatherBean;
+
+    public HeFenWeather.HeWeather5Bean getWeatherBean() {
+        return mWeatherBean;
+    }
 
     @Override
     protected int attachLayoutRes() {
@@ -80,14 +89,34 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
                 mPresenter.getWeatherInfo(mCurrentCity.getCityZh(), Constant.APP_KEY);
             }
         });
+        mRvWeather.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                mScrolledY += dy;
+                if (mWeatherAdapter.getRlHeaderHeight() != 0) {
+                    if (mScrolledY >= mWeatherAdapter.getRlHeaderHeight()) {
+                        // 展开WeatherCustomTitle
+                        mWeatherFragment.expandWeatherCustomTitle();
+                    } else {
+                        // 收缩WeatherCustomTitle
+                        mWeatherFragment.shrinkWeatherCustomTitle();
+                    }
+                }
+            }
+        });
     }
 
     @Override
     public void showWeatherInfo(HeFenWeather weatherInfo) {
-        HeFenWeather.HeWeather5Bean weatherBean = weatherInfo.getHeWeather5().get(0);
-        if (Constant.STATUS_OK.equals(weatherBean.getStatus())) {
+        mWeatherBean = weatherInfo.getHeWeather5().get(0);
+        mWeatherFragment.setWeatherCustomTitle(mWeatherBean, 0);
+        if (Constant.STATUS_OK.equals(mWeatherBean.getStatus())) {
             // 请求成功
             mWeatherAdapter.replaceAll(weatherInfo.getHeWeather5());
+            long start = System.currentTimeMillis();
+            updateWeatherInfo(weatherInfo.getHeWeather5().get(0));
+            L.e("time : " + (System.currentTimeMillis() - start));
         } else {
 
         }
@@ -98,5 +127,35 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
     public void showTip(String tip) {
         ShowUtils.showToast("请求失败");
         mRefreshLayout.finishRefreshing();
+    }
+
+    /**
+     * 刷新item
+     */
+    public void refreshItem(int position) {
+        if (mWeatherAdapter != null) {
+            mWeatherAdapter.refreshItem(position);
+        }
+    }
+
+    /**
+     * 更新天气信息
+     */
+    private void updateWeatherInfo(HeFenWeather.HeWeather5Bean weatherBean) {
+        HeFenWeather.HeWeather5Bean.BasicBean basic = weatherBean.getBasic();
+        HeFenWeather.HeWeather5Bean.NowBean now = weatherBean.getNow();
+        int weatherCode = Integer.parseInt(now.getCond().getCode());
+        HeFenWeather.HeWeather5Bean.DailyForecastBean.TmpBean tmp = weatherBean.getDaily_forecast().get(0).getTmp();
+        int max = Integer.parseInt(tmp.getMax());
+        int min = Integer.parseInt(tmp.getMin());
+        PYCityStore.getInstance(mContext).update(basic.getId(), basic.getCity(), weatherCode, max, min, now.getCond().getTxt());
+    }
+
+    /**
+     * 当折线图发生改变时候的监听
+     */
+    @Override
+    public void onLineTypeChange() {
+        refreshItem(0);
     }
 }

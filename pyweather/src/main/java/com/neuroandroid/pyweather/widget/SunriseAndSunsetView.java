@@ -1,10 +1,12 @@
 package com.neuroandroid.pyweather.widget;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -12,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 
 import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.model.response.HeFenWeather;
@@ -32,12 +35,28 @@ public class SunriseAndSunsetView extends View {
      * 日出日落实体类
      */
     private HeFenWeather.HeWeather5Bean.DailyForecastBean.AstroBean mAstroBean;
+    private float mPercent;
 
     public void setAstroBean(HeFenWeather.HeWeather5Bean.DailyForecastBean.AstroBean astroBean) {
         mAstroBean = astroBean;
         mSunriseStr = astroBean.getSr();
         mSunsetStr = astroBean.getSs();
-        invalidate();
+
+        mSunriseMillis = timeStrToTimeMill(mSunriseStr);
+        mSunsetMillis = timeStrToTimeMill(mSunsetStr);
+        // 方便测试
+        // long currentMillis = getCurrentMillis(5, 39);
+        mPercent = (System.currentTimeMillis() - mSunriseMillis) * 1.0f / (mSunsetMillis - mSunriseMillis);
+        if (mPercent < 0f) mPercent = 0f;
+        if (mPercent > 1f) mPercent = 1f;
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, mPercent);
+        valueAnimator.addUpdateListener(valueAnimator1 -> {
+            mPercent = (float) valueAnimator.getAnimatedValue();
+            invalidate();
+        });
+        valueAnimator.setDuration(2000);
+        valueAnimator.setInterpolator(new DecelerateInterpolator());
+        valueAnimator.start();
     }
 
     /**
@@ -94,6 +113,9 @@ public class SunriseAndSunsetView extends View {
 
     private Paint mCirclePaint;
 
+    private Path mSunriseAndSunsetPath;
+    private Paint mSunriseAndSunsetPaint;
+
     private Rect mTextRect = new Rect();
 
     /**
@@ -147,7 +169,12 @@ public class SunriseAndSunsetView extends View {
         mCirclePaint.setStrokeWidth(mDashedLineWidth * 0.5f);
         mCirclePaint.setPathEffect(null);
 
+        mSunriseAndSunsetPaint = new Paint(mLinePaint);
+        mSunriseAndSunsetPaint.setColor(UIUtils.getColor(R.color.white_3));
+        mSunriseAndSunsetPaint.setStyle(Paint.Style.FILL);
+
         mSunriseAndSunsetRect = new RectF();
+        mSunriseAndSunsetPath = new Path();
     }
 
     @Override
@@ -159,22 +186,27 @@ public class SunriseAndSunsetView extends View {
         canvas.drawArc(mSunriseAndSunsetRect, 180, 180, false, mLinePaint);
 
         if (mAstroBean != null) {
-            mSunriseMillis = timeStrToTimeMill(mSunriseStr);
-            mSunsetMillis = timeStrToTimeMill(mSunsetStr);
-            // long currentMillis = getCurrentMillis(9, 57);
-            float percent = (System.currentTimeMillis() - mSunriseMillis) * 1.0f / (mSunsetMillis - mSunriseMillis);
-            if (percent < 0f) percent = 0f;
-            if (percent > 1f) percent = 1f;
-
             float sunriseAndSunsetWidth = getMeasuredWidth() - 2 * mLeftAndRightPadding;
             // 太阳圆圈圆心的x坐标
-            float sunCircleX = sunriseAndSunsetWidth * percent + mLeftAndRightPadding;
+            float sunCircleX = sunriseAndSunsetWidth * mPercent + mLeftAndRightPadding;
 
             // 太阳圆圈圆心的x坐标减去mLeftAndRightPadding与sunriseAndSunsetWidth的一半的差值
             float diffSunCircleXAndSunriseAndSunsetWidth = (sunCircleX - mLeftAndRightPadding) - 0.5f * sunriseAndSunsetWidth;
             L.e("diffSunCircleXAndSunriseAndSunsetWidth : " + diffSunCircleXAndSunriseAndSunsetWidth);
             float sunCircleY;
+            // 圆心角
+            float circleAngle;
             if (diffSunCircleXAndSunriseAndSunsetWidth != 0) {
+                // 先计算计算圆心角
+                if (diffSunCircleXAndSunriseAndSunsetWidth > 0) {
+                    // 太阳圆圈在右边
+                    circleAngle = (float) Math.acos(diffSunCircleXAndSunriseAndSunsetWidth / (0.5f * sunriseAndSunsetWidth));
+                    circleAngle = 180 - (float) (180 / Math.PI * circleAngle);
+                } else {
+                    // 太阳圆圈在左边
+                    circleAngle = (float) Math.acos(-diffSunCircleXAndSunriseAndSunsetWidth / (0.5f * sunriseAndSunsetWidth));
+                    circleAngle = (float) (180 / Math.PI * circleAngle);
+                }
                 // 太阳圆圈在左边或者右边
                 diffSunCircleXAndSunriseAndSunsetWidth = Math.abs(diffSunCircleXAndSunriseAndSunsetWidth);
                 sunCircleY = (float) (Math.sqrt(Math.pow(0.5f * sunriseAndSunsetWidth, 2) - Math.pow(diffSunCircleXAndSunriseAndSunsetWidth, 2)));
@@ -182,8 +214,16 @@ public class SunriseAndSunsetView extends View {
             } else {
                 // 太阳圆圈在中间
                 sunCircleY = mLeftAndRightPadding;
+                circleAngle = 90;
             }
             L.e("sunCircleY : " + sunCircleY);
+            L.e("circleAngle : " + circleAngle);
+
+            mSunriseAndSunsetPath.addArc(mSunriseAndSunsetRect, 180, circleAngle);
+            mSunriseAndSunsetPath.lineTo(sunCircleX, getMeasuredHeight());
+            // 绘制覆盖区域
+            canvas.drawPath(mSunriseAndSunsetPath, mSunriseAndSunsetPaint);
+
             // 绘制小太阳圆圈
             canvas.drawCircle(sunCircleX, sunCircleY, mCircleRadius, mCirclePaint);
 
@@ -213,7 +253,7 @@ public class SunriseAndSunsetView extends View {
     }
 
     /**
-     * @param timeStr 18:58
+     * @param timeStr  18:58
      * @param position 0, 1
      * @return is position == 0 18 else 58
      */

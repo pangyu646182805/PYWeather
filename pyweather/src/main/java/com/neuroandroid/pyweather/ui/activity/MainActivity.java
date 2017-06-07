@@ -7,17 +7,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.base.BaseActivity;
 import com.neuroandroid.pyweather.config.Constant;
+import com.neuroandroid.pyweather.event.BaseEvent;
 import com.neuroandroid.pyweather.ui.fragment.CityManageFragment;
 import com.neuroandroid.pyweather.ui.fragment.WeatherFragment;
 import com.neuroandroid.pyweather.utils.FragmentUtils;
+import com.neuroandroid.pyweather.utils.ImageLoader;
 import com.neuroandroid.pyweather.utils.SPUtils;
 import com.neuroandroid.pyweather.utils.ShowUtils;
+import com.neuroandroid.pyweather.utils.TimeUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 import com.neuroandroid.pyweather.widget.weather.DynamicWeatherView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import didikee.com.permissionshelper.PermissionsHelper;
@@ -45,6 +52,7 @@ public class MainActivity extends BaseActivity {
 
     private PermissionsHelper mPermissionsHelper;
     private MainActivityFragmentCallbacks mCurrentFragment;
+    private ImageView mIvBackground;
 
     @Override
     protected int attachLayoutRes() {
@@ -53,12 +61,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        /*mFlBackground = (FrameLayout) findViewById(R.id.fl_background);
-        mDynamicWeatherView = new DynamicWeatherView(this);
+        mFlBackground = (FrameLayout) findViewById(R.id.fl_background);
+        /*mDynamicWeatherView = new DynamicWeatherView(this);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
         mDynamicWeatherView.setLayoutParams(params);
         mFlBackground.addView(mDynamicWeatherView);
         mDynamicWeatherView.setDrawerType(BaseDrawer.Type.CLOUDY_D);*/
+        setCustomBackground();
     }
 
     @Override
@@ -80,7 +89,13 @@ public class MainActivity extends BaseActivity {
             mDrawerLayout.closeDrawers();
             switch (item.getItemId()) {
                 case R.id.nav_city_manage:
-                    UIUtils.getHandler().postDelayed(() -> setChooser(FRAGMENT_CITY_MANAGE), 150);
+                    UIUtils.getHandler().postDelayed(() -> setChooser(FRAGMENT_CITY_MANAGE), 250);
+                    break;
+                case R.id.nav_settings:
+                    UIUtils.getHandler().postDelayed(() -> {
+                        mIntent.setClass(this, SettingActivity.class);
+                        UIUtils.toLayout(mIntent);
+                    }, 250);
                     break;
             }
             return true;
@@ -133,6 +148,13 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
+     * 跳转到城市管理页面
+     */
+    public void toCityManagerFragment() {
+        setChooser(FRAGMENT_CITY_MANAGE);
+    }
+
+    /**
      * 设置当前Fragment
      */
     private void setCurrentFragment(@SuppressWarnings("NullableProblems") Fragment fragment) {
@@ -175,6 +197,25 @@ public class MainActivity extends BaseActivity {
         return mCurrentFragment != null && mCurrentFragment.handleBackPress();
     }
 
+    private void setCustomBackground() {
+        String customBackground = SPUtils.getString(this, Constant.SP_CUSTOM_BACKGROUND, null);
+        if (mIvBackground == null) {
+            mIvBackground = new ImageView(this);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+            mIvBackground.setLayoutParams(params);
+            mFlBackground.addView(mIvBackground);
+        }
+        ImageLoader.getInstance().displayImage(this, customBackground, getBackground(), mIvBackground);
+    }
+
+    private int getBackground() {
+        if (TimeUtils.judgeDayOrNight()) {
+            return R.mipmap.img_day;
+        } else {
+            return R.mipmap.img_night;
+        }
+    }
+
     /*@Override
     protected void onResume() {
         super.onResume();
@@ -192,6 +233,28 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
         mDynamicWeatherView.onDestroy();
     }*/
+
+    @Override
+    protected boolean useEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(BaseEvent baseEvent) {
+        if (baseEvent != null) {
+            switch (baseEvent.getEventFlag()) {
+                case BaseEvent.EVENT_CUSTOM_BACKGROUND:
+                    setCustomBackground();
+                    break;
+                case BaseEvent.EVENT_LINE_TYPE:
+                    if (mCurrentFragment instanceof WeatherFragment) {
+                        WeatherFragment weatherFragment = (WeatherFragment) mCurrentFragment;
+                        weatherFragment.onLineTypeChange();
+                    }
+                    break;
+            }
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.adapter.base.BaseRvAdapter;
 import com.neuroandroid.pyweather.bean.CityBean;
+import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.utils.UIUtils;
 import com.neuroandroid.pyweather.widget.NoPaddingTextView;
 
@@ -64,6 +65,8 @@ public class CityListAdapter extends BaseRvAdapter<CityBean.CityListBean, CityLi
             mTvFirstWord.setText(cityZh.substring(0, 1));
             if (max == 100 || min == 100) {
                 mTvTemp.setText("N/A°");
+            } else {
+                mTvTemp.setText(min + "~" + max + Constant.TEMP);
             }
             if (UIUtils.isEmpty(weatherDesc)) {
                 mTvSubTitle.setText("N/A");

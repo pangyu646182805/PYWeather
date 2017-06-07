@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PYWeather.iml" filepath="$PROJECT_DIR$/PYWeather.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photogallery/photogallery.iml" filepath="$PROJECT_DIR$/photogallery/photogallery.iml" />
       <module fileurl="file://$PROJECT_DIR$/pyweather/pyweather.iml" filepath="$PROJECT_DIR$/pyweather/pyweather.iml" />
     </modules>
   </component>

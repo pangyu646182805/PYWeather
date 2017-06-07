@@ -13,6 +13,7 @@ import android.view.View;
 import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.model.response.HeFenWeather;
+import com.neuroandroid.pyweather.utils.SPUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 
 import java.util.List;
@@ -24,13 +25,20 @@ import static java.lang.Integer.parseInt;
  */
 
 public class WeatherLineChartView extends View {
+    private static final int LINE_TYPE_LINE = 0;  // 折线图
+    private static final int LINE_TYPE_CURVE = 1;  // 曲线图
     private final Context mContext;
     private List<HeFenWeather.HeWeather5Bean.DailyForecastBean> mDailyForecastDataList;
 
     public void setDailyForecastDataList(List<HeFenWeather.HeWeather5Bean.DailyForecastBean> dataList) {
         this.mDailyForecastDataList = dataList;
+        mCurrentLineType = SPUtils.getInt(mContext, Constant.SP_LINE_TYPE, LINE_TYPE_LINE);
+        mMaxLinePath.reset();
+        mMinLinePath.reset();
         invalidate();
     }
+
+    private int mCurrentLineType = LINE_TYPE_LINE;
 
     /**
      * 线的宽度
@@ -151,13 +159,31 @@ public class WeatherLineChartView extends View {
                     mMaxLinePath.moveTo(startX, maxTempYAxis);
                     mMinLinePath.moveTo(startX, minTempYAxis);
                 } else {
-                    mMaxLinePath.lineTo(startX, maxTempYAxis);
-                    mMinLinePath.lineTo(startX, minTempYAxis);
+                    if (mCurrentLineType == LINE_TYPE_LINE) {
+                        mMaxLinePath.lineTo(startX, maxTempYAxis);
+                        mMinLinePath.lineTo(startX, minTempYAxis);
+                    } else {
+                        HeFenWeather.HeWeather5Bean.DailyForecastBean.TmpBean previousTmp = mDailyForecastDataList.get(i - 1).getTmp();
+                        float previousStartX = startX - distanceOfPointAndPoint;
+                        int previousMaxTemp = Integer.parseInt(previousTmp.getMax());
+                        int previousMinTemp = Integer.parseInt(previousTmp.getMin());
+
+                        float previousMaxTempYAxis = calTempYAxis(previousMaxTemp);
+                        float previousMinTempYAxis = calTempYAxis(previousMinTemp);
+
+                        mMaxLinePath.cubicTo((previousStartX + startX) / 2, getMeasuredHeight() - (getMeasuredHeight() - previousMaxTempYAxis),
+                                (previousStartX + startX) / 2, maxTempYAxis, startX, maxTempYAxis);
+                        mMinLinePath.cubicTo((previousStartX + startX) / 2, getMeasuredHeight() - (getMeasuredHeight() - previousMinTempYAxis),
+                                (previousStartX + startX) / 2, minTempYAxis, startX, minTempYAxis);
+                    }
                 }
                 canvas.drawText(maxTemp + Constant.TEMP, startX, maxTempYAxis - mTextRect.height(), mTextPaint);
                 canvas.drawText(minTemp + Constant.TEMP, startX, minTempYAxis + 2 * mTextRect.height(), mTextPaint);
-                canvas.drawCircle(startX, maxTempYAxis, 5, mCirclePaint);
-                canvas.drawCircle(startX, minTempYAxis, 5, mCirclePaint);
+
+                if (mCurrentLineType == LINE_TYPE_LINE) {
+                    canvas.drawCircle(startX, maxTempYAxis, 5, mCirclePaint);
+                    canvas.drawCircle(startX, minTempYAxis, 5, mCirclePaint);
+                }
                 startX += distanceOfPointAndPoint;
             }
             canvas.drawPath(mMaxLinePath, mLinePaint);

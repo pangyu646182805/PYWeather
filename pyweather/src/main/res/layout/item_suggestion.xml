@@ -346,7 +346,7 @@
 
     <com.neuroandroid.pyweather.widget.NoPaddingTextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y92"
+        android:layout_height="@dimen/y88"
         android:gravity="center"
         android:text="数据来源 和风天气"
         android:textColor="@color/white_a"

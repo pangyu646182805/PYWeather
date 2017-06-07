@@ -95,7 +95,6 @@ public class HeFenWeather {
             /**
              * city : {"aqi":"113","co":"1","no2":"56","o3":"162","pm10":"115","pm25":"85","qlty":"轻度污染","so2":"26"}
              */
-
             private CityBean city;
 
             public CityBean getCity() {
@@ -117,7 +116,6 @@ public class HeFenWeather {
                  * qlty : 轻度污染
                  * so2 : 26
                  */
-
                 private String aqi;
                 private String co;
                 private String no2;
@@ -202,7 +200,6 @@ public class HeFenWeather {
              * lon : 116.40528870
              * update : {"loc":"2017-06-05 12:52","utc":"2017-06-05 04:52"}
              */
-
             private String city;
             private String cnty;
             private String id;
@@ -296,7 +293,6 @@ public class HeFenWeather {
              * vis : 5
              * wind : {"deg":"220","dir":"东南风","sc":"3-4","spd":"10"}
              */
-
             private CondBean cond;
             private String fl;
             private String hum;

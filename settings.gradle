@@ -1,1 +1,1 @@
-include ':pyweather'
+include ':pyweather', ':photogallery'

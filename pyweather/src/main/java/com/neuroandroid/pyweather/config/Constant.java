@@ -76,4 +76,8 @@ public class Constant {
     public static final String STATUS_PERMISSION_DENIED = "permission denied";
 
     public static final String TEMP = "°";
+
+    public static final String SP_CUSTOM_BACKGROUND = "sp_custom_background";
+
+    public static final String SP_LINE_TYPE = "sp_line_type";  // 0 : 折线图  1 : 曲线图
 }

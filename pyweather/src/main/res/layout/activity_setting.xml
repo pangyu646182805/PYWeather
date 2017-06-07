@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/layout_title_bar"/>
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:requiresFadingEdge="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_color_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x32"
+                android:paddingBottom="@dimen/y24"
+                android:paddingTop="@dimen/y24"
+                android:text="自定义"
+                android:textColor="@color/colorPrimary"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_main_background"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y108"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/x32"
+                android:paddingRight="@dimen/x32">
+
+                <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="自定义主页背景"
+                    android:textColor="@color/colorGray333"
+                    android:textSize="14sp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_line_type"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y108"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/x32"
+                android:paddingRight="@dimen/x32">
+
+                <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="未来天气趋势图类型"
+                    android:textColor="@color/colorGray333"
+                    android:textSize="14sp"/>
+
+                <ImageView
+                    android:id="@+id/iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right"/>
+
+                <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                    android:id="@+id/tv_line_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x8"
+                    android:layout_toLeftOf="@+id/iv"
+                    android:text="折线图"
+                    android:textColor="@color/colorGray333"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_life_index"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y108"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/x32"
+                android:paddingRight="@dimen/x32">
+
+                <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="显示生活指数信息"
+                    android:textColor="@color/colorGray333"
+                    android:textSize="14sp"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/sw_life_index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FF3C3F41"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+    <!--android:background="#FF3C3F41"-->
 
-    <com.neuroandroid.pyweather.widget.TitleBar
-        android:id="@+id/title_bar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.itsronald.widget.ViewPagerIndicator
-        android:id="@+id/view_pager_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:gravity="center_vertical"
-        app:dotPadding="@dimen/x4"
-        app:dotRadius="@dimen/x3"
-        app:selectedDotColor="@color/white"
-        app:unselectedDotColor="#9fff"
-        app:viewPagerId="@+id/vp_content"/>
+        <View
+            android:id="@+id/view_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/transparent"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
+        <com.neuroandroid.pyweather.widget.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"/>
+
+        <com.itsronald.widget.ViewPagerIndicator
+            android:id="@+id/view_pager_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:gravity="center_vertical"
+            app:dotPadding="@dimen/x4"
+            app:dotRadius="@dimen/x3"
+            app:selectedDotColor="@color/white"
+            app:unselectedDotColor="#9fff"
+            app:viewPagerId="@+id/vp_content"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <include layout="@layout/layout_loading_common"/>
+</FrameLayout>

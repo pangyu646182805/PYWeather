@@ -23,6 +23,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="@dimen/y8"
         android:background="#4fff"/>
 </LinearLayout>
