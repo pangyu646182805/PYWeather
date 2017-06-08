@@ -188,10 +188,6 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         }
     }
 
-    public void setTitleAlpha(float alpha) {
-        mCenterText.setAlpha(alpha);
-    }
-
     public void setImageTitle(int resId) {
         mCenterText.setBackgroundResource(resId);
         mCenterText.getLayoutParams().width = (int) getResources().getDimension(R.dimen.y90);
@@ -296,7 +292,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     public void addRightActions(ActionList actionList) {
         int actions = actionList.size();
         for (int i = 0; i < actions; i++) {
-            addRightAction(actionList.get(i), i);
+            addRightAction(actionList.get(i), RIGHT_ACTION);
         }
     }
 
@@ -343,8 +339,15 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     /**
      * Removes all action views from this action bar
      */
-    public void removeAllActions() {
+    public void removeAllRightActions() {
         mRightLayout.removeAllViews();
+    }
+
+    /**
+     * Removes all action views from this action bar
+     */
+    public void removeAllLeftActions() {
+        mLeftLayout.removeAllViews();
     }
 
     /**
@@ -352,8 +355,17 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
      *
      * @param index position of action to remove
      */
-    public void removeActionAt(int index) {
+    public void removeRightActionAt(int index) {
         mRightLayout.removeViewAt(index);
+    }
+
+    /**
+     * Remove a action from the action bar.
+     *
+     * @param index position of action to remove
+     */
+    public void removeLeftActionAt(int index) {
+        mLeftLayout.removeViewAt(index);
     }
 
     /**
@@ -361,7 +373,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
      *
      * @param action The action to remove
      */
-    public void removeAction(Action action) {
+    public void removeRightAction(Action action) {
         int childCount = mRightLayout.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View view = mRightLayout.getChildAt(i);
@@ -369,6 +381,24 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
                 final Object tag = view.getTag();
                 if (tag instanceof Action && tag.equals(action)) {
                     mRightLayout.removeView(view);
+                }
+            }
+        }
+    }
+
+    /**
+     * Remove a action from the action bar.
+     *
+     * @param action The action to remove
+     */
+    public void removeLeftAction(Action action) {
+        int childCount = mLeftLayout.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View view = mLeftLayout.getChildAt(i);
+            if (view != null) {
+                final Object tag = view.getTag();
+                if (tag instanceof Action && tag.equals(action)) {
+                    mLeftLayout.removeView(view);
                 }
             }
         }

@@ -40,7 +40,7 @@ public class ImageLoader {
                 .with(context)
                 .load(url)
                 .error(errorResId)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .centerCrop()
                 .crossFade()
                 .into(imageView);
@@ -62,7 +62,7 @@ public class ImageLoader {
         Glide
                 .with(context)
                 .load(file)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .centerCrop()
                 .crossFade()
                 .into(imageView);
@@ -86,7 +86,7 @@ public class ImageLoader {
                 .with(context)
                 .load(url)
                 .error(errorResId)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .centerCrop()
                 .override(width, height)
                 .crossFade()

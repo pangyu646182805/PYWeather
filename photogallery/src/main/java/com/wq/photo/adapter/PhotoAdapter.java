@@ -195,7 +195,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 centerCrop()
                 .crossFade()
                 .override(sWidthPix / spancount, sWidthPix / spancount)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .placeholder(R.drawable.loadfaild)
                 .into(view);
     }

@@ -10,7 +10,7 @@ import com.neuroandroid.pyweather.adapter.WeatherAdapter;
 import com.neuroandroid.pyweather.base.BaseFragment;
 import com.neuroandroid.pyweather.bean.CityBean;
 import com.neuroandroid.pyweather.config.Constant;
-import com.neuroandroid.pyweather.listener.OnLineTypeChangeListener;
+import com.neuroandroid.pyweather.listener.OnSettingConfigChangeListener;
 import com.neuroandroid.pyweather.model.response.HeFenWeather;
 import com.neuroandroid.pyweather.mvp.contract.IWeatherContract;
 import com.neuroandroid.pyweather.mvp.presenter.WeatherPresenter;
@@ -28,7 +28,7 @@ import butterknife.BindView;
  * Created by NeuroAndroid on 2017/6/5.
  */
 
-public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Presenter> implements IWeatherContract.View, OnLineTypeChangeListener {
+public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Presenter> implements IWeatherContract.View, OnSettingConfigChangeListener {
     @BindView(R.id.rv_weather)
     RecyclerView mRvWeather;
     @BindView(R.id.refresh_layout)
@@ -157,5 +157,12 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
     @Override
     public void onLineTypeChange() {
         refreshItem(0);
+    }
+
+    @Override
+    public void onThemeStyleChange(boolean lightThemeStyle) {
+        if (mWeatherAdapter != null) {
+            mWeatherAdapter.setThemeStyleColor(lightThemeStyle);
+        }
     }
 }

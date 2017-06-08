@@ -16,6 +16,7 @@ import com.neuroandroid.pyweather.adapter.base.BaseRvAdapter;
 import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.model.response.HeFenWeather;
 import com.neuroandroid.pyweather.utils.ImageLoader;
+import com.neuroandroid.pyweather.utils.SPUtils;
 import com.neuroandroid.pyweather.utils.TimeUtils;
 import com.neuroandroid.pyweather.widget.AirQualityView;
 import com.neuroandroid.pyweather.widget.NoPaddingTextView;
@@ -37,6 +38,15 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
     private static final int ITEM_SUGGESTION = 3;  // 生活指数
 
     private int mRlHeaderHeight;
+    private int mThemeStyleColor = Constant.LIGHT_THEME_STYLE_COLOR;
+
+    public void setThemeStyleColor(boolean lightThemeStyle) {
+        mThemeStyleColor = lightThemeStyle ? Constant.LIGHT_THEME_STYLE_COLOR : Constant.DARK_THEME_STYLE_COLOR;
+        refreshItem(ITEM_HEADER_AND_LINE_CHART);
+        refreshItem(ITEM_AIR_QUALITY);
+        refreshItem(ITEM_SUN);
+        refreshItem(ITEM_SUGGESTION);
+    }
 
     public int getRlHeaderHeight() {
         return mRlHeaderHeight;
@@ -44,6 +54,7 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
 
     public WeatherAdapter(Context context, List<HeFenWeather.HeWeather5Bean> dataList) {
         super(context, dataList);
+        mThemeStyleColor = SPUtils.getInt(mContext, Constant.SP_APP_FONT_ICON_THEME_STYLE, Color.WHITE);
     }
 
     @Override
@@ -119,13 +130,16 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
 
         // 头布局
         private RelativeLayout mRlHeader;
+        private ImageView mIvWet, mIvWind, mIvTemp;
         private NoPaddingTextView mTvCurrentTemp;
         private NoPaddingTextView mTvWeatherDesc;
         private NoPaddingTextView mTvRefreshTime;
         private NoPaddingTextView mTvWet;
+        private NoPaddingTextView mTvWetDesc;
         private NoPaddingTextView mTvWind;
         private NoPaddingTextView mTvWindDesc;
         private NoPaddingTextView mTvTemp;
+        private NoPaddingTextView mTvTempDesc;
         private WeatherLineChartView mWeatherLineChartView;
         private ImageView mIvNight1, mIvNight2, mIvNight3, mIvNight4, mIvNight5, mIvNight6, mIvNight7;
         private ImageView mIvDay1, mIvDay2, mIvDay3, mIvDay4, mIvDay5, mIvDay6, mIvDay7;
@@ -142,9 +156,11 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
         private NoPaddingTextView mTvCo;
         private NoPaddingTextView mTvNo2;
         private NoPaddingTextView mTvO3;
+        private View mSplit0, mSplit1, mSplit2, mSplit3, mSplit4, mSplit5, mSplit6, mSplit7;
 
         // 日出日落
         private SunriseAndSunsetView mSunriseAndSunsetView;
+        private View mSplit8;
 
         // 生活指数
         private NoPaddingTextView mTvComfortDesc, mTvComfortTxt;
@@ -154,6 +170,8 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
         private NoPaddingTextView mTvSportDesc, mTvSportTxt;
         private NoPaddingTextView mTvTourDesc, mTvTourTxt;
         private NoPaddingTextView mTvUvDesc, mTvUvTxt;
+        private NoPaddingTextView mTvDataSource;
+        private View mSplit9;
 
         public Holder(View itemView, int viewType) {
             super(itemView);
@@ -169,13 +187,19 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
                         }
                     });
 
+                    mIvWet = ButterKnife.findById(itemView, R.id.iv_wet);
+                    mIvWind = ButterKnife.findById(itemView, R.id.iv_wind);
+                    mIvTemp = ButterKnife.findById(itemView, R.id.iv_temp);
+
                     mTvCurrentTemp = ButterKnife.findById(itemView, R.id.tv_current_temp);
                     mTvWeatherDesc = ButterKnife.findById(itemView, R.id.tv_weather_desc);
                     mTvRefreshTime = ButterKnife.findById(itemView, R.id.tv_refresh_time);
                     mTvWet = ButterKnife.findById(itemView, R.id.tv_wet);
+                    mTvWetDesc = ButterKnife.findById(itemView, R.id.tv_wet_desc);
                     mTvWind = ButterKnife.findById(itemView, R.id.tv_wind);
                     mTvWindDesc = ButterKnife.findById(itemView, R.id.tv_wind_desc);
                     mTvTemp = ButterKnife.findById(itemView, R.id.tv_temp);
+                    mTvTempDesc = ButterKnife.findById(itemView, R.id.tv_temp_desc);
                     mWeatherLineChartView = ButterKnife.findById(itemView, R.id.weather_line_chart);
                     mIvNight1 = ButterKnife.findById(itemView, R.id.iv_night1);
                     mIvNight2 = ButterKnife.findById(itemView, R.id.iv_night2);
@@ -225,21 +249,25 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
                     mTvNightDesc6 = ButterKnife.findById(itemView, R.id.tv_night_desc6);
                     mTvNightDesc7 = ButterKnife.findById(itemView, R.id.tv_night_desc7);
 
-                    setWeatherIconColorFilter(mIvNight1, Color.WHITE);
-                    setWeatherIconColorFilter(mIvNight2, Color.WHITE);
-                    setWeatherIconColorFilter(mIvNight3, Color.WHITE);
-                    setWeatherIconColorFilter(mIvNight4, Color.WHITE);
-                    setWeatherIconColorFilter(mIvNight5, Color.WHITE);
-                    setWeatherIconColorFilter(mIvNight6, Color.WHITE);
-                    setWeatherIconColorFilter(mIvNight7, Color.WHITE);
+                    setWeatherIconColorFilter(mIvWet, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvWind, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvTemp, mThemeStyleColor);
 
-                    setWeatherIconColorFilter(mIvDay1, Color.WHITE);
-                    setWeatherIconColorFilter(mIvDay2, Color.WHITE);
-                    setWeatherIconColorFilter(mIvDay3, Color.WHITE);
-                    setWeatherIconColorFilter(mIvDay4, Color.WHITE);
-                    setWeatherIconColorFilter(mIvDay5, Color.WHITE);
-                    setWeatherIconColorFilter(mIvDay6, Color.WHITE);
-                    setWeatherIconColorFilter(mIvDay7, Color.WHITE);
+                    setWeatherIconColorFilter(mIvNight1, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvNight2, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvNight3, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvNight4, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvNight5, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvNight6, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvNight7, mThemeStyleColor);
+
+                    setWeatherIconColorFilter(mIvDay1, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvDay2, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvDay3, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvDay4, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvDay5, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvDay6, mThemeStyleColor);
+                    setWeatherIconColorFilter(mIvDay7, mThemeStyleColor);
                     break;
                 case ITEM_AIR_QUALITY:
                     mAirQualityView = ButterKnife.findById(itemView, R.id.air_quality_view);
@@ -249,9 +277,29 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
                     mTvCo = ButterKnife.findById(itemView, R.id.tv_co);
                     mTvNo2 = ButterKnife.findById(itemView, R.id.tv_no2);
                     mTvO3 = ButterKnife.findById(itemView, R.id.tv_o3);
+
+                    mSplit0 = ButterKnife.findById(itemView, R.id.split_0);
+                    mSplit1 = ButterKnife.findById(itemView, R.id.split_1);
+                    mSplit2 = ButterKnife.findById(itemView, R.id.split_2);
+                    mSplit3 = ButterKnife.findById(itemView, R.id.split_3);
+                    mSplit4 = ButterKnife.findById(itemView, R.id.split_4);
+                    mSplit5 = ButterKnife.findById(itemView, R.id.split_5);
+                    mSplit6 = ButterKnife.findById(itemView, R.id.split_6);
+                    mSplit7 = ButterKnife.findById(itemView, R.id.split_7);
+
+                    setBackgroundColor(mSplit0);
+                    setBackgroundColor(mSplit1);
+                    setBackgroundColor(mSplit2);
+                    setBackgroundColor(mSplit3);
+                    setBackgroundColor(mSplit4);
+                    setBackgroundColor(mSplit5);
+                    setBackgroundColor(mSplit6);
+                    setBackgroundColor(mSplit7);
                     break;
                 case ITEM_SUN:
                     mSunriseAndSunsetView = ButterKnife.findById(itemView, R.id.sunrise_and_sunset_view);
+                    mSplit8 = ButterKnife.findById(itemView, R.id.split_8);
+                    setBackgroundColor(mSplit8);
                     break;
                 case ITEM_SUGGESTION:
                     mTvComfortDesc = ButterKnife.findById(itemView, R.id.tv_comfort_desc);
@@ -268,6 +316,9 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
                     mTvTourTxt = ButterKnife.findById(itemView, R.id.tv_tour_txt);
                     mTvUvDesc = ButterKnife.findById(itemView, R.id.tv_uv_desc);
                     mTvUvTxt = ButterKnife.findById(itemView, R.id.tv_uv_txt);
+
+                    mSplit9 = ButterKnife.findById(itemView, R.id.split_9);
+                    setBackgroundColor(mSplit9);
                     break;
             }
         }
@@ -275,15 +326,18 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
         public void setHeaderData() {
             HeFenWeather.HeWeather5Bean.NowBean now = mWeatherBean.getNow();
             // HeFenWeather.HeWeather5Bean.BasicBean basic = mWeatherBean.getBasic();
-            mTvCurrentTemp.setText(now.getTmp() + "°");
-            mTvWeatherDesc.setText(now.getCond().getTxt());
-            mTvRefreshTime.setText(mWeatherBean.getBasic().getUpdate().getLoc() + "更新");
-            mTvWet.setText(now.getHum() + "%");
-            mTvWindDesc.setText(now.getWind().getDir());
-            mTvWind.setText(now.getWind().getSc() + "级");
-            mTvTemp.setText(now.getFl() + "°");
+            setTextColor(mTvWetDesc);
+            setTextColor(mTvTempDesc);
+
+            setText(mTvCurrentTemp, now.getTmp() + "°");
+            setText(mTvWeatherDesc, now.getCond().getTxt());
+            setText(mTvRefreshTime, mWeatherBean.getBasic().getUpdate().getLoc() + "更新");
+            setText(mTvWet, now.getHum() + "%");
+            setText(mTvWindDesc, now.getWind().getDir());
+            setText(mTvWind, now.getWind().getSc() + "级");
+            setText(mTvTemp, now.getFl() + "°");
             List<HeFenWeather.HeWeather5Bean.DailyForecastBean> dailyForecast = mWeatherBean.getDaily_forecast();
-            mWeatherLineChartView.setDailyForecastDataList(dailyForecast);
+            mWeatherLineChartView.setDailyForecastDataList(dailyForecast, mThemeStyleColor);
             for (int i = 0; i < dailyForecast.size(); i++) {
                 HeFenWeather.HeWeather5Bean.DailyForecastBean dailyForecastBean = dailyForecast.get(i);
                 HeFenWeather.HeWeather5Bean.DailyForecastBean.CondBeanX cond = dailyForecastBean.getCond();
@@ -355,12 +409,12 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
             HeFenWeather.HeWeather5Bean.AqiBean aqiBean = mWeatherBean.getAqi();
             mAirQualityView.setAqiBean(aqiBean);
             HeFenWeather.HeWeather5Bean.AqiBean.CityBean city = aqiBean.getCity();
-            mTvPm25.setText(city.getPm25());
-            mTvPm10.setText(city.getPm10());
-            mTvSo2.setText(city.getSo2());
-            mTvNo2.setText(city.getNo2());
-            mTvCo.setText(city.getCo());
-            mTvO3.setText(city.getO3());
+            setText(mTvPm25, city.getPm25());
+            setText(mTvPm10, city.getPm10());
+            setText(mTvSo2, city.getSo2());
+            setText(mTvNo2, city.getNo2());
+            setText(mTvCo, city.getCo());
+            setText(mTvO3, city.getO3());
         }
 
         public void setSunriseAndSunsetData() {
@@ -369,26 +423,26 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
 
         public void setLifeIndexData() {
             HeFenWeather.HeWeather5Bean.SuggestionBean suggestion = mWeatherBean.getSuggestion();
-            mTvComfortDesc.setText("舒适度指数 " + suggestion.getComf().getBrf());
-            mTvComfortTxt.setText(suggestion.getComf().getTxt());
+            setText(mTvComfortDesc, "舒适度指数 " + suggestion.getComf().getBrf());
+            setText(mTvComfortTxt, suggestion.getComf().getTxt());
 
-            mTvCarWashDesc.setText("洗车指数 " + suggestion.getCw().getBrf());
-            mTvCarWashTxt.setText(suggestion.getCw().getTxt());
+            setText(mTvCarWashDesc, "洗车指数 " + suggestion.getCw().getBrf());
+            setText(mTvCarWashTxt, suggestion.getCw().getTxt());
 
-            mTvDressingDesc.setText("穿衣指数 " + suggestion.getDrsg().getBrf());
-            mTvDressingTxt.setText(suggestion.getDrsg().getTxt());
+            setText(mTvDressingDesc, "穿衣指数 " + suggestion.getDrsg().getBrf());
+            setText(mTvDressingTxt, suggestion.getDrsg().getTxt());
 
-            mTvColdDesc.setText("感冒指数 " + suggestion.getFlu().getBrf());
-            mTvColdTxt.setText(suggestion.getFlu().getTxt());
+            setText(mTvColdDesc, "感冒指数 " + suggestion.getFlu().getBrf());
+            setText(mTvColdTxt, suggestion.getFlu().getTxt());
 
-            mTvSportDesc.setText("运动指数 " + suggestion.getSport().getBrf());
-            mTvSportTxt.setText(suggestion.getSport().getTxt());
+            setText(mTvSportDesc, "运动指数 " + suggestion.getSport().getBrf());
+            setText(mTvSportTxt, suggestion.getSport().getTxt());
 
-            mTvTourDesc.setText("旅游指数 " + suggestion.getTrav().getBrf());
-            mTvTourTxt.setText(suggestion.getTrav().getTxt());
+            setText(mTvTourDesc, "旅游指数 " + suggestion.getTrav().getBrf());
+            setText(mTvTourTxt, suggestion.getTrav().getTxt());
 
-            mTvUvDesc.setText("紫外线指数 " + suggestion.getUv().getBrf());
-            mTvUvTxt.setText(suggestion.getUv().getTxt());
+            setText(mTvUvDesc, "紫外线指数 " + suggestion.getUv().getBrf());
+            setText(mTvUvTxt, suggestion.getUv().getTxt());
         }
 
         private void setWeatherIconColorFilter(ImageView iv, int color) {
@@ -401,6 +455,15 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
 
         private void setText(TextView tv, String text) {
             tv.setText(text);
+            setTextColor(tv);
+        }
+
+        private void setTextColor(TextView tv) {
+            tv.setTextColor(mThemeStyleColor);
+        }
+
+        private void setBackgroundColor(View split) {
+            split.setBackgroundColor(mThemeStyleColor == Color.WHITE ? Constant.LIGHT_THEME_STYLE_SUB_COLOR : Constant.DARK_THEME_STYLE_SUB_COLOR);
         }
     }
 }

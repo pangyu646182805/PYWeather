@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
 import com.neuroandroid.pyweather.R;
+import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.model.response.HeFenWeather;
 
 /**
@@ -111,6 +112,18 @@ public class WeatherTitleCustomWidget extends LinearLayout {
             });
             valueAnimator.setDuration(400);
             valueAnimator.start();
+        }
+    }
+
+    public void setThemeStyle(boolean lightThemeStyle) {
+        if (lightThemeStyle) {
+            mTvCity.setTextColor(Constant.LIGHT_THEME_STYLE_COLOR);
+            mTvTemp.setTextColor(Constant.LIGHT_THEME_STYLE_COLOR);
+            mTvWeatherDesc.setTextColor(Constant.LIGHT_THEME_STYLE_COLOR);
+        } else {
+            mTvCity.setTextColor(Constant.DARK_THEME_STYLE_COLOR);
+            mTvTemp.setTextColor(Constant.DARK_THEME_STYLE_COLOR);
+            mTvWeatherDesc.setTextColor(Constant.DARK_THEME_STYLE_COLOR);
         }
     }
 }

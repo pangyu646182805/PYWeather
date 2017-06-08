@@ -1,6 +1,7 @@
 package com.neuroandroid.pyweather.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -9,16 +10,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.github.mmin18.widget.RealtimeBlurView;
 import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.base.BaseActivity;
 import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.event.BaseEvent;
 import com.neuroandroid.pyweather.ui.fragment.CityManageFragment;
 import com.neuroandroid.pyweather.ui.fragment.WeatherFragment;
+import com.neuroandroid.pyweather.utils.ColorUtils;
 import com.neuroandroid.pyweather.utils.FragmentUtils;
 import com.neuroandroid.pyweather.utils.ImageLoader;
 import com.neuroandroid.pyweather.utils.SPUtils;
 import com.neuroandroid.pyweather.utils.ShowUtils;
+import com.neuroandroid.pyweather.utils.SystemUtils;
 import com.neuroandroid.pyweather.utils.TimeUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 import com.neuroandroid.pyweather.widget.weather.DynamicWeatherView;
@@ -47,12 +51,16 @@ public class MainActivity extends BaseActivity {
     DrawerLayout mDrawerLayout;
     @BindView(R.id.nav_layout)
     NavigationView mNavLayout;
-    private FrameLayout mFlBackground;
+    @BindView(R.id.fl_background)
+    FrameLayout mFlBackground;
+    @BindView(R.id.iv_background)
+    ImageView mIvBackground;
+    @BindView(R.id.blur_view)
+    RealtimeBlurView mBlurView;
     private DynamicWeatherView mDynamicWeatherView;
 
     private PermissionsHelper mPermissionsHelper;
     private MainActivityFragmentCallbacks mCurrentFragment;
-    private ImageView mIvBackground;
 
     @Override
     protected int attachLayoutRes() {
@@ -61,7 +69,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        mFlBackground = (FrameLayout) findViewById(R.id.fl_background);
         /*mDynamicWeatherView = new DynamicWeatherView(this);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
         mDynamicWeatherView.setLayoutParams(params);
@@ -199,13 +206,42 @@ public class MainActivity extends BaseActivity {
 
     private void setCustomBackground() {
         String customBackground = SPUtils.getString(this, Constant.SP_CUSTOM_BACKGROUND, null);
-        if (mIvBackground == null) {
-            mIvBackground = new ImageView(this);
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-            mIvBackground.setLayoutParams(params);
-            mFlBackground.addView(mIvBackground);
-        }
+        int transparency = SPUtils.getInt(this, Constant.SP_CUSTOM_BACKGROUND_TRANSPARENCY, 0);
+        int blurLevel = SPUtils.getInt(this, Constant.SP_CUSTOM_BACKGROUND_BLUR_LEVEL, 0);
+        int themeStyle = SPUtils.getInt(this, Constant.SP_APP_FONT_ICON_THEME_STYLE, Color.WHITE);
         ImageLoader.getInstance().displayImage(this, customBackground, getBackground(), mIvBackground);
+        mBlurView.setOverlayColor(ColorUtils.adjustAlpha(themeStyle == Color.WHITE ?
+                Color.BLACK : Color.WHITE, transparency * 1f / 100));
+        mBlurView.setBlurRadius(blurLevel);
+        setSystemStatusBarStyle(themeStyle == Color.WHITE);
+    }
+
+    /**
+     * 设置图标字体的主题风格
+     */
+    private void setThemeStyle() {
+        int themeStyle = SPUtils.getInt(this, Constant.SP_APP_FONT_ICON_THEME_STYLE, Color.WHITE);
+        int transparency = SPUtils.getInt(this, Constant.SP_CUSTOM_BACKGROUND_TRANSPARENCY, 0);
+        if (mCurrentFragment instanceof WeatherFragment) {
+            WeatherFragment weatherFragment = (WeatherFragment) mCurrentFragment;
+            boolean lightThemeStyle = themeStyle == Color.WHITE;
+            weatherFragment.setThemeStyle(lightThemeStyle);
+            weatherFragment.onThemeStyleChange(lightThemeStyle);
+            mBlurView.setOverlayColor(ColorUtils.adjustAlpha(themeStyle == Color.WHITE ?
+                    Color.BLACK : Color.WHITE, transparency * 1f / 100));
+            setSystemStatusBarStyle(lightThemeStyle);
+        }
+    }
+
+    /**
+     * 设置系统状态栏样式
+     */
+    private void setSystemStatusBarStyle(boolean lightThemeStyle) {
+        if (lightThemeStyle) {
+            SystemUtils.setTranslateStatusBar(this);
+        } else {
+            SystemUtils.myStatusBar(this);
+        }
     }
 
     private int getBackground() {
@@ -251,6 +287,9 @@ public class MainActivity extends BaseActivity {
                         WeatherFragment weatherFragment = (WeatherFragment) mCurrentFragment;
                         weatherFragment.onLineTypeChange();
                     }
+                    break;
+                case BaseEvent.EVENT_THEME_STYLE:
+                    setThemeStyle();
                     break;
             }
         }

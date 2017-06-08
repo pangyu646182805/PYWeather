@@ -21,6 +21,7 @@
         android:layout_height="@dimen/y360"/>
 
     <View
+        android:id="@+id/split_8"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="#4fff"/>

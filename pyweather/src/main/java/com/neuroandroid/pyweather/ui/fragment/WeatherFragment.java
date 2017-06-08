@@ -12,10 +12,12 @@ import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.adapter.WeatherPagerAdapter;
 import com.neuroandroid.pyweather.base.BaseFragment;
 import com.neuroandroid.pyweather.bean.CityBean;
+import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.model.response.HeFenWeather;
 import com.neuroandroid.pyweather.provider.PYCityStore;
 import com.neuroandroid.pyweather.ui.activity.MainActivity;
 import com.neuroandroid.pyweather.ui.activity.SettingActivity;
+import com.neuroandroid.pyweather.utils.SPUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 import com.neuroandroid.pyweather.widget.TitleBar;
 import com.neuroandroid.pyweather.widget.WeatherTitleCustomWidget;
@@ -39,6 +41,8 @@ public class WeatherFragment extends BaseFragment implements MainActivity.MainAc
     private ArrayList<CityBean.CityListBean> mAllCities;
     private WeatherTitleCustomWidget mWeatherTitleCustomWidget;
     private WeatherPagerAdapter mWeatherPagerAdapter;
+    private TitleBar.ImageAction mMenuAction;
+    private TitleBar.ImageAction mSpinnerAction;
 
     public static WeatherFragment newInstance() {
         return new WeatherFragment();
@@ -52,13 +56,20 @@ public class WeatherFragment extends BaseFragment implements MainActivity.MainAc
     @Override
     protected void initView() {
         initTitleBar(UIUtils.getString(R.string.app_name), false);
-        initLeftAction(new TitleBar.ImageAction(R.drawable.ic_menu_white) {
+        setStatusBar(mStatusBar);
+        mWeatherTitleCustomWidget = new WeatherTitleCustomWidget(mContext);
+        getTitleBar().setCustomTitle(mWeatherTitleCustomWidget);
+        setThemeStyle(SPUtils.getInt(mContext, Constant.SP_APP_FONT_ICON_THEME_STYLE, Color.WHITE) == Color.WHITE);
+    }
+
+    private void initImageAction(boolean lightThemeStyle) {
+        mMenuAction = new TitleBar.ImageAction(lightThemeStyle ? R.drawable.ic_menu_white : R.drawable.ic_menu_black) {
             @Override
             public void performAction(View view) {
                 getMainActivity().openDrawer();
             }
-        });
-        initRightAction(new TitleBar.ImageAction(R.mipmap.ic_more_vert_white_24dp) {
+        };
+        mSpinnerAction = new TitleBar.ImageAction(lightThemeStyle ? R.drawable.ic_more_vert_white : R.drawable.ic_more_vert_black) {
             @Override
             public void performAction(View view) {
                 PopupMenu popupMenu = new PopupMenu(mContext, mStatusBar, Gravity.END);
@@ -77,10 +88,9 @@ public class WeatherFragment extends BaseFragment implements MainActivity.MainAc
                 });
                 popupMenu.show();
             }
-        });
-        setStatusBar(mStatusBar);
-        mWeatherTitleCustomWidget = new WeatherTitleCustomWidget(mContext);
-        getTitleBar().setCustomTitle(mWeatherTitleCustomWidget);
+        };
+        initLeftAction(mMenuAction);
+        initRightAction(mSpinnerAction);
     }
 
     @Override
@@ -156,5 +166,22 @@ public class WeatherFragment extends BaseFragment implements MainActivity.MainAc
             WeatherDetailFragment weatherDetailFragment = (WeatherDetailFragment) getFragment(i);
             weatherDetailFragment.onLineTypeChange();
         }
+    }
+
+    /**
+     * 当设置配置发生改变
+     */
+    public void onThemeStyleChange(boolean lightThemeStyle) {
+        for (int i = 0; i < mWeatherPagerAdapter.getCount(); i++) {
+            WeatherDetailFragment weatherDetailFragment = (WeatherDetailFragment) getFragment(i);
+            weatherDetailFragment.onThemeStyleChange(lightThemeStyle);
+        }
+    }
+
+    public void setThemeStyle(boolean lightThemeStyle) {
+        mWeatherTitleCustomWidget.setThemeStyle(lightThemeStyle);
+        getTitleBar().removeLeftAction(mMenuAction);
+        getTitleBar().removeRightAction(mSpinnerAction);
+        initImageAction(lightThemeStyle);
     }
 }

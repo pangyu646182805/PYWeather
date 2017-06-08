@@ -1,5 +1,10 @@
 package com.neuroandroid.pyweather.config;
 
+import android.graphics.Color;
+
+import com.neuroandroid.pyweather.R;
+import com.neuroandroid.pyweather.utils.UIUtils;
+
 /**
  * Created by NeuroAndroid on 2017/3/15.
  */
@@ -59,7 +64,7 @@ public class Constant {
      */
     public static final String STATUS_INVALID_KEY = "invalid key";
     /**
-     * 	未知城市
+     * 未知城市
      */
     public static final String STATUS_UNKNOWN_CITY = "unknown city";
     /**
@@ -80,4 +85,21 @@ public class Constant {
     public static final String SP_CUSTOM_BACKGROUND = "sp_custom_background";
 
     public static final String SP_LINE_TYPE = "sp_line_type";  // 0 : 折线图  1 : 曲线图
+
+    // 自定义背景透明度 (0-70)
+    public static final String SP_CUSTOM_BACKGROUND_TRANSPARENCY = "sp_custom_background_transparency";
+
+    // 自定义背景模糊程度 (0-100)
+    public static final String SP_CUSTOM_BACKGROUND_BLUR_LEVEL = "sp_custom_background_blur_level";
+
+    // app主题风格 (字体图标亮色主题还是暗色主题) Color.BLACK  Color.WHITE
+    public static final String SP_APP_FONT_ICON_THEME_STYLE = "sp_app_font_icon_theme_style";
+
+    public static final int LIGHT_THEME_STYLE_COLOR = Color.WHITE;
+
+    public static final int DARK_THEME_STYLE_COLOR = UIUtils.getColor(R.color.colorGray333);
+
+    public static final int LIGHT_THEME_STYLE_SUB_COLOR = UIUtils.getColor(R.color.white_3);
+
+    public static final int DARK_THEME_STYLE_SUB_COLOR = UIUtils.getColor(R.color.black_3);
 }

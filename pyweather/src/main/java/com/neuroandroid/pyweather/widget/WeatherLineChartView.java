@@ -30,11 +30,19 @@ public class WeatherLineChartView extends View {
     private final Context mContext;
     private List<HeFenWeather.HeWeather5Bean.DailyForecastBean> mDailyForecastDataList;
 
-    public void setDailyForecastDataList(List<HeFenWeather.HeWeather5Bean.DailyForecastBean> dataList) {
+    // 当数据为空时的7天天气预报假数据
+    private int[] mEmptyMaxTemp = {31, 29, 26, 33, 28, 31, 28};
+    private int[] mEmptyMinTemp = {24, 23, 23, 25, 24, 21, 22};
+
+    public void setDailyForecastDataList(List<HeFenWeather.HeWeather5Bean.DailyForecastBean> dataList, int themeStyleColor) {
         this.mDailyForecastDataList = dataList;
         mCurrentLineType = SPUtils.getInt(mContext, Constant.SP_LINE_TYPE, LINE_TYPE_LINE);
         mMaxLinePath.reset();
         mMinLinePath.reset();
+        mThemeColor = themeStyleColor;
+        mCirclePaint.setColor(mThemeColor);
+        mLinePaint.setColor(mThemeColor);
+        mTextPaint.setColor(mThemeColor);
         invalidate();
     }
 
@@ -48,7 +56,7 @@ public class WeatherLineChartView extends View {
     /**
      * 线和文本的颜色
      */
-    private int mLineColor;
+    private int mThemeColor;
 
     /**
      * 文本大小
@@ -109,7 +117,7 @@ public class WeatherLineChartView extends View {
     private void init() {
         mTextRect = new Rect();
         mLineStrokeWidth = UIUtils.getDimen(R.dimen.x2);
-        mLineColor = UIUtils.getColor(R.color.white);
+        mThemeColor = UIUtils.getColor(R.color.white);
         mTextSize = UIUtils.getRawSize(mContext, TypedValue.COMPLEX_UNIT_SP, 11f);
 
         // Path
@@ -120,7 +128,7 @@ public class WeatherLineChartView extends View {
         mLinePaint = new Paint();
         // mLinePaint.setPathEffect(effects);
         mLinePaint.setDither(true);
-        mLinePaint.setColor(mLineColor);
+        mLinePaint.setColor(mThemeColor);
         mLinePaint.setStrokeWidth(mLineStrokeWidth);
         mLinePaint.setStyle(Paint.Style.STROKE);
         mLinePaint.setAntiAlias(true);
@@ -132,16 +140,19 @@ public class WeatherLineChartView extends View {
         mTextPaint.setDither(true);
         mTextPaint.setAntiAlias(true);
         mTextPaint.setTextSize(mTextSize);
-        mTextPaint.setColor(mLineColor);
+        mTextPaint.setColor(mThemeColor);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
 
-        UIUtils.getTextBounds(mTextPaint, "30" + Constant.TEMP, mTextRect);
+        mCurrentLineType = SPUtils.getInt(mContext, Constant.SP_LINE_TYPE, LINE_TYPE_LINE);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (mDailyForecastDataList != null && mDailyForecastDataList.size() == 7) {
+            mTextPaint.setTextSize(mTextSize);
+            mLinePaint.setStrokeWidth(mLineStrokeWidth);
+            UIUtils.getTextBounds(mTextPaint, "30" + Constant.TEMP, mTextRect);
             // 绘制七日天气预报
             getMaxAndMinTemp(mDailyForecastDataList);
             float distanceOfPointAndPoint = getDistanceOfPointAndPoint();
@@ -152,42 +163,81 @@ public class WeatherLineChartView extends View {
                 int maxTemp = Integer.parseInt(tmp.getMax());
                 int minTemp = Integer.parseInt(tmp.getMin());
 
-                float maxTempYAxis = calTempYAxis(maxTemp);
-                float minTempYAxis = calTempYAxis(minTemp);
-
-                if (i == 0) {
-                    mMaxLinePath.moveTo(startX, maxTempYAxis);
-                    mMinLinePath.moveTo(startX, minTempYAxis);
-                } else {
-                    if (mCurrentLineType == LINE_TYPE_LINE) {
-                        mMaxLinePath.lineTo(startX, maxTempYAxis);
-                        mMinLinePath.lineTo(startX, minTempYAxis);
-                    } else {
-                        HeFenWeather.HeWeather5Bean.DailyForecastBean.TmpBean previousTmp = mDailyForecastDataList.get(i - 1).getTmp();
-                        float previousStartX = startX - distanceOfPointAndPoint;
-                        int previousMaxTemp = Integer.parseInt(previousTmp.getMax());
-                        int previousMinTemp = Integer.parseInt(previousTmp.getMin());
-
-                        float previousMaxTempYAxis = calTempYAxis(previousMaxTemp);
-                        float previousMinTempYAxis = calTempYAxis(previousMinTemp);
-
-                        mMaxLinePath.cubicTo((previousStartX + startX) / 2, getMeasuredHeight() - (getMeasuredHeight() - previousMaxTempYAxis),
-                                (previousStartX + startX) / 2, maxTempYAxis, startX, maxTempYAxis);
-                        mMinLinePath.cubicTo((previousStartX + startX) / 2, getMeasuredHeight() - (getMeasuredHeight() - previousMinTempYAxis),
-                                (previousStartX + startX) / 2, minTempYAxis, startX, minTempYAxis);
-                    }
-                }
-                canvas.drawText(maxTemp + Constant.TEMP, startX, maxTempYAxis - mTextRect.height(), mTextPaint);
-                canvas.drawText(minTemp + Constant.TEMP, startX, minTempYAxis + 2 * mTextRect.height(), mTextPaint);
-
-                if (mCurrentLineType == LINE_TYPE_LINE) {
-                    canvas.drawCircle(startX, maxTempYAxis, 5, mCirclePaint);
-                    canvas.drawCircle(startX, minTempYAxis, 5, mCirclePaint);
-                }
+                processWeatherLogic(canvas, i, maxTemp, minTemp, distanceOfPointAndPoint, startX, false);
                 startX += distanceOfPointAndPoint;
             }
             canvas.drawPath(mMaxLinePath, mLinePaint);
             canvas.drawPath(mMinLinePath, mLinePaint);
+        } else {
+            mTextPaint.setTextSize(mTextSize * 0.5f);
+            mLinePaint.setStrokeWidth(mLineStrokeWidth * 0.5f);
+            UIUtils.getTextBounds(mTextPaint, "30" + Constant.TEMP, mTextRect);
+            getEmptyMaxAndMinTemp();
+            float distanceOfPointAndPoint = getDistanceOfPointAndPoint();
+            float startX = distanceOfPointAndPoint * 0.5f;
+            for (int i = 0; i < 7; i++) {
+                int maxTemp = mEmptyMaxTemp[i];
+                int minTemp = mEmptyMinTemp[i];
+
+                processWeatherLogic(canvas, i, maxTemp, minTemp, distanceOfPointAndPoint, startX, true);
+                startX += distanceOfPointAndPoint;
+            }
+            canvas.drawPath(mMaxLinePath, mLinePaint);
+            canvas.drawPath(mMinLinePath, mLinePaint);
+        }
+    }
+
+    /**
+     * 处理天气预报折线图逻辑
+     */
+    private void processWeatherLogic(Canvas canvas, int index, int maxTemp, int minTemp,
+                                     float distanceOfPointAndPoint, float startX, boolean empty) {
+        float maxTempYAxis = calTempYAxis(maxTemp);
+        float minTempYAxis = calTempYAxis(minTemp);
+
+        if (index == 0) {
+            mMaxLinePath.moveTo(startX, maxTempYAxis);
+            mMinLinePath.moveTo(startX, minTempYAxis);
+        } else {
+            if (mCurrentLineType == LINE_TYPE_LINE) {
+                mMaxLinePath.lineTo(startX, maxTempYAxis);
+                mMinLinePath.lineTo(startX, minTempYAxis);
+            } else {
+                float previousStartX = startX - distanceOfPointAndPoint;
+                float previousMaxTempYAxis;
+                float previousMinTempYAxis;
+                if (!empty) {
+                    HeFenWeather.HeWeather5Bean.DailyForecastBean.TmpBean previousTmp = mDailyForecastDataList.get(index - 1).getTmp();
+                    int previousMaxTemp = Integer.parseInt(previousTmp.getMax());
+                    int previousMinTemp = Integer.parseInt(previousTmp.getMin());
+
+                    previousMaxTempYAxis = calTempYAxis(previousMaxTemp);
+                    previousMinTempYAxis = calTempYAxis(previousMinTemp);
+                } else {
+                    int previousMaxTemp = mEmptyMaxTemp[index - 1];
+                    int previousMinTemp = mEmptyMinTemp[index - 1];
+
+                    previousMaxTempYAxis = calTempYAxis(previousMaxTemp);
+                    previousMinTempYAxis = calTempYAxis(previousMinTemp);
+                }
+
+                mMaxLinePath.cubicTo((previousStartX + startX) / 2, getMeasuredHeight() - (getMeasuredHeight() - previousMaxTempYAxis),
+                        (previousStartX + startX) / 2, maxTempYAxis, startX, maxTempYAxis);
+                mMinLinePath.cubicTo((previousStartX + startX) / 2, getMeasuredHeight() - (getMeasuredHeight() - previousMinTempYAxis),
+                        (previousStartX + startX) / 2, minTempYAxis, startX, minTempYAxis);
+            }
+        }
+        canvas.drawText(maxTemp + Constant.TEMP, startX, maxTempYAxis - mTextRect.height(), mTextPaint);
+        canvas.drawText(minTemp + Constant.TEMP, startX, minTempYAxis + 2 * mTextRect.height(), mTextPaint);
+
+        if (mCurrentLineType == LINE_TYPE_LINE) {
+            if (empty) {
+                canvas.drawCircle(startX, maxTempYAxis, 2.5f, mCirclePaint);
+                canvas.drawCircle(startX, minTempYAxis, 2.5f, mCirclePaint);
+            } else {
+                canvas.drawCircle(startX, maxTempYAxis, 5f, mCirclePaint);
+                canvas.drawCircle(startX, minTempYAxis, 5f, mCirclePaint);
+            }
         }
     }
 
@@ -200,6 +250,26 @@ public class WeatherLineChartView extends View {
         for (int i = 1; i < mDailyForecastDataList.size(); i++) {
             int maxTemp = Integer.parseInt(dataList.get(i).getTmp().getMax());
             int minTemp = Integer.parseInt(dataList.get(i).getTmp().getMin());
+            if (maxTemp > mMaxTemp) {
+                mMaxTemp = maxTemp;
+            }
+            if (minTemp < mMinTemp) {
+                mMinTemp = minTemp;
+            }
+        }
+        mMaxTemp += 5;
+        mMinTemp -= 5;
+    }
+
+    /**
+     * 当数据为空时获取最高温度和最低温度
+     */
+    private void getEmptyMaxAndMinTemp() {
+        mMaxTemp = mEmptyMaxTemp[0];
+        mMinTemp = mEmptyMinTemp[0];
+        for (int i = 1; i < 7; i++) {
+            int maxTemp = mEmptyMaxTemp[i];
+            int minTemp = mEmptyMinTemp[i];
             if (maxTemp > mMaxTemp) {
                 mMaxTemp = maxTemp;
             }
