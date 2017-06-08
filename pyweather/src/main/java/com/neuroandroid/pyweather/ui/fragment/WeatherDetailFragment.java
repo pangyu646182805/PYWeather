@@ -1,5 +1,6 @@
 package com.neuroandroid.pyweather.ui.fragment;
 
+import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import com.neuroandroid.pyweather.mvp.contract.IWeatherContract;
 import com.neuroandroid.pyweather.mvp.presenter.WeatherPresenter;
 import com.neuroandroid.pyweather.provider.PYCityStore;
 import com.neuroandroid.pyweather.utils.L;
+import com.neuroandroid.pyweather.utils.SPUtils;
 import com.neuroandroid.pyweather.utils.ShowUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 import com.neuroandroid.pyweather.widget.WeatherRefreshHeader;
@@ -38,6 +40,7 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
     private WeatherAdapter mWeatherAdapter;
     private int mScrolledY;
     private HeFenWeather.HeWeather5Bean mWeatherBean;
+    private WeatherRefreshHeader mRefreshHeader;
 
     public HeFenWeather.HeWeather5Bean getWeatherBean() {
         return mWeatherBean;
@@ -55,8 +58,9 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
 
     @Override
     protected void initView() {
-        WeatherRefreshHeader refreshHeader = new WeatherRefreshHeader(mContext);
-        mRefreshLayout.setHeaderView(refreshHeader);
+        mRefreshHeader = new WeatherRefreshHeader(mContext);
+        mRefreshHeader.setRefreshHeaderColorFilter(SPUtils.getInt(mContext, Constant.SP_APP_FONT_ICON_THEME_STYLE, Color.WHITE));
+        mRefreshLayout.setHeaderView(mRefreshHeader);
         mRefreshLayout.setHeaderHeight(UIUtils.getDimen(R.dimen.y64));
         mRefreshLayout.setMaxHeadHeight(UIUtils.getDimen(R.dimen.y1280));
         mRefreshLayout.setEnableLoadmore(false);
@@ -163,6 +167,7 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
     public void onThemeStyleChange(boolean lightThemeStyle) {
         if (mWeatherAdapter != null) {
             mWeatherAdapter.setThemeStyleColor(lightThemeStyle);
+            mRefreshHeader.setRefreshHeaderColorFilter(lightThemeStyle ? Color.WHITE : Color.BLACK);
         }
     }
 }

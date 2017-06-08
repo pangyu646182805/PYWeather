@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:id="@+id/tv_sunrise_sunset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

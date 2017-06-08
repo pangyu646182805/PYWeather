@@ -48,7 +48,7 @@ public class WeatherRefreshHeader extends FrameLayout implements IHeaderView {
         LayoutParams params = new LayoutParams(mSunWidthAndHeight, mSunWidthAndHeight);
         params.gravity = Gravity.CENTER;
         mIvSun.setLayoutParams(params);
-        mIvSun.setBackgroundResource(R.mipmap.iconfont_baitianqing);
+        mIvSun.setImageResource(R.mipmap.iconfont_baitianqing);
         mIvSun.setScaleX(0f);
         mIvSun.setScaleY(0f);
         addView(mIvSun);
@@ -60,6 +60,13 @@ public class WeatherRefreshHeader extends FrameLayout implements IHeaderView {
         mRotateAnimation.setRepeatMode(Animation.INFINITE);
         mRotateAnimation.setFillAfter(true);
         mRotateAnimation.setDuration(2000);
+    }
+
+    /**
+     * 改变头部刷新图标的颜色
+     */
+    public void setRefreshHeaderColorFilter(int color) {
+        mIvSun.setColorFilter(color);
     }
 
     @Override

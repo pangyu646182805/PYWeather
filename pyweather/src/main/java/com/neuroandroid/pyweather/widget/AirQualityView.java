@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.neuroandroid.pyweather.R;
+import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.model.response.HeFenWeather;
 import com.neuroandroid.pyweather.utils.UIUtils;
 
@@ -45,9 +46,13 @@ public class AirQualityView extends View {
      */
     private HeFenWeather.HeWeather5Bean.AqiBean mAqiBean;
 
-    public void setAqiBean(HeFenWeather.HeWeather5Bean.AqiBean aqiBean) {
+    public void setAqiBean(HeFenWeather.HeWeather5Bean.AqiBean aqiBean, int themeStyleColor) {
         mAqiBean = aqiBean;
         mAirQuality = Integer.parseInt(aqiBean.getCity().getAqi());
+        mAirQualityTextColor = themeStyleColor;
+        mRingColor = themeStyleColor == Color.WHITE ? Constant.LIGHT_THEME_STYLE_SUB_COLOR : Constant.DARK_THEME_STYLE_SUB_COLOR;
+        mRingPaint.setColor(mRingColor);
+        mTextPaint.setColor(mAirQualityTextColor);
         invalidate();
     }
 
@@ -112,10 +117,10 @@ public class AirQualityView extends View {
 
     private void init() {
         mRingWidth = UIUtils.getDimen(R.dimen.x24);
-        mRingColor = UIUtils.getColor(R.color.white_3);
+        mRingColor = Constant.LIGHT_THEME_STYLE_SUB_COLOR;
         mAirQualityIndexTextSize = UIUtils.getRawSize(mContext, TypedValue.COMPLEX_UNIT_SP, 30);
         mAirQualityDescTextSize = UIUtils.getRawSize(mContext, TypedValue.COMPLEX_UNIT_SP, 14);
-        mAirQualityTextColor = Color.WHITE;
+        mAirQualityTextColor = Constant.LIGHT_THEME_STYLE_COLOR;
 
         mRingPaint = new Paint();
         mRingPaint.setDither(true);

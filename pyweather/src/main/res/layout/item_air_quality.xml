@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_air_quality"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -14,6 +14,7 @@
         android:background="@color/white_3"/>
 
     <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:id="@+id/tv_air_quality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -51,6 +52,7 @@
             android:orientation="vertical">
 
             <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_pm25_desc"
                 style="@style/TextViewWeatherWhite"
                 android:text="PM2.5"
                 android:textSize="14sp"/>
@@ -77,6 +79,7 @@
             android:orientation="vertical">
 
             <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_pm10_desc"
                 style="@style/TextViewWeatherWhite"
                 android:text="PM10"
                 android:textSize="14sp"/>
@@ -103,6 +106,7 @@
             android:orientation="vertical">
 
             <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_so2_desc"
                 style="@style/TextViewWeatherWhite"
                 android:text="SO2"
                 android:textSize="14sp"/>
@@ -137,6 +141,7 @@
             android:orientation="vertical">
 
             <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_co_desc"
                 style="@style/TextViewWeatherWhite"
                 android:text="CO"
                 android:textSize="14sp"/>
@@ -163,6 +168,7 @@
             android:orientation="vertical">
 
             <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_no2_desc"
                 style="@style/TextViewWeatherWhite"
                 android:text="NO2"
                 android:textSize="14sp"/>
@@ -189,6 +195,7 @@
             android:orientation="vertical">
 
             <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_o3_desc"
                 style="@style/TextViewWeatherWhite"
                 android:text="O3"
                 android:textSize="14sp"/>

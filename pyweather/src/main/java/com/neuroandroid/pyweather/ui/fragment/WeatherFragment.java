@@ -183,5 +183,14 @@ public class WeatherFragment extends BaseFragment implements MainActivity.MainAc
         getTitleBar().removeLeftAction(mMenuAction);
         getTitleBar().removeRightAction(mSpinnerAction);
         initImageAction(lightThemeStyle);
+        setPagerIndicatorDotColor(lightThemeStyle);
+    }
+
+    /**
+     * 设置指示器颜色
+     */
+    private void setPagerIndicatorDotColor(boolean lightThemeStyle) {
+        mPagerIndicator.setSelectedDotColor(lightThemeStyle ? Color.WHITE : Color.BLACK);
+        mPagerIndicator.setUnselectedDotColor(lightThemeStyle ? Color.parseColor("#99FFFFFF") : Color.parseColor("#99000000"));
     }
 }

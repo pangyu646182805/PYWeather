@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import com.neuroandroid.pyweather.R;
+import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.model.response.HeFenWeather;
 import com.neuroandroid.pyweather.utils.L;
 import com.neuroandroid.pyweather.utils.UIUtils;
@@ -37,10 +38,17 @@ public class SunriseAndSunsetView extends View {
     private HeFenWeather.HeWeather5Bean.DailyForecastBean.AstroBean mAstroBean;
     private float mPercent;
 
-    public void setAstroBean(HeFenWeather.HeWeather5Bean.DailyForecastBean.AstroBean astroBean) {
+    public void setAstroBean(HeFenWeather.HeWeather5Bean.DailyForecastBean.AstroBean astroBean, int themeStyleColor) {
         mAstroBean = astroBean;
         mSunriseStr = astroBean.getSr();
         mSunsetStr = astroBean.getSs();
+
+        mThemeColor = themeStyleColor;
+        mThemeSubColor = themeStyleColor == Color.WHITE ? Constant.LIGHT_THEME_STYLE_SUB_COLOR : Constant.DARK_THEME_STYLE_SUB_COLOR;
+        mLinePaint.setColor(mThemeColor);
+        mCirclePaint.setColor(mThemeColor);
+        mTextPaint.setColor(mThemeColor);
+        mSunriseAndSunsetPaint.setColor(mThemeSubColor);
 
         mSunriseMillis = timeStrToTimeMill(mSunriseStr);
         mSunsetMillis = timeStrToTimeMill(mSunsetStr);
@@ -90,6 +98,13 @@ public class SunriseAndSunsetView extends View {
     private float mLeftAndRightPadding;
 
     private float mCircleRadius;
+
+    /**
+     * 主题色
+     */
+    private int mThemeColor = Constant.LIGHT_THEME_STYLE_COLOR;
+
+    private int mThemeSubColor = Constant.LIGHT_THEME_STYLE_SUB_COLOR;
 
     /**
      * 虚线的宽度
@@ -152,7 +167,7 @@ public class SunriseAndSunsetView extends View {
 
         mLinePaint = new Paint();
         mLinePaint.setDither(true);
-        mLinePaint.setColor(Color.WHITE);
+        mLinePaint.setColor(mThemeColor);
         mLinePaint.setStrokeWidth(mDashedLineWidth);
         mLinePaint.setStyle(Paint.Style.STROKE);
         mLinePaint.setPathEffect(mEffect);
@@ -161,7 +176,7 @@ public class SunriseAndSunsetView extends View {
         mTextPaint = new Paint();
         mTextPaint.setDither(true);
         mTextPaint.setAntiAlias(true);
-        mTextPaint.setColor(Color.WHITE);
+        mTextPaint.setColor(mThemeColor);
         mTextPaint.setTextSize(mSunriseAndSunsetTextSize);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
 
@@ -170,7 +185,7 @@ public class SunriseAndSunsetView extends View {
         mCirclePaint.setPathEffect(null);
 
         mSunriseAndSunsetPaint = new Paint(mLinePaint);
-        mSunriseAndSunsetPaint.setColor(UIUtils.getColor(R.color.white_3));
+        mSunriseAndSunsetPaint.setColor(mThemeSubColor);
         mSunriseAndSunsetPaint.setStyle(Paint.Style.FILL);
 
         mSunriseAndSunsetRect = new RectF();

@@ -67,7 +67,7 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_centerVertical="true"
-                    android:background="@mipmap/ic_weather_wet"/>
+                    android:src="@mipmap/ic_weather_wet"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -78,6 +78,7 @@
                     android:orientation="vertical">
 
                     <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                        android:id="@+id/tv_wet_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="空气湿度"
@@ -106,7 +107,7 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_centerVertical="true"
-                    android:background="@mipmap/ic_weather_wind"/>
+                    android:src="@mipmap/ic_weather_wind"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -146,7 +147,7 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_centerVertical="true"
-                    android:background="@mipmap/ic_weather_temperature"/>
+                    android:src="@mipmap/ic_weather_temperature"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -157,6 +158,7 @@
                     android:orientation="vertical">
 
                     <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                        android:id="@+id/tv_temp_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="体感温度"

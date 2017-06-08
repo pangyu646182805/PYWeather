@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <com.neuroandroid.pyweather.widget.NoPaddingTextView
+        android:id="@+id/tv_life_index"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -24,11 +25,12 @@
         android:paddingTop="@dimen/y16">
 
         <ImageView
+            android:id="@+id/iv_comfort"
             android:layout_width="@dimen/x72"
             android:layout_height="@dimen/y72"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x32"
-            android:background="@mipmap/zs_ic_shushi"/>
+            android:src="@mipmap/zs_ic_shushi"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,11 +72,12 @@
         android:paddingTop="@dimen/y16">
 
         <ImageView
+            android:id="@+id/iv_car_wash"
             android:layout_width="@dimen/x72"
             android:layout_height="@dimen/y72"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x32"
-            android:background="@mipmap/zs_ic_xiche"/>
+            android:src="@mipmap/zs_ic_xiche"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,11 +119,12 @@
         android:paddingTop="@dimen/y16">
 
         <ImageView
+            android:id="@+id/iv_dressing"
             android:layout_width="@dimen/x72"
             android:layout_height="@dimen/y72"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x32"
-            android:background="@mipmap/zs_ic_chuanyi"/>
+            android:src="@mipmap/zs_ic_chuanyi"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -162,11 +166,12 @@
         android:paddingTop="@dimen/y16">
 
         <ImageView
+            android:id="@+id/iv_cold"
             android:layout_width="@dimen/x72"
             android:layout_height="@dimen/y72"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x32"
-            android:background="@mipmap/zs_ic_ganmao"/>
+            android:src="@mipmap/zs_ic_ganmao"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -208,12 +213,12 @@
         android:paddingTop="@dimen/y16">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_sport"
             android:layout_width="@dimen/x72"
             android:layout_height="@dimen/y72"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x32"
-            android:background="@mipmap/zs_ic_chenlian"/>
+            android:src="@mipmap/zs_ic_chenlian"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -255,11 +260,12 @@
         android:paddingTop="@dimen/y16">
 
         <ImageView
+            android:id="@+id/iv_tour"
             android:layout_width="@dimen/x72"
             android:layout_height="@dimen/y72"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x32"
-            android:background="@mipmap/zs_ic_lvyou"/>
+            android:src="@mipmap/zs_ic_lvyou"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -301,11 +307,12 @@
         android:paddingTop="@dimen/y16">
 
         <ImageView
+            android:id="@+id/iv_uv"
             android:layout_width="@dimen/x72"
             android:layout_height="@dimen/y72"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x32"
-            android:background="@mipmap/zs_ic_ziwaixian"/>
+            android:src="@mipmap/zs_ic_ziwaixian"/>
 
         <LinearLayout
             android:layout_width="match_parent"
