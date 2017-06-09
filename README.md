@@ -24,3 +24,4 @@
 
 ## 最后附上Github链接: [PY天气](https://github.com/pangyu646182805/PYWeather)
 ### 有什么不足之处欢迎提出宝贵意见
+### 最后附上apk下载链接：[PY天气](https://github.com/pangyu646182805/PYWeather/blob/master/apk/pyweather-release.apk)
