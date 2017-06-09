@@ -6,6 +6,12 @@
 
 ## PY天气允许用户自定义天气背景，并且可以自定义背景透明度和模糊程度，实现应用字体亮色和暗色风格的切换
    其中高斯模糊使用到的第三方库：[RealtimeBlurView](https://github.com/mmin18/RealtimeBlurView)
+   
+## 待完善
+```
+添加自动定位功能
+... ...
+```
 
 # PY天气部分截图
 <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215232.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215332.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215354.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215436.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215521.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215533.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-222611.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-222706.png"/>
