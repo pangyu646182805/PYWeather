@@ -13,14 +13,9 @@
 ... ...
 ```
 
-## 待完善
-```
-添加自动定位功能
-... ...
-```
-
 # PY天气部分截图
 <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215232.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215332.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215354.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215436.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215521.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215533.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-222611.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-222706.png"/>
 
-## 最后附上Github链接: [PY天气](https://github.com/pangyu646182805/PYWeather)
+## 最后附上Github链接: [PY天气](https://github.com/pangyu646182805/PYWeather) 
+## 以及apk: [PY天气apk](https://github.com/pangyu646182805/PYWeather/blob/master/apk/pyweather-release.apk)
 ### 有什么不足之处欢迎提出宝贵意见
