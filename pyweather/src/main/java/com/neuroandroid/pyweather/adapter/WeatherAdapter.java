@@ -42,11 +42,7 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
 
     public void setThemeStyleColor(boolean lightThemeStyle) {
         mThemeStyleColor = lightThemeStyle ? Constant.LIGHT_THEME_STYLE_COLOR : Constant.DARK_THEME_STYLE_COLOR;
-        notifyDataSetChanged();
-        /*refreshItem(ITEM_HEADER_AND_LINE_CHART);
-        refreshItem(ITEM_AIR_QUALITY);
-        refreshItem(ITEM_SUN);
-        refreshItem(ITEM_SUGGESTION);*/
+        notifyItemRangeChanged(ITEM_HEADER_AND_LINE_CHART, 4);
     }
 
     public int getRlHeaderHeight() {

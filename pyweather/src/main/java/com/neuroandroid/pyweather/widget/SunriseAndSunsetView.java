@@ -43,6 +43,8 @@ public class SunriseAndSunsetView extends View {
         mSunriseStr = astroBean.getSr();
         mSunsetStr = astroBean.getSs();
 
+        mSunriseAndSunsetPath.reset();
+
         mThemeColor = themeStyleColor;
         mThemeSubColor = themeStyleColor == Color.WHITE ? Constant.LIGHT_THEME_STYLE_SUB_COLOR : Constant.DARK_THEME_STYLE_SUB_COLOR;
         mLinePaint.setColor(mThemeColor);

@@ -7,6 +7,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -61,6 +62,7 @@ public class MainActivity extends BaseActivity {
 
     private PermissionsHelper mPermissionsHelper;
     private MainActivityFragmentCallbacks mCurrentFragment;
+    private boolean mLightThemeStyle = true;
 
     @Override
     protected int attachLayoutRes() {
@@ -106,6 +108,25 @@ public class MainActivity extends BaseActivity {
                     break;
             }
             return true;
+        });
+        mDrawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                if (!mLightThemeStyle) {
+                    SystemUtils.setTranslateStatusBar(MainActivity.this);
+                }
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                if (mCurrentFragment instanceof CityManageFragment) {
+                    SystemUtils.setTranslateStatusBar(MainActivity.this);
+                } else if (!mLightThemeStyle) {
+                    SystemUtils.myStatusBar(MainActivity.this);
+                }
+            }
         });
     }
 
@@ -194,6 +215,7 @@ public class MainActivity extends BaseActivity {
 
     public boolean handleBackPress() {
         if (mCurrentFragment instanceof CityManageFragment) {
+            if (!mLightThemeStyle) SystemUtils.myStatusBar(this);
             setChooser(FRAGMENT_WEATHER);
             return true;
         }
@@ -204,11 +226,15 @@ public class MainActivity extends BaseActivity {
         return mCurrentFragment != null && mCurrentFragment.handleBackPress();
     }
 
+    /**
+     * 设置自定义背景
+     */
     private void setCustomBackground() {
         String customBackground = SPUtils.getString(this, Constant.SP_CUSTOM_BACKGROUND, null);
         int transparency = SPUtils.getInt(this, Constant.SP_CUSTOM_BACKGROUND_TRANSPARENCY, 0);
         int blurLevel = SPUtils.getInt(this, Constant.SP_CUSTOM_BACKGROUND_BLUR_LEVEL, 0);
         int themeStyle = SPUtils.getInt(this, Constant.SP_APP_FONT_ICON_THEME_STYLE, Color.WHITE);
+        mLightThemeStyle = themeStyle == Color.WHITE;
         ImageLoader.getInstance().displayImage(this, customBackground, getBackground(), mIvBackground);
         mBlurView.setOverlayColor(ColorUtils.adjustAlpha(themeStyle == Color.WHITE ?
                 Color.BLACK : Color.WHITE, transparency * 1f / 100));

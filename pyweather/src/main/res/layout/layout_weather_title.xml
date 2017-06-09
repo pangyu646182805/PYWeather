@@ -7,7 +7,7 @@
         android:id="@+id/tv_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="杭州"
+        tools:text="杭州"
         android:textColor="@color/white"
         android:textSize="15sp"/>
 
@@ -24,7 +24,7 @@
             android:layout_marginLeft="@dimen/x32"
             android:layout_marginRight="@dimen/x32"
             android:lines="1"
-            android:text="23℃"
+            tools:text="23℃"
             android:textColor="@color/white"
             android:textSize="15sp"/>
 
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lines="1"
-            android:text="多云"
+            tools:text="多云"
             android:textColor="@color/white"
             android:textSize="15sp"/>
     </LinearLayout>
