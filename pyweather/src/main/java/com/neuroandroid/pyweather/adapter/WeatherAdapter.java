@@ -316,7 +316,7 @@ public class WeatherAdapter extends BaseRvAdapter<HeFenWeather.HeWeather5Bean, W
 
             setText(mTvCurrentTemp, now.getTmp() + "°");
             setText(mTvWeatherDesc, now.getCond().getTxt());
-            setText(mTvRefreshTime, mWeatherBean.getBasic().getUpdate().getLoc() + "更新");
+            setText(mTvRefreshTime, mWeatherBean.getBasic().getUpdate().getLoc().split(" ")[1] + " 更新");
             setText(mTvWet, now.getHum() + "%");
             setText(mTvWindDesc, now.getWind().getDir());
             setText(mTvWind, now.getWind().getSc() + "级");

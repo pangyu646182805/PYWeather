@@ -109,6 +109,15 @@ public class WeatherLineChartView extends View {
 
     private Rect mTextRect;
 
+    /**
+     * 折线图/曲线图动画
+     */
+    private float mMaxTempLineSrcLength;
+    private float mMinTempLineSrcLength;
+    private PathMeasure mMaxTempLineMeasure;
+    private PathMeasure mMinTempLineMeasure;
+    private ObjectAnimator mAnimator;
+
     public WeatherLineChartView(Context context) {
         this(context, null);
     }
@@ -198,12 +207,6 @@ public class WeatherLineChartView extends View {
         canvas.drawPath(mMaxLinePath, mMaxTempLinePaint);
         canvas.drawPath(mMinLinePath, mMinTempLinePaint);
     }
-
-    float mMaxTempLineSrcLength;
-    float mMinTempLineSrcLength;
-    PathMeasure mMaxTempLineMeasure;
-    PathMeasure mMinTempLineMeasure;
-    ObjectAnimator mAnimator;
 
     /**
      * 开启动画

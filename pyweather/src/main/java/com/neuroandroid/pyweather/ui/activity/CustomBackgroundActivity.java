@@ -191,6 +191,7 @@ public class CustomBackgroundActivity extends BaseActivity {
 
     private void setMiniWeatherHeader(int themeStyleColor) {
         mWeatherLineChartView.setDailyForecastDataList(null, themeStyleColor);
+        mWeatherLineChartView.invalidate();
 
         setTextColor(mTvCurrentTemp, themeStyleColor);
         setTextColor(mTvWeatherDesc, themeStyleColor);
