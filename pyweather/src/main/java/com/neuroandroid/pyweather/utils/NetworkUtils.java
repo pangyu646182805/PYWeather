@@ -234,8 +234,8 @@ public class NetworkUtils {
         }
     }
 
-    public static String getIpAddress() {
-        WifiManager wifiManager = (WifiManager) UIUtils.getContext().getSystemService(Context.WIFI_SERVICE);
+    public static String getIpAddress(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         int ipInt = wifiInfo.getIpAddress();
         StringBuilder sb = new StringBuilder();

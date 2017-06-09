@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/y96"
     android:clickable="true"
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/ic_done_green"/>
+        app:srcCompat="@drawable/ic_done_green"/>
 
     <com.neuroandroid.pyweather.widget.NoPaddingTextView
         android:id="@+id/tv_text"

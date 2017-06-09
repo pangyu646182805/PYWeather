@@ -7,9 +7,9 @@
         android:id="@+id/tv_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="杭州"
         android:textColor="@color/white"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        tools:text="杭州"/>
 
     <LinearLayout
         android:id="@+id/ll_sub"
@@ -21,20 +21,23 @@
             android:id="@+id/tv_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x32"
-            android:layout_marginRight="@dimen/x32"
             android:lines="1"
-            tools:text="23℃"
+            android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="15sp"/>
+            android:ems="4"
+            android:textSize="15sp"
+            tools:text="23℃"/>
 
         <com.neuroandroid.pyweather.widget.NoPaddingTextView
             android:id="@+id/tv_weather_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:lines="1"
-            tools:text="多云"
+            android:maxEms="2"
+            android:ems="2"
             android:textColor="@color/white"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            tools:text="多云"/>
     </LinearLayout>
 </merge>
