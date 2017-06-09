@@ -7,6 +7,7 @@ import com.neuroandroid.pyweather.utils.NetworkUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.CacheControl;
@@ -14,7 +15,6 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -65,6 +65,7 @@ public class RetrofitUtils {
         builder.cache(cache)
                 // 连接失败是否重新请求
                 .retryOnConnectionFailure(true)
+                .readTimeout(20000, TimeUnit.MILLISECONDS)
                 // 没网络时的拦截器
                 .addInterceptor(getInterceptor(ctx))
                 // 有网络时的拦截器
@@ -109,12 +110,5 @@ public class RetrofitUtils {
             }
             return response;
         };
-    }
-
-    public static String getCallUrl(Call call) {
-        if (call != null) {
-            return call.request().url().url().toString();
-        }
-        return "url is null";
     }
 }

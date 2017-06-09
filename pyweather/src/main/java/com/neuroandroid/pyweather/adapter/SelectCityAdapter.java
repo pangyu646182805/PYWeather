@@ -1,6 +1,7 @@
 package com.neuroandroid.pyweather.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.adapter.base.BaseRvAdapter;
 import com.neuroandroid.pyweather.widget.NoPaddingTextView;
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by NeuroAndroid on 2017/6/2.
  */
 
-public class SelectCityAdapter extends BaseRvAdapter<String, SelectCityAdapter.Holder> {
+public class SelectCityAdapter extends BaseRvAdapter<String, SelectCityAdapter.Holder> implements FastScrollRecyclerView.SectionedAdapter {
     public static final int PROVINCE_LEVEL = 0;
     public static final int CITY_LEVEL = 1;
     public static final int AREA_LEVEL = 2;
@@ -44,6 +46,12 @@ public class SelectCityAdapter extends BaseRvAdapter<String, SelectCityAdapter.H
     @Override
     public void onBindItemViewHolder(Holder holder, int position) {
         holder.onBind(mDataList.get(position));
+    }
+
+    @NonNull
+    @Override
+    public String getSectionName(int position) {
+        return mDataList.get(position).substring(0, 1);
     }
 
     public class Holder extends RecyclerView.ViewHolder {

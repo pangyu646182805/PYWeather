@@ -43,6 +43,7 @@ public class WeatherFragment extends BaseFragment implements MainActivity.MainAc
     private WeatherPagerAdapter mWeatherPagerAdapter;
     private TitleBar.ImageAction mMenuAction;
     private TitleBar.ImageAction mSpinnerAction;
+    private boolean mLightThemeStyle;
 
     public static WeatherFragment newInstance() {
         return new WeatherFragment();
@@ -101,7 +102,7 @@ public class WeatherFragment extends BaseFragment implements MainActivity.MainAc
             setWeatherCustomTitle(null, 0);
         } else {
             setReloadBtnText(UIUtils.getString(R.string.add_city));
-            setStatusTextColor(Color.WHITE);
+            setStatusTextColor(mLightThemeStyle ? Color.WHITE : Color.BLACK);
             showError(() -> getMainActivity().toCityManagerFragment(), UIUtils.getString(R.string.str_empty));
         }
         setUpViewPager();
@@ -179,6 +180,7 @@ public class WeatherFragment extends BaseFragment implements MainActivity.MainAc
     }
 
     public void setThemeStyle(boolean lightThemeStyle) {
+        mLightThemeStyle = lightThemeStyle;
         mWeatherTitleCustomWidget.setThemeStyle(lightThemeStyle);
         getTitleBar().removeLeftAction(mMenuAction);
         getTitleBar().removeRightAction(mSpinnerAction);

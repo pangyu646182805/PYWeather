@@ -6,7 +6,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -19,6 +18,7 @@ import com.neuroandroid.pyweather.event.CityManageEvent;
 import com.neuroandroid.pyweather.loader.CityLoader;
 import com.neuroandroid.pyweather.loader.WrappedAsyncTaskLoader;
 import com.neuroandroid.pyweather.utils.UIUtils;
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.greenrobot.eventbus.EventBus;
@@ -37,7 +37,7 @@ public class SelectedCityActivity extends BaseActivity implements LoaderManager.
     @BindView(R.id.tool_bar)
     Toolbar mToolbar;
     @BindView(R.id.rv_city)
-    RecyclerView mRvCity;
+    FastScrollRecyclerView mRvCity;
     @BindView(R.id.iv_img)
     ImageView mIvImg;
     private SelectCityAdapter mSelectCityAdapter;

@@ -1,6 +1,5 @@
 package com.neuroandroid.pyweather.ui.activity;
 
-import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -36,10 +35,6 @@ public class SettingActivity extends BaseActivity {
     NoPaddingTextView mTvLineType;
     @BindView(R.id.rl_line_type)
     RelativeLayout mRlLineType;
-    @BindView(R.id.sw_life_index)
-    SwitchCompat mSwLifeIndex;
-    @BindView(R.id.rl_life_index)
-    RelativeLayout mRlLifeIndex;
 
     @Override
     protected int attachLayoutRes() {

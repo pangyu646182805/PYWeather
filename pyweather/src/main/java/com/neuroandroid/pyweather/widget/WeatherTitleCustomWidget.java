@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.ViewTreeObserver;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 
 import com.neuroandroid.pyweather.R;
@@ -93,6 +94,7 @@ public class WeatherTitleCustomWidget extends LinearLayout {
                 mLlSub.requestLayout();
             });
             valueAnimator.setDuration(400);
+            valueAnimator.setInterpolator(new DecelerateInterpolator());
             valueAnimator.start();
         }
     }
@@ -111,6 +113,7 @@ public class WeatherTitleCustomWidget extends LinearLayout {
                 mLlSub.requestLayout();
             });
             valueAnimator.setDuration(400);
+            valueAnimator.setInterpolator(new DecelerateInterpolator());
             valueAnimator.start();
         }
     }

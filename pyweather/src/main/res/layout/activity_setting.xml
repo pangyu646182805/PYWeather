@@ -97,33 +97,6 @@
                     android:textColor="@color/colorGray333"
                     android:textSize="12sp"/>
             </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_life_index"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y108"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/x32"
-                android:paddingRight="@dimen/x32">
-
-                <com.neuroandroid.pyweather.widget.NoPaddingTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="显示生活指数信息"
-                    android:textColor="@color/colorGray333"
-                    android:textSize="14sp"/>
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/sw_life_index"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center_vertical"/>
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

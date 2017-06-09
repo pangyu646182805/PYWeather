@@ -1,9 +1,13 @@
 package com.neuroandroid.pyweather.widget;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathEffect;
+import android.graphics.PathMeasure;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -41,9 +45,9 @@ public class WeatherLineChartView extends View {
         mMinLinePath.reset();
         mThemeColor = themeStyleColor;
         mCirclePaint.setColor(mThemeColor);
-        mLinePaint.setColor(mThemeColor);
+        mMaxTempLinePaint.setColor(mThemeColor);
+        mMinTempLinePaint.setColor(mThemeColor);
         mTextPaint.setColor(mThemeColor);
-        invalidate();
     }
 
     private int mCurrentLineType = LINE_TYPE_LINE;
@@ -74,9 +78,14 @@ public class WeatherLineChartView extends View {
     private Path mMinLinePath;
 
     /**
-     * 线的画笔
+     * MaxTempLine线的画笔
      */
-    private Paint mLinePaint;
+    private Paint mMaxTempLinePaint;
+
+    /**
+     * MinTempLine线的画笔
+     */
+    private Paint mMinTempLinePaint;
 
     /**
      * 圆点的画笔
@@ -125,15 +134,17 @@ public class WeatherLineChartView extends View {
         mMinLinePath = new Path();
 
         // Paint
-        mLinePaint = new Paint();
+        mMaxTempLinePaint = new Paint();
         // mLinePaint.setPathEffect(effects);
-        mLinePaint.setDither(true);
-        mLinePaint.setColor(mThemeColor);
-        mLinePaint.setStrokeWidth(mLineStrokeWidth);
-        mLinePaint.setStyle(Paint.Style.STROKE);
-        mLinePaint.setAntiAlias(true);
+        mMaxTempLinePaint.setDither(true);
+        mMaxTempLinePaint.setColor(mThemeColor);
+        mMaxTempLinePaint.setStrokeWidth(mLineStrokeWidth);
+        mMaxTempLinePaint.setStyle(Paint.Style.STROKE);
+        mMaxTempLinePaint.setAntiAlias(true);
 
-        mCirclePaint = new Paint(mLinePaint);
+        mMinTempLinePaint = new Paint(mMaxTempLinePaint);
+
+        mCirclePaint = new Paint(mMaxTempLinePaint);
         mCirclePaint.setStyle(Paint.Style.FILL);
 
         mTextPaint = new Paint();
@@ -151,7 +162,8 @@ public class WeatherLineChartView extends View {
         super.onDraw(canvas);
         if (mDailyForecastDataList != null && mDailyForecastDataList.size() == 7) {
             mTextPaint.setTextSize(mTextSize);
-            mLinePaint.setStrokeWidth(mLineStrokeWidth);
+            mMaxTempLinePaint.setStrokeWidth(mLineStrokeWidth);
+            mMinTempLinePaint.setStrokeWidth(mLineStrokeWidth);
             UIUtils.getTextBounds(mTextPaint, "30" + Constant.TEMP, mTextRect);
             // 绘制七日天气预报
             getMaxAndMinTemp(mDailyForecastDataList);
@@ -166,11 +178,10 @@ public class WeatherLineChartView extends View {
                 processWeatherLogic(canvas, i, maxTemp, minTemp, distanceOfPointAndPoint, startX, false);
                 startX += distanceOfPointAndPoint;
             }
-            canvas.drawPath(mMaxLinePath, mLinePaint);
-            canvas.drawPath(mMinLinePath, mLinePaint);
         } else {
             mTextPaint.setTextSize(mTextSize * 0.5f);
-            mLinePaint.setStrokeWidth(mLineStrokeWidth * 0.5f);
+            mMaxTempLinePaint.setStrokeWidth(mLineStrokeWidth * 0.5f);
+            mMinTempLinePaint.setStrokeWidth(mLineStrokeWidth * 0.5f);
             UIUtils.getTextBounds(mTextPaint, "30" + Constant.TEMP, mTextRect);
             getEmptyMaxAndMinTemp();
             float distanceOfPointAndPoint = getDistanceOfPointAndPoint();
@@ -182,8 +193,30 @@ public class WeatherLineChartView extends View {
                 processWeatherLogic(canvas, i, maxTemp, minTemp, distanceOfPointAndPoint, startX, true);
                 startX += distanceOfPointAndPoint;
             }
-            canvas.drawPath(mMaxLinePath, mLinePaint);
-            canvas.drawPath(mMinLinePath, mLinePaint);
+        }
+        startAnim();
+        canvas.drawPath(mMaxLinePath, mMaxTempLinePaint);
+        canvas.drawPath(mMinLinePath, mMinTempLinePaint);
+    }
+
+    float mMaxTempLineSrcLength;
+    float mMinTempLineSrcLength;
+    PathMeasure mMaxTempLineMeasure;
+    PathMeasure mMinTempLineMeasure;
+    ObjectAnimator mAnimator;
+
+    /**
+     * 开启动画
+     */
+    private void startAnim() {
+        if (mAnimator == null) {
+            mMaxTempLineMeasure = new PathMeasure(mMaxLinePath, false);
+            mMinTempLineMeasure = new PathMeasure(mMinLinePath, false);
+            mMaxTempLineSrcLength = mMaxTempLineMeasure.getLength();
+            mMinTempLineSrcLength = mMinTempLineMeasure.getLength();
+            mAnimator = ObjectAnimator.ofFloat(this, "phase", 0.0f, 1.0f);
+            mAnimator.setDuration(800);
+            mAnimator.start();
         }
     }
 
@@ -257,8 +290,10 @@ public class WeatherLineChartView extends View {
                 mMinTemp = minTemp;
             }
         }
-        mMaxTemp += 5;
-        mMinTemp -= 5;
+        // += -= 是为了画出更加好看的折线图
+        int diffTemp = mMaxTemp - mMinTemp;
+        mMaxTemp += diffTemp / 2;
+        mMinTemp -= diffTemp / 2;
     }
 
     /**
@@ -277,8 +312,9 @@ public class WeatherLineChartView extends View {
                 mMinTemp = minTemp;
             }
         }
-        mMaxTemp += 5;
-        mMinTemp -= 5;
+        int diffTemp = mMaxTemp - mMinTemp;
+        mMaxTemp += diffTemp / 2;
+        mMinTemp -= diffTemp / 2;
     }
 
     /**
@@ -299,5 +335,16 @@ public class WeatherLineChartView extends View {
         // float yAxis = (measuredHeight - 2 * mTextRect.height()) * percent + mTextRect.height();
         float yAxis = measuredHeight * percent;
         return yAxis;
+    }
+
+    public void setPhase(float phase) {
+        mMaxTempLinePaint.setPathEffect(createPathEffect(mMaxTempLineSrcLength, phase));
+        mMinTempLinePaint.setPathEffect(createPathEffect(mMinTempLineSrcLength, phase));
+        invalidate();
+    }
+
+    private static PathEffect createPathEffect(float pathLength, float phase) {
+        return new DashPathEffect(new float[]{pathLength, pathLength},
+                pathLength - phase * pathLength);
     }
 }
