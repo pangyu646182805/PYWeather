@@ -113,4 +113,24 @@ public class ListDialog extends BaseDialog<ListDialog> {
         setNormalListAdapter(dataList, 0, itemSelectedListener);
         return this;
     }
+
+    /**
+     * 根据数据源的isSelect勾选
+     */
+    public ListDialog setAdapterCheckedPos() {
+        if (mNormalListAdapter != null) {
+            mNormalListAdapter.setCheckedPos();
+        }
+        return this;
+    }
+
+    /**
+     * 根据传入的position勾选
+     */
+    public ListDialog setAdapterCheckedPos(int checkedPos) {
+        if (mNormalListAdapter != null) {
+            mNormalListAdapter.setCheckedPos(checkedPos);
+        }
+        return this;
+    }
 }

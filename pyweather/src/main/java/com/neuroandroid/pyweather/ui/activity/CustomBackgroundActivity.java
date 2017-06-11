@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -22,7 +23,9 @@ import com.neuroandroid.pyweather.bean.NormalListBean;
 import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.event.CustomBackgroundEvent;
 import com.neuroandroid.pyweather.event.ThemeStyleEvent;
+import com.neuroandroid.pyweather.ui.fragment.WallPaperFragment;
 import com.neuroandroid.pyweather.utils.ColorUtils;
+import com.neuroandroid.pyweather.utils.FragmentUtils;
 import com.neuroandroid.pyweather.utils.ImageLoader;
 import com.neuroandroid.pyweather.utils.PhotoGalleryUtils;
 import com.neuroandroid.pyweather.utils.SPUtils;
@@ -97,6 +100,8 @@ public class CustomBackgroundActivity extends BaseActivity {
     NoPaddingTextView mTvTemp;
     @BindView(R.id.weather_line_chart)
     WeatherLineChartView mWeatherLineChartView;
+    @BindView(R.id.rl_wall_paper)
+    RelativeLayout mRlWallPaper;
 
     private ImageView mIvNight1, mIvNight2, mIvNight3, mIvNight4, mIvNight5, mIvNight6, mIvNight7;
     private ImageView mIvDay1, mIvDay2, mIvDay3, mIvDay4, mIvDay5, mIvDay6, mIvDay7;
@@ -106,6 +111,7 @@ public class CustomBackgroundActivity extends BaseActivity {
     private NoPaddingTextView mTvNightDesc1, mTvNightDesc2, mTvNightDesc3, mTvNightDesc4, mTvNightDesc5, mTvNightDesc6, mTvNightDesc7;
 
     private int mRlHeight;
+    private WallPaperFragment mWallPaperFragment;
 
     @Override
     protected int attachLayoutRes() {
@@ -210,7 +216,7 @@ public class CustomBackgroundActivity extends BaseActivity {
         setTextColor(mTvDay5, themeStyleColor);
         setTextColor(mTvDay6, themeStyleColor);
         setTextColor(mTvDay7, themeStyleColor);
-        
+
         setTextColor(mTvDate1, themeStyleColor);
         setTextColor(mTvDate2, themeStyleColor);
         setTextColor(mTvDate3, themeStyleColor);
@@ -218,7 +224,7 @@ public class CustomBackgroundActivity extends BaseActivity {
         setTextColor(mTvDate5, themeStyleColor);
         setTextColor(mTvDate6, themeStyleColor);
         setTextColor(mTvDate7, themeStyleColor);
-        
+
         setTextColor(mTvDayDesc1, themeStyleColor);
         setTextColor(mTvDayDesc2, themeStyleColor);
         setTextColor(mTvDayDesc3, themeStyleColor);
@@ -374,6 +380,11 @@ public class CustomBackgroundActivity extends BaseActivity {
                 mBlurView.setBlurRadius(0);
             }
         });
+        mRlWallPaper.setOnClickListener(v -> {
+            mWallPaperFragment = new WallPaperFragment();
+            FragmentUtils.replaceFragment(getSupportFragmentManager(), mWallPaperFragment, R.id.fl_container, false);
+            fullScreen(true);
+        });
     }
 
     /**
@@ -451,6 +462,33 @@ public class CustomBackgroundActivity extends BaseActivity {
             SPUtils.putString(this, Constant.SP_CUSTOM_BACKGROUND, path);
             EventBus.getDefault().post(new CustomBackgroundEvent());
             ImageLoader.getInstance().displayImage(this, path, getBackground(), mIvCustomBackground);
+        }
+    }
+
+    /**
+     * @param enable true : 全屏
+     */
+    private void fullScreen(boolean enable) {
+        if (enable) {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+            getWindow().setAttributes(lp);
+            // getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        } else {
+            WindowManager.LayoutParams attr = getWindow().getAttributes();
+            attr.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getWindow().setAttributes(attr);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mWallPaperFragment != null) {
+            FragmentUtils.removeFragment(mWallPaperFragment);
+            mWallPaperFragment = null;
+            fullScreen(false);
+        } else {
+            super.onBackPressed();
         }
     }
 }

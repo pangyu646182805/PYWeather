@@ -1,92 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
-    android:orientation="vertical">
+    android:background="@color/backgroundColor">
 
-    <include layout="@layout/layout_title_bar"/>
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <include layout="@layout/layout_title_bar"/>
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/cv_custom_background"
-                android:layout_width="@dimen/x360"
-                android:layout_height="@dimen/y640"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/y24"
-                android:layout_marginTop="@dimen/y24"
-                app:cardBackgroundColor="@color/transparent"
-                app:cardCornerRadius="@dimen/x12"
-                app:cardElevation="@dimen/y48">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/iv_custom_background"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        tools:background="@mipmap/img_day"/>
-
-                    <com.github.mmin18.widget.RealtimeBlurView
-                        android:id="@+id/blur_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:realtimeOverlayColor="#0000"/>
-
-                    <include layout="@layout/layout_mini_weather_header"/>
-                </FrameLayout>
-            </android.support.v7.widget.CardView>
-
-            <RelativeLayout
-                android:id="@+id/rl_blur"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y108"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/x32"
-                android:paddingRight="@dimen/x32">
-
-                <com.neuroandroid.pyweather.widget.NoPaddingTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="背景模糊"
-                    android:textColor="@color/colorGray333"
-                    android:textSize="14sp"/>
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/sw_blur"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center_vertical"
-                    android:clickable="false"/>
-            </RelativeLayout>
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/ll_theme_style"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_custom_background"
+                    android:layout_width="@dimen/x360"
+                    android:layout_height="@dimen/y640"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/y24"
+                    android:layout_marginTop="@dimen/y24"
+                    app:cardBackgroundColor="@color/transparent"
+                    app:cardCornerRadius="@dimen/x12"
+                    app:cardElevation="@dimen/y48">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_custom_background"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            tools:background="@mipmap/img_day"/>
+
+                        <com.github.mmin18.widget.RealtimeBlurView
+                            android:id="@+id/blur_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:realtimeOverlayColor="#0000"/>
+
+                        <include layout="@layout/layout_mini_weather_header"/>
+                    </FrameLayout>
+                </android.support.v7.widget.CardView>
+
                 <RelativeLayout
-                    android:id="@+id/rl_theme_style"
+                    android:id="@+id/rl_blur"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y108"
                     android:clickable="true"
@@ -99,92 +69,61 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="图标和字体风格"
+                        android:text="背景模糊"
                         android:textColor="@color/colorGray333"
                         android:textSize="14sp"/>
 
-                    <ImageView
-                        android:id="@+id/iv_1"
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/sw_blur"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/ic_keyboard_arrow_right"/>
-
-                    <com.neuroandroid.pyweather.widget.NoPaddingTextView
-                        android:id="@+id/tv_theme_style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/x8"
-                        android:layout_toLeftOf="@+id/iv_1"
-                        android:text="亮色"
-                        android:textColor="@color/colorGray333"
-                        android:textSize="12sp"/>
+                        android:layout_gravity="center_vertical"
+                        android:clickable="false"/>
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/rl_transparency"
+                <LinearLayout
+                    android:id="@+id/ll_theme_style"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y108"
-                    android:clickable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/x32"
-                    android:paddingRight="@dimen/x32">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <include layout="@layout/layout_custom_background"/>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_wall_paper"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
+                        android:layout_height="@dimen/y108"
+                        android:layout_marginBottom="@dimen/y216"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/x32"
+                        android:paddingRight="@dimen/x32">
 
                         <com.neuroandroid.pyweather.widget.NoPaddingTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="透明度"
+                            android:layout_centerVertical="true"
+                            android:text="设置壁纸"
                             android:textColor="@color/colorGray333"
                             android:textSize="14sp"/>
 
-                        <SeekBar
-                            android:id="@+id/sb_transparency"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/y16"/>
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/rl_blur_level"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/y108"
-                    android:clickable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/x32"
-                    android:paddingRight="@dimen/x32">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
-
-                        <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="模糊程度"
-                            android:textColor="@color/colorGray333"
-                            android:textSize="14sp"/>
-
-                        <SeekBar
-                            android:id="@+id/sb_blur_level"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/y16"/>
-                    </LinearLayout>
-                </RelativeLayout>
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            app:srcCompat="@drawable/ic_keyboard_arrow_right"/>
+                    </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</FrameLayout>

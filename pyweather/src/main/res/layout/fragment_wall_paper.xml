@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <com.neuroandroid.pyweather.widget.photo.PhotoView
+        android:id="@+id/iv_wall_paper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:background="@mipmap/img_day"/>
+
+    <com.github.mmin18.widget.RealtimeBlurView
+        android:id="@+id/blur_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:realtimeOverlayColor="#0000"/>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_control"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:background="@color/white_a"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_custom_background"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white_a">
+
+        <ImageView
+            android:id="@+id/iv_arrow_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x32"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/colorGray333"
+            app:srcCompat="@drawable/ic_arrow_back"/>
+
+        <LinearLayout
+            android:id="@+id/ll_wall_paper"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/x24"
+            android:paddingRight="@dimen/x32">
+
+            <ImageView
+                android:id="@+id/iv_done"
+                android:layout_width="@dimen/x42"
+                android:layout_height="@dimen/y42"
+                android:layout_gravity="center_vertical"
+                android:tint="@color/colorGray333"
+                app:srcCompat="@drawable/ic_done_green"/>
+
+            <com.neuroandroid.pyweather.widget.NoPaddingTextView
+                android:id="@+id/tv_wall_paper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x8"
+                android:text="设置壁纸"/>
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>
