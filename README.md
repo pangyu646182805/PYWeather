@@ -13,8 +13,13 @@
 ... ...
 ```
 
+## 添加新功能：天气壁纸
+```
+用户可以根据自己喜好调节天气壁纸的透明度和模糊程度并将之设置为桌面壁纸
+```
+
 # PY天气部分截图
-<img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215232.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215332.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215354.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215436.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215521.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215533.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-222611.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-222706.png"/>
+<img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215232.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215332.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215354.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215436.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215521.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-215533.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-222611.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170608-222706.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170612-092425.png"/>  <img width="180" height="320" src="https://github.com/pangyu646182805/PYWeather/blob/master/img/Screenshot_20170612-092449.png"/>
 
 ## 最后附上Github链接: [PY天气](https://github.com/pangyu646182805/PYWeather) 
 ## 以及apk: [PY天气apk](https://github.com/pangyu646182805/PYWeather/blob/master/apk/pyweather-release.apk)
