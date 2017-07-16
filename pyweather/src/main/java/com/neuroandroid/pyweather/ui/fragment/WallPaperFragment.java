@@ -186,6 +186,7 @@ public class WallPaperFragment extends BaseFragment implements View.OnTouchListe
             }
         });
         mLlWallPaper.setOnClickListener(v -> {
+            showOrHideLayout(false, false);
             ListDialog listDialog = new ListDialog(mContext);
             listDialog.setNormalListAdapter(generateWallPaperDataList(mCurrentWallPaperFlag), (view, position, isSelected, normalListBean) -> {
                 if (isSelected) {
@@ -201,7 +202,9 @@ public class WallPaperFragment extends BaseFragment implements View.OnTouchListe
                             break;
                     }
                     listDialog.dismiss();
-                    UIUtils.getHandler().postDelayed(() -> showOrHideLayout(false, true), 250);
+                    // UIUtils.getHandler().postDelayed(() -> showOrHideLayout(false, true), 250);
+                    UIUtils.getHandler().postDelayed(() ->
+                            setWallPaper(getScreenShot(mActivity), mActivity), 250);
                 }
             }).setSelectMode(ISelect.SINGLE_MODE).setAdapterCheckedPos();
             listDialog.show();
