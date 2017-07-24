@@ -1,5 +1,6 @@
 package com.neuroandroid.pyweather.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -27,26 +28,22 @@ import com.neuroandroid.pyweather.utils.SystemUtils;
 import com.neuroandroid.pyweather.utils.TimeUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 import com.neuroandroid.pyweather.widget.weather.DynamicWeatherView;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.Arrays;
+import java.util.List;
+
 import butterknife.BindView;
-import didikee.com.permissionshelper.PermissionsHelper;
-import didikee.com.permissionshelper.permission.DangerousPermissions;
 
 public class MainActivity extends BaseActivity {
     private static final int REQUEST_CODE_INTO_GUIDE = 2;
+    private static final int REQUEST_CODE_PERMISSION = 3;
     private static final int FRAGMENT_WEATHER = 0;
     private static final int FRAGMENT_CITY_MANAGE = 1;
-
-    /**
-     * 需要动态申请的权限
-     */
-    private static final String[] PERMISSIONS = new String[]{
-            DangerousPermissions.LOCATION,
-            DangerousPermissions.STORAGE
-    };
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -60,7 +57,6 @@ public class MainActivity extends BaseActivity {
     RealtimeBlurView mBlurView;
     private DynamicWeatherView mDynamicWeatherView;
 
-    private PermissionsHelper mPermissionsHelper;
     private MainActivityFragmentCallbacks mCurrentFragment;
     private boolean mLightThemeStyle = true;
 
@@ -81,7 +77,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mPermissionsHelper = new PermissionsHelper(this, PERMISSIONS);
         boolean appGuide = SPUtils.getBoolean(this, Constant.APP_GUIDE, false);
         if (!appGuide) {
             // 如果没有显示过引导页面则显示
@@ -90,6 +85,45 @@ public class MainActivity extends BaseActivity {
         } else {
             checkPermission();
         }
+    }
+
+    /**
+     * 检查有没有权限
+     * 没有则去动态申请权限
+     */
+    private void checkPermission() {
+        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION};
+
+        AndPermission.with(this)
+                .requestCode(REQUEST_CODE_PERMISSION)
+                .permission(permissions)
+                .rationale((requestCode, rationale) ->
+                        AndPermission.rationaleDialog(this, rationale).show())
+                .callback(new PermissionListener() {
+                    @Override
+                    public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+                        if (requestCode == REQUEST_CODE_PERMISSION) {
+                            ShowUtils.showToast("权限申请成功");
+                            setChooser(FRAGMENT_WEATHER);
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+                        if (requestCode == REQUEST_CODE_PERMISSION) {
+                            ShowUtils.showToast("权限申请失败");
+                            // 是否有不再提示并拒绝的权限。
+                            if (AndPermission.hasAlwaysDeniedPermission(MainActivity.this, Arrays.asList(permissions))) {
+                                AndPermission.defaultSettingDialog(MainActivity.this, 400).show();
+                            } else {
+                                finish();
+                            }
+                        }
+                    }
+                }).start();
     }
 
     @Override
@@ -126,33 +160,6 @@ public class MainActivity extends BaseActivity {
                 } else if (!mLightThemeStyle) {
                     SystemUtils.myStatusBar(MainActivity.this);
                 }
-            }
-        });
-    }
-
-    /**
-     * 检查有没有权限
-     * 没有则去动态申请权限
-     */
-    private void checkPermission() {
-        if (mPermissionsHelper.checkAllPermissions(PERMISSIONS)) {
-            setChooser(FRAGMENT_WEATHER);
-            mPermissionsHelper.onDestroy();
-        } else {
-            // 申请权限
-            mPermissionsHelper.startRequestNeedPermissions();
-        }
-        mPermissionsHelper.setonAllNeedPermissionsGrantedListener(new PermissionsHelper.onAllNeedPermissionsGrantedListener() {
-            @Override
-            public void onAllNeedPermissionsGranted() {
-                ShowUtils.showToast("权限申请成功");
-                setChooser(FRAGMENT_WEATHER);
-            }
-
-            @Override
-            public void onPermissionsDenied() {
-                ShowUtils.showToast("权限申请失败");
-                finish();
             }
         });
     }
@@ -322,16 +329,9 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        mPermissionsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mPermissionsHelper.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_INTO_GUIDE) {
+        if (requestCode == REQUEST_CODE_INTO_GUIDE || requestCode == 400) {
             checkPermission();
         }
     }
