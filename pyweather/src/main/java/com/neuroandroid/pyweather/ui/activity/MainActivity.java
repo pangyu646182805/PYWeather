@@ -97,33 +97,37 @@ public class MainActivity extends BaseActivity {
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION};
 
-        AndPermission.with(this)
-                .requestCode(REQUEST_CODE_PERMISSION)
-                .permission(permissions)
-                .rationale((requestCode, rationale) ->
-                        AndPermission.rationaleDialog(this, rationale).show())
-                .callback(new PermissionListener() {
-                    @Override
-                    public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
-                        if (requestCode == REQUEST_CODE_PERMISSION) {
-                            ShowUtils.showToast("权限申请成功");
-                            setChooser(FRAGMENT_WEATHER);
-                        }
-                    }
-
-                    @Override
-                    public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
-                        if (requestCode == REQUEST_CODE_PERMISSION) {
-                            ShowUtils.showToast("权限申请失败");
-                            // 是否有不再提示并拒绝的权限。
-                            if (AndPermission.hasAlwaysDeniedPermission(MainActivity.this, Arrays.asList(permissions))) {
-                                AndPermission.defaultSettingDialog(MainActivity.this, 400).show();
-                            } else {
-                                finish();
+        if (AndPermission.hasPermission(this, Arrays.asList(permissions))) {
+            setChooser(FRAGMENT_WEATHER);
+        } else {
+            AndPermission.with(this)
+                    .requestCode(REQUEST_CODE_PERMISSION)
+                    .permission(permissions)
+                    .rationale((requestCode, rationale) ->
+                            AndPermission.rationaleDialog(this, rationale).show())
+                    .callback(new PermissionListener() {
+                        @Override
+                        public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+                            if (requestCode == REQUEST_CODE_PERMISSION) {
+                                ShowUtils.showToast("权限申请成功");
+                                setChooser(FRAGMENT_WEATHER);
                             }
                         }
-                    }
-                }).start();
+
+                        @Override
+                        public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+                            if (requestCode == REQUEST_CODE_PERMISSION) {
+                                ShowUtils.showToast("权限申请失败");
+                                // 是否有不再提示并拒绝的权限。
+                                if (AndPermission.hasAlwaysDeniedPermission(MainActivity.this, Arrays.asList(permissions))) {
+                                    AndPermission.defaultSettingDialog(MainActivity.this, 400).show();
+                                } else {
+                                    finish();
+                                }
+                            }
+                        }
+                    }).start();
+        }
     }
 
     @Override
