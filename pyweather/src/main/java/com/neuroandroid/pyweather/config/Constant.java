@@ -40,6 +40,8 @@ public class Constant {
 
     public static final String CITY = "city";
 
+    public static final String YOUR_CITY = "your_city";
+
     /**
      * 返回的响应码
      */

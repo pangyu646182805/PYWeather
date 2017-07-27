@@ -16,8 +16,8 @@ android {
         applicationId "com.neuroandroid.pyweather"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -69,6 +69,6 @@ dependencies {
     compile 'com.github.mmin18:realtimeblurview:1.1.0'
     compile 'com.simplecityapps:recyclerview-fastscroll:1.0.16'
     // 权限相关
-    compile 'com.yanzhenjie:permission:1.0.8'
+    compile 'pub.devrel:easypermissions:0.4.2'
     compile files('lib/TencentLocationSDK_v4.8.8.3.jar')
 }

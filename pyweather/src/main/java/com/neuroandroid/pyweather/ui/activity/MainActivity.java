@@ -3,6 +3,7 @@ package com.neuroandroid.pyweather.ui.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -15,31 +16,39 @@ import android.widget.ImageView;
 import com.github.mmin18.widget.RealtimeBlurView;
 import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.base.BaseActivity;
+import com.neuroandroid.pyweather.bean.CityBean;
 import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.event.BaseEvent;
+import com.neuroandroid.pyweather.loader.CityLoader;
+import com.neuroandroid.pyweather.provider.PYCityStore;
 import com.neuroandroid.pyweather.ui.fragment.CityManageFragment;
 import com.neuroandroid.pyweather.ui.fragment.WeatherFragment;
 import com.neuroandroid.pyweather.utils.ColorUtils;
 import com.neuroandroid.pyweather.utils.FragmentUtils;
 import com.neuroandroid.pyweather.utils.ImageLoader;
+import com.neuroandroid.pyweather.utils.L;
 import com.neuroandroid.pyweather.utils.SPUtils;
 import com.neuroandroid.pyweather.utils.ShowUtils;
 import com.neuroandroid.pyweather.utils.SystemUtils;
 import com.neuroandroid.pyweather.utils.TimeUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 import com.neuroandroid.pyweather.widget.weather.DynamicWeatherView;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.PermissionListener;
+import com.tencent.map.geolocation.TencentLocation;
+import com.tencent.map.geolocation.TencentLocationListener;
+import com.tencent.map.geolocation.TencentLocationManager;
+import com.tencent.map.geolocation.TencentLocationRequest;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements TencentLocationListener, EasyPermissions.PermissionCallbacks {
     private static final int REQUEST_CODE_INTO_GUIDE = 2;
     private static final int REQUEST_CODE_PERMISSION = 3;
     private static final int FRAGMENT_WEATHER = 0;
@@ -59,6 +68,8 @@ public class MainActivity extends BaseActivity {
 
     private MainActivityFragmentCallbacks mCurrentFragment;
     private boolean mLightThemeStyle = true;
+    private TencentLocationManager mManager;
+    private String mDistrict;
 
     @Override
     protected int attachLayoutRes() {
@@ -77,6 +88,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        // yourCity : 浙江省-杭州市-滨江区
+        String yourCity = SPUtils.getString(this, Constant.YOUR_CITY, null);
+        if (!UIUtils.isEmpty(yourCity)) {
+            mDistrict = yourCity.split("-")[2];
+        }
         boolean appGuide = SPUtils.getBoolean(this, Constant.APP_GUIDE, false);
         if (!appGuide) {
             // 如果没有显示过引导页面则显示
@@ -92,41 +108,54 @@ public class MainActivity extends BaseActivity {
      * 没有则去动态申请权限
      */
     private void checkPermission() {
-        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
+        String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION};
 
-        if (AndPermission.hasPermission(this, Arrays.asList(permissions))) {
+        if (EasyPermissions.hasPermissions(this, permissions)) {
+            requestLocation();
             setChooser(FRAGMENT_WEATHER);
         } else {
-            AndPermission.with(this)
-                    .requestCode(REQUEST_CODE_PERMISSION)
-                    .permission(permissions)
-                    .rationale((requestCode, rationale) ->
-                            AndPermission.rationaleDialog(this, rationale).show())
-                    .callback(new PermissionListener() {
-                        @Override
-                        public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
-                            if (requestCode == REQUEST_CODE_PERMISSION) {
-                                ShowUtils.showToast("权限申请成功");
-                                setChooser(FRAGMENT_WEATHER);
-                            }
-                        }
+            EasyPermissions.requestPermissions(this, "需要获取一些权限", 3, permissions);
+        }
 
-                        @Override
-                        public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
-                            if (requestCode == REQUEST_CODE_PERMISSION) {
-                                ShowUtils.showToast("权限申请失败");
-                                // 是否有不再提示并拒绝的权限。
-                                if (AndPermission.hasAlwaysDeniedPermission(MainActivity.this, Arrays.asList(permissions))) {
-                                    AndPermission.defaultSettingDialog(MainActivity.this, 400).show();
-                                } else {
-                                    finish();
-                                }
+        /*AndPermission.with(this)
+                .requestCode(REQUEST_CODE_PERMISSION)
+                .permission(permissions)
+                .rationale((requestCode, rationale) ->
+                        AndPermission.rationaleDialog(this, rationale).show())
+                .callback(new PermissionListener() {
+                    @Override
+                    public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+                        if (requestCode == REQUEST_CODE_PERMISSION) {
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+                        if (requestCode == REQUEST_CODE_PERMISSION) {
+                            ShowUtils.showToast("权限申请失败");
+                            // 是否有不再提示并拒绝的权限。
+                            if (AndPermission.hasAlwaysDeniedPermission(MainActivity.this, Arrays.asList(permissions))) {
+                                AndPermission.defaultSettingDialog(MainActivity.this, 400).show();
+                            } else {
+                                finish();
                             }
                         }
-                    }).start();
+                    }
+                }).start();*/
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        requestLocation();
+        setChooser(FRAGMENT_WEATHER);
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this).build().show();
         }
     }
 
@@ -186,6 +215,15 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    private void requestLocation() {
+        TencentLocationRequest request = TencentLocationRequest.create();
+        request.setRequestLevel(TencentLocationRequest.REQUEST_LEVEL_POI);
+        if (mManager == null) {
+            mManager = TencentLocationManager.getInstance(this);
+        }
+        mManager.requestLocationUpdates(request, this);
+    }
+
     /**
      * 跳转到城市管理页面
      */
@@ -211,6 +249,48 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onLocationChanged(TencentLocation tencentLocation, int error, String s) {
+        if (TencentLocation.ERROR_OK == error) {
+            // 定位成功
+            String province = tencentLocation.getProvince();
+            String city = tencentLocation.getCity();
+            String district = tencentLocation.getDistrict();
+            L.e(city + " : " + province + " : " + district);
+            if (!UIUtils.isEmpty(mDistrict)) {
+                if (mDistrict.contains(district)) {
+                    // 当前定位与保存的位置相同
+                    L.e("当前定位与保存的位置相同");
+                } else {
+                    L.e("当前定位与保存的位置不相同");
+                    SPUtils.putString(MainActivity.this, Constant.YOUR_CITY, province + "-" + city + "-" + district);
+                    new LocationAsyncTask().execute(district);
+                }
+            } else {
+                L.e("mDistrict为空");
+                SPUtils.putString(MainActivity.this, Constant.YOUR_CITY, province + "-" + city + "-" + district);
+                new LocationAsyncTask().execute(district);
+            }
+        } else {
+            // 定位失败
+            ShowUtils.showToast("定位失败，请手动选择城市");
+        }
+        // 移除定位监听
+        removeUpdate();
+    }
+
+    @Override
+    public void onStatusUpdate(String s, int i, String s1) {
+
+    }
+
+    private void removeUpdate() {
+        if (mManager != null) {
+            mManager.removeUpdates(this);
+            mManager = null;
+        }
+    }
+
     /**
      * 处理fragment返回事件
      */
@@ -226,7 +306,8 @@ public class MainActivity extends BaseActivity {
 
     public boolean handleBackPress() {
         if (mCurrentFragment instanceof CityManageFragment) {
-            if (!mLightThemeStyle) SystemUtils.myStatusBar(this);
+            if (!mLightThemeStyle)
+                SystemUtils.myStatusBar(this);
             setChooser(FRAGMENT_WEATHER);
             return true;
         }
@@ -337,6 +418,49 @@ public class MainActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_INTO_GUIDE || requestCode == 400) {
             checkPermission();
+        } else if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
+            ShowUtils.showToast("AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE");
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    private class LocationAsyncTask extends AsyncTask<String, Void, CityBean> {
+        private String mDistrict;
+
+        @Override
+        protected CityBean doInBackground(String... params) {
+            mDistrict = params[0];
+            CityBean allCities = CityLoader.getAllCities(MainActivity.this);
+            ArrayList<CityBean.CityListBean> dataList = allCities.getDataList();
+            CityBean.CityListBean yourCity = null;
+            for (CityBean.CityListBean cityBean : dataList) {
+                if (mDistrict.contains(cityBean.getCityZh()) || cityBean.getCityZh().contains(mDistrict)) {
+                    yourCity = cityBean;
+                    break;
+                }
+            }
+            if (yourCity != null) {
+                PYCityStore pyCityStore = PYCityStore.getInstance(MainActivity.this);
+                int count = pyCityStore.find(yourCity.getId());
+                if (count == 0) {
+                    // 没有记录才去添加记录
+                    pyCityStore.addItem(yourCity.getId(), yourCity.getCityZh(), -1, 100, 100, "");
+                } else {
+                    // 新的定位位置已经存在
+                }
+            }
+            return allCities;
+        }
+
+        @Override
+        protected void onPostExecute(CityBean cityBean) {
+            super.onPostExecute(cityBean);
+            setChooser(FRAGMENT_WEATHER);
         }
     }
 }

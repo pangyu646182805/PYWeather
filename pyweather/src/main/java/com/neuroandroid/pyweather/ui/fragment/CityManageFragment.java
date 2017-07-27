@@ -10,11 +10,13 @@ import com.neuroandroid.pyweather.R;
 import com.neuroandroid.pyweather.adapter.CityListAdapter;
 import com.neuroandroid.pyweather.base.BaseFragment;
 import com.neuroandroid.pyweather.bean.CityBean;
+import com.neuroandroid.pyweather.config.Constant;
 import com.neuroandroid.pyweather.event.BaseEvent;
 import com.neuroandroid.pyweather.event.CityManageEvent;
 import com.neuroandroid.pyweather.provider.PYCityStore;
 import com.neuroandroid.pyweather.ui.activity.MainActivity;
 import com.neuroandroid.pyweather.ui.activity.SelectedCityActivity;
+import com.neuroandroid.pyweather.utils.SPUtils;
 import com.neuroandroid.pyweather.utils.ShowUtils;
 import com.neuroandroid.pyweather.utils.UIUtils;
 import com.neuroandroid.pyweather.widget.TitleBar;
@@ -69,7 +71,13 @@ public class CityManageFragment extends BaseFragment implements MainActivity.Mai
 
     @Override
     protected void initData() {
-        mAllCities = PYCityStore.getInstance(mContext).getAllCities();
+        // yourCity : 浙江省-杭州市-滨江区
+        String yourCity = SPUtils.getString(mContext, Constant.YOUR_CITY, null);
+        String district = null;
+        if (!UIUtils.isEmpty(yourCity)) {
+            district = yourCity.split("-")[2];
+        }
+        mAllCities = PYCityStore.getInstance(mContext).getAllCities(district);
         if (mCityListAdapter == null) {
             mCityListAdapter = new CityListAdapter(mContext, mAllCities);
             // 布局管理器
@@ -164,6 +172,14 @@ public class CityManageFragment extends BaseFragment implements MainActivity.Mai
         @Override
         protected Boolean doInBackground(CityBean.CityListBean... cityListBeen) {
             CityBean.CityListBean cityListBean = cityListBeen[0];
+            String yourCity = SPUtils.getString(mContext, Constant.YOUR_CITY, null);
+            String district = "";
+            if (!UIUtils.isEmpty(yourCity)) {
+                district = yourCity.split("-")[2];
+                if (district.contains(cityListBean.getCityZh()) || cityListBean.getCityZh().contains(district)) {
+                    SPUtils.putString(mContext, Constant.YOUR_CITY, null);
+                }
+            }
             PYCityStore pyCityStore = PYCityStore.getInstance(mContext);
             int delete = pyCityStore.deleteByCityId(cityListBean.getId());
             return delete == 1;

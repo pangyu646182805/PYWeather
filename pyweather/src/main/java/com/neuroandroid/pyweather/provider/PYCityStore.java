@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.neuroandroid.pyweather.bean.CityBean;
+import com.neuroandroid.pyweather.utils.UIUtils;
 
 import java.util.ArrayList;
 
@@ -82,7 +83,7 @@ public class PYCityStore extends SQLiteOpenHelper {
      */
     public synchronized int find(String cityId) {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, null, "city_id=?", new String[] {cityId},
+        Cursor cursor = db.query(TABLE_NAME, null, "city_id=?", new String[]{cityId},
                 null, null, null);
         int count = cursor.getCount();
         db.close();
@@ -104,24 +105,38 @@ public class PYCityStore extends SQLiteOpenHelper {
     /**
      * 获取数据库里面TABLE_NAME表的所有数据
      */
-    public ArrayList<CityBean.CityListBean> getAllCities() {
+    public ArrayList<CityBean.CityListBean> getAllCities(String district) {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null, null, null,
                 null, null, null);
         ArrayList<CityBean.CityListBean> dataList = new ArrayList<>();
         CityBean.CityListBean city;
+        CityBean.CityListBean locationCity = null;
+
         while (cursor.moveToNext()) {
             city = new CityBean.CityListBean();
             city.setId(cursor.getString(cursor.getColumnIndex("city_id")));
-            city.setCityZh(cursor.getString(cursor.getColumnIndex("city_name")));
+            String cityName = cursor.getString(cursor.getColumnIndex("city_name"));
+            city.setCityZh(cityName);
             city.setWeatherCode(cursor.getInt(cursor.getColumnIndex("weather_code")));
             city.setMax(cursor.getInt(cursor.getColumnIndex("max")));
             city.setMin(cursor.getInt(cursor.getColumnIndex("min")));
             city.setWeatherDesc(cursor.getString(cursor.getColumnIndex("weather_desc")));
-            dataList.add(city);
+            if (!UIUtils.isEmpty(district)) {
+                if (district.contains(cityName) || cityName.contains(district)) {
+                    locationCity = city;
+                } else {
+                    dataList.add(city);
+                }
+            } else {
+                dataList.add(city);
+            }
         }
         db.close();
         cursor.close();
+        if (locationCity != null) {
+            dataList.add(0, locationCity);
+        }
         return dataList;
     }
 

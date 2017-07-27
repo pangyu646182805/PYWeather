@@ -96,7 +96,13 @@ public class WeatherFragment extends BaseFragment implements MainActivity.MainAc
 
     @Override
     protected void initData() {
-        mAllCities = PYCityStore.getInstance(mContext).getAllCities();
+        // yourCity : 浙江省-杭州市-滨江区
+        String yourCity = SPUtils.getString(mContext, Constant.YOUR_CITY, null);
+        String district = null;
+        if (!UIUtils.isEmpty(yourCity)) {
+            district = yourCity.split("-")[2];
+        }
+        mAllCities = PYCityStore.getInstance(mContext).getAllCities(district);
         if (!mAllCities.isEmpty()) {
             // getTitleBar().setTitle(mAllCities.get(0).getCityZh());
             setWeatherCustomTitle(null, 0);

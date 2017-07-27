@@ -1,5 +1,6 @@
 package com.neuroandroid.pyweather.model.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,9 +40,52 @@ public class HeFenWeather {
          * 校验是否有null的对象
          */
         public boolean hasNullObject() {
-            return this.aqi == null || this.basic == null
-                    || this.now == null || this.suggestion == null
-                    || daily_forecast == null || hourly_forecast == null;
+            boolean hasNullObject = false;
+            if (this.aqi == null) {
+                aqi = new AqiBean();
+                /**
+                 * aqi : 113
+                 * co : 1
+                 * no2 : 56
+                 * o3 : 162
+                 * pm10 : 115
+                 * pm25 : 85
+                 * qlty : 轻度污染
+                 * so2 : 26
+                 */
+                AqiBean.CityBean cityBean = new AqiBean.CityBean();
+                cityBean.setAqi("0");
+                cityBean.setCo("0");
+                cityBean.setNo2("0");
+                cityBean.setO3("0");
+                cityBean.setPm10("0");
+                cityBean.setPm25("0");
+                cityBean.setQlty("没有数据");
+                cityBean.setSo2("0");
+                aqi.setCity(cityBean);
+                hasNullObject = true;
+            }
+            if (this.basic == null){
+                basic = new BasicBean();
+                hasNullObject = true;
+            }
+            if (this.now == null){
+                now = new NowBean();
+                hasNullObject = true;
+            }
+            if (this.suggestion == null){
+                suggestion = new SuggestionBean();
+                hasNullObject = true;
+            }
+            if (this.daily_forecast == null){
+                daily_forecast = new ArrayList<>();
+                hasNullObject = true;
+            }
+            if (this.hourly_forecast == null){
+                hourly_forecast = new ArrayList<>();
+                hasNullObject = true;
+            }
+            return hasNullObject;
         }
 
         public AqiBean getAqi() {

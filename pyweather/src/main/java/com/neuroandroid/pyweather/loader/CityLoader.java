@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.neuroandroid.pyweather.bean.CityBean;
 import com.neuroandroid.pyweather.utils.CloseUtils;
+import com.neuroandroid.pyweather.utils.L;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class CityLoader {
      * 根据本地asset文件夹里面的city.json文件获取全国省市信息
      */
     public static CityBean getAllCities(Context context) {
+        long start = System.currentTimeMillis();
         InputStream is = null;
         try {
             is = context.getAssets().open("city.json");
@@ -38,6 +40,7 @@ public class CityLoader {
                 }
             }
             cityBean.setProvinceList(provinceList);
+            L.e("time : " + (System.currentTimeMillis() - start));
             return cityBean;
         } catch (Exception e) {
             e.printStackTrace();

@@ -78,10 +78,10 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
         super.onFragmentVisibleChange(isVisible);
         if (isVisible) {  // 不可见 -> 可见
             if (mWeatherAdapter.getDataList().isEmpty()) {
-                mRefreshLayout.startRefresh();
+                if (mRefreshLayout != null) mRefreshLayout.startRefresh();
             }
         } else {
-            mRefreshLayout.finishRefreshing();
+            if (mRefreshLayout != null) mRefreshLayout.finishRefreshing();
         }
     }
 
@@ -118,6 +118,11 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
             if (heWeather5Bean.hasNullObject()) {
                 weatherInfo.getHeWeather5().remove(0);
             }
+        } else {
+            HeFenWeather.HeWeather5Bean heWeather5Bean = weatherInfo.getHeWeather5().get(0);
+            if (heWeather5Bean.hasNullObject()) {
+                ShowUtils.showToast("有部分天气信息为空");
+            }
         }
         mWeatherBean = weatherInfo.getHeWeather5().get(0);
         mWeatherFragment.setWeatherCustomTitle(mWeatherBean, 0);
@@ -130,13 +135,13 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
         } else {
 
         }
-        mRefreshLayout.finishRefreshing();
+        if (mRefreshLayout != null) mRefreshLayout.finishRefreshing();
     }
 
     @Override
     public void showTip(String tip) {
         ShowUtils.showToast("请求失败");
-        mRefreshLayout.finishRefreshing();
+        if (mRefreshLayout != null) mRefreshLayout.finishRefreshing();
     }
 
     /**
