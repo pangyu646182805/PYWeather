@@ -113,6 +113,12 @@ public class WeatherDetailFragment extends BaseFragment<IWeatherContract.Present
 
     @Override
     public void showWeatherInfo(HeFenWeather weatherInfo) {
+        if (weatherInfo.getHeWeather5().size() > 1) {
+            HeFenWeather.HeWeather5Bean heWeather5Bean = weatherInfo.getHeWeather5().get(0);
+            if (heWeather5Bean.hasNullObject()) {
+                weatherInfo.getHeWeather5().remove(0);
+            }
+        }
         mWeatherBean = weatherInfo.getHeWeather5().get(0);
         mWeatherFragment.setWeatherCustomTitle(mWeatherBean, 0);
         if (Constant.STATUS_OK.equals(mWeatherBean.getStatus())) {

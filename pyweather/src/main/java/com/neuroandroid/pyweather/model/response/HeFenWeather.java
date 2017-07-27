@@ -35,6 +35,15 @@ public class HeFenWeather {
         private List<DailyForecastBean> daily_forecast;
         private List<HourlyForecastBean> hourly_forecast;
 
+        /**
+         * 校验是否有null的对象
+         */
+        public boolean hasNullObject() {
+            return this.aqi == null || this.basic == null
+                    || this.now == null || this.suggestion == null
+                    || daily_forecast == null || hourly_forecast == null;
+        }
+
         public AqiBean getAqi() {
             return aqi;
         }
